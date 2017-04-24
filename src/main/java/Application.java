@@ -1,18 +1,24 @@
+import java.io.IOException;
+
 /**
  * Created by ramyeid on 4/24/17.
  */
 public class Application {
-    public static void main(String []args){
-//        ScriptEngine engine = new ScriptEngineManager().getEngineByName("python");
-        String[] cmd = {
-                "ls|",
-                "python script.py "
-        };
+    public static void main(String []args) {
+
+        ProcessBuilder pb = new ProcessBuilder("python","/Users/ramyeid/Desktop/Proj/PythonTimeSeriååes/test.py");
+        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+        Process p = null;
         try {
-            Runtime.getRuntime().exec(cmd);
+            p = pb.start();å
+            p.waitFor();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            System.out.println(e);
+        catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
 }
