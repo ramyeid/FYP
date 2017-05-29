@@ -1,11 +1,10 @@
+package modal;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class CSVReader {
 
@@ -30,13 +29,7 @@ public class CSVReader {
     }
 
 
-    //got index
-    //  if you check in folder resources : -> Airpasseengers you can see that it has a header "Month" - "#PAssengers"
-    // if it has a header then you should specify header keyX and the other header keyY that you want to take from the csv.
-    // if you only have 2 vectors you can set keyX to "" and keyY to "" and gotHeader to false.
-    // If you need to extract more than 2 vectors this function is not what you re looking for.
-    // write in your own in the same file but after this function.
-    // I will not modify this file anymore so you can modify it.
+
     public <T> ArrayList<ArrayList<T>> getDataCSVForKeys(String keyX, String keyY,boolean gotHeader) {
         String line = "";
         String csvSplitBy = ",";
