@@ -2,11 +2,7 @@ from pandas import read_csv
 from pandas import datetime
 import pandas as pd
 from matplotlib import pyplot
-from statsmodels.tsa.
-
-
-For our implementation we used ARIMA library for the time series analysis. In fact this ARIMA library offers us the predict and forecast tool that we need for our project.
-As a secondary library we used also numpy, csv, pandas, .. for simplifying reasons. import ARIMA
+from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 import numpy as np
 import sys

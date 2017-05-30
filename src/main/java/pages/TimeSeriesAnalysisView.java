@@ -32,6 +32,7 @@ import modal.timeseriesanalysis.Action;
 //        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
 //
  */
+//TODO ADD SAVE GRAPH
 //TODO ADD ERROR FOR  ACTION. FORECAST VS. ACTUAL, CONTINUOUS FORECAST
     //TODO FORECAST VS. ACTUAL GET THE ERROR FROM PYTHON SCRIPT.
     //TODO CONTINUOUS FORECAST IMPLEMENT FUNCTION PLOT CONTINUOUS FORECASTING.
