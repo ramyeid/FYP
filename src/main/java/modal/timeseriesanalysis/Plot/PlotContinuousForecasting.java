@@ -1,4 +1,4 @@
-package modal.timeseriesanalysis;
+package modal.timeseriesanalysis.Plot;
 
 
 import java.io.BufferedReader;
@@ -19,7 +19,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.*;
-import org.jfree.ui.ApplicationFrame;
 
 import javax.swing.*;
 

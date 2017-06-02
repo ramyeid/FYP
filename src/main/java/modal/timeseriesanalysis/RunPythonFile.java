@@ -6,6 +6,7 @@ import java.io.IOException;
  * Created by ramyeid on 4/24/17.
  */
 public class RunPythonFile {
+
     String dateFormat;
     String inputFile ;
     String keyX;
@@ -20,8 +21,6 @@ public class RunPythonFile {
 
 
     public RunPythonFile(String inputFile,String keyX,String keyY,int action,int actionTime, String average,String dateFormat,int resetCSV, float datatoAdd){
-
-        System.out.println(System.getProperty("user.dir"));
         pythonFile = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/script.py";
         this.inputFile = inputFile;
         this.keyX = keyX;

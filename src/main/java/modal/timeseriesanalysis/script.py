@@ -227,9 +227,7 @@ def continuousForecastWithoutActual(inputFile,keyY,keyX,series,actionTime,src,re
 
 
 def copyDatatoTempFile(keyX,series,dateFormat,file):
-    print series[keyX][0]
     series[keyX] = pd.to_datetime(series[keyX]).dt.strftime(dateFormat)
-    print series[keyX][0]
 
     series.to_csv(file,index=False)
 
