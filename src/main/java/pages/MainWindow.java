@@ -1,31 +1,22 @@
-import java.awt.EventQueue;
+package pages;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import java.awt.event.ActionListener;
 
-public class MainWindow1 extends JFrame
+public class MainWindow extends JFrame
 {
 
 	private JPanel contentPane;
-	private static MainWindow1 frame;
+	private static MainWindow frame;
 
 	private JInternalFrame csvInternalFrame;
 
 	private JTextField pathToCsv;
+
+	private String csvPath;
 
 	/**
 	 * Launch the application.
@@ -38,7 +29,7 @@ public class MainWindow1 extends JFrame
 			{
 				try
 				{
-					frame = new MainWindow1();
+					frame = new MainWindow();
 					frame.setVisible(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				}
@@ -53,7 +44,7 @@ public class MainWindow1 extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public MainWindow1()
+	public MainWindow()
 	{
 		setTitle("Pattern Prediction and Forecasting");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,9 +53,15 @@ public class MainWindow1 extends JFrame
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
+//*****************
+//*** MENU FILE ***
+//*****************
+
 		JMenu mnFile = new JMenu("File");
 		mnFile.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnFile);
+
+//Load CSV
 
 		JMenuItem mntmLoadCsv = new JMenuItem("Load CSV");
 		mntmLoadCsv.addActionListener(new ActionListener()
@@ -77,6 +74,8 @@ public class MainWindow1 extends JFrame
 		mntmLoadCsv.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnFile.add(mntmLoadCsv);
 
+//Close
+
 		JMenuItem mntmClose = new JMenuItem("Close");
 		mntmClose.addActionListener(new ActionListener()
 		{
@@ -88,42 +87,115 @@ public class MainWindow1 extends JFrame
 		mntmClose.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnFile.add(mntmClose);
 
+//***********************
+//*** MENU ALGORITHMS ***
+//***********************
+
 		JMenu mnAlgorithms = new JMenu("Algorithms");
 		mnAlgorithms.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnAlgorithms);
 		mnAlgorithms.setEnabled(false);
 
+// Menu Neural Network
+
 		JMenuItem mntmNeurolNetwork = new JMenuItem("Neural Network");
+		mntmNeurolNetwork.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mntmNeurolNetwork.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mntmNeurolNetwork);
+
+//Menu Time Series Analysis
 
 		JMenu mnTimeSeriesAnalysis = new JMenu("Time Series Analysis");
 		mnTimeSeriesAnalysis.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mnTimeSeriesAnalysis);
 
+//Predict
 		JMenuItem mntmPredict = new JMenuItem("Predict");
+		mntmPredict.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				TimeSeriesPredict timeSeriesPredictInternalFrame = new TimeSeriesPredict(csvPath);
+				frame.add(timeSeriesPredictInternalFrame);
+				timeSeriesPredictInternalFrame.setVisible(true);
+			}
+		});
 		mnTimeSeriesAnalysis.add(mntmPredict);
 
+//Forecast Once
 		JMenuItem mntmForecastOnce = new JMenuItem("Forecast Once");
+		mntmForecastOnce.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mnTimeSeriesAnalysis.add(mntmForecastOnce);
 
+//Forecast Vs Actual
 		JMenuItem mntmForecastVsActual = new JMenuItem("Forecast vs Actual");
+		mntmForecastVsActual.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mnTimeSeriesAnalysis.add(mntmForecastVsActual);
 
+//Continous Forecast
 		JMenuItem mntmContinuousForecast = new JMenuItem("Continuous Forecast");
+		mntmContinuousForecast.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mnTimeSeriesAnalysis.add(mntmContinuousForecast);
 
+//Menu Naive Bayes
+
 		JMenuItem mntmNaiveBayes = new JMenuItem("Naive Bayes");
+		mntmNaiveBayes.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mntmNaiveBayes.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mntmNaiveBayes);
 
+//Bayesian Network
+
 		JMenuItem mntmBayesianNetwork = new JMenuItem("Bayesian Network");
+		mntmBayesianNetwork.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mntmBayesianNetwork.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mntmBayesianNetwork);
 
+//Suport Vector Machine
+
 		JMenuItem mntmSupportVectorMachine = new JMenuItem("Support Vector Machine");
+		mntmSupportVectorMachine.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			}
+		});
 		mntmSupportVectorMachine.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mntmSupportVectorMachine);
+
+//*****************
+//*** MENU HELP ***
+//*****************
 
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -212,7 +284,7 @@ public class MainWindow1 extends JFrame
 
 				else
 				{
-					String csvPath = pathToCsv.getText();
+					csvPath = pathToCsv.getText();
 					mnAlgorithms.setEnabled(true);
 					csvInternalFrame.dispose();
 				}
