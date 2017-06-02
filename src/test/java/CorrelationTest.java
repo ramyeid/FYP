@@ -1,5 +1,5 @@
-import modal.CSVReader;
-import modal.timeseriesanalysis.Plot.PlotPredictionForecastOnce;
+import swissknife.CSVReader;
+import swissknife.modal.timeseriesanalysis.Plot.PlotPredictionForecastOnce;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.jfree.data.time.TimeSeries;
 import org.junit.Test;
