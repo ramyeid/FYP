@@ -25,7 +25,7 @@ public class Application {
 
 //        System.out.println("predict 2");
 //        //ss1 - predict
-        String inputFile ="/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/AirPassengers.csv";
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/AirPassengers.csv";
         String keyX = "Date";
         String keyY = "#Passengers";
 //        int action = 3;

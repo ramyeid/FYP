@@ -22,7 +22,7 @@ public class CorrelationTest {
 
     @Test
     public void AutoCorrelationTest()  {
-        String input= "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/AirPassengers.csv";
+        String input= System.getProperty("user.dir")+"/src/main/resources/AirPassengers.csv";
         TimeSeries tmp = PlotPredictionForecastOnce.addSingleValueFromcsv(input,"yyyy-MM","test");
         double[] t = new double [100];
         double[] t2 = new double [100];
@@ -42,7 +42,7 @@ public class CorrelationTest {
     @Test
     public void CorrelationTestBayesData(){
 
-        String input= "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/BayesData_2.csv";
+        String input= System.getProperty("user.dir")+"/src/main/resources/BayesData_2.csv";
         ArrayList<ArrayList<Double>> tmp = CSVReader.readDataFromCSV(input,9);
 
         int size = tmp.get(0).size();
