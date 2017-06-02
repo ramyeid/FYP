@@ -1,4 +1,4 @@
-package modal.timeseriesanalysis;
+package modal.timeseriesanalysis.Plot;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -10,7 +10,6 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.ui.ApplicationFrame;
 
 import javax.swing.*;
 import java.io.BufferedReader;

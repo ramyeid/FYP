@@ -1,4 +1,6 @@
-import pages.ContinuousForcastView;
+import pages.TimeSeriesAnalysisView;
+
+import javax.swing.*;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -35,7 +37,14 @@ public class Application {
 //        int resetCSV = 1;
 //        float data = 0.0f;
 //        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-        new ContinuousForcastView(inputFile,keyX,keyY,average,dateFormat);
+//        new ContinuousForcastView(inputFile,keyX,keyY,average,dateFormat);
+
+        //WARNING : Remove for final product.
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new TimeSeriesAnalysisView(inputFile,2));
+        frame.pack();
+        frame.setVisible(true);
 
 
 

@@ -8,13 +8,9 @@ import java.util.ArrayList;
 
 public class CSVReader {
 
-    String csvFile;
 
-    public CSVReader(String csvFile) {
-        this.csvFile = csvFile;
-    }
 
-    public String[] getColumnKeys() {
+    public static String[] getColumnKeys(String csvFile) {
         String line = "";
         String cvsSplitBy = ",";
         String[] columnKeys = null;
@@ -32,7 +28,7 @@ public class CSVReader {
 
 
 
-    public <T> ArrayList<ArrayList<T>> getDataCSVForKeys(String keyX, String keyY,boolean gotHeader) {
+    public <T> ArrayList<ArrayList<T>> getDataCSVForKeys(String csvFile,String keyX, String keyY,boolean gotHeader) {
         String line = "";
         String csvSplitBy = ",";
 
