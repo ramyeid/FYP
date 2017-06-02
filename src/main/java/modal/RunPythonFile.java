@@ -1,4 +1,4 @@
-package modal.timeseriesanalysis;
+package modal;
 
 import java.io.IOException;
 
@@ -20,8 +20,8 @@ public class RunPythonFile {
     float datatoAdd;
 
 
-    public RunPythonFile(String inputFile,String keyX,String keyY,int action,int actionTime, String average,String dateFormat,int resetCSV, float datatoAdd){
-        pythonFile = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/script.py";
+    public RunPythonFile(String pythonFile,String inputFile,String keyX,String keyY,int action,int actionTime, String average,String dateFormat,int resetCSV, float datatoAdd){
+        this.pythonFile = pythonFile;
         this.inputFile = inputFile;
         this.keyX = keyX;
         this.keyY = keyY;

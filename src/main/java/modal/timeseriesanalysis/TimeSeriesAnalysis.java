@@ -1,6 +1,7 @@
-package modal.tool;
+package modal.timeseriesanalysis;
 
 import modal.Tool;
+import modal.Resources;
 
 /**
  * Created by ramyeid on 6/2/17.
@@ -13,6 +14,7 @@ public abstract class TimeSeriesAnalysis implements Tool {
     int actionTime;
     String average;
     String dateFormat;
+    String pythonFile = Resources.Time_Series_Python_File;
 
 
     public TimeSeriesAnalysis(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){

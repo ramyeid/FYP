@@ -2,7 +2,7 @@ package pages;
 
 import modal.CSVReader;
 import modal.Tool;
-import modal.timeseriesanalysis.Resources;
+import modal.Resources;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +66,7 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
     }
 
 
-    public TimeSeriesAnalysisView(String fileName,int action) {
+    public TimeSeriesAnalysisView(String fileName, int action) {
         super(new BorderLayout());
 
         this.inputFile = fileName;
@@ -121,7 +121,9 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
 
         submitButton.setText(actionName);
         submitPanel.add(new Label("Action Time"));
-        submitPanel.add(actionTimeField);
+        if (action != 4) {
+            submitPanel.add(actionTimeField);
+        }
         submitPanel.add(submitButton);
 
         centerPanel.add(submitPanel);
@@ -148,11 +150,11 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
                 }
             }
         }
-        if (e.getSource() == submitButton){
-            String keyX = radioButtonListX.stream().filter(s->s.isSelected()).findFirst().orElse(null).getText();
-            String keyY = radioButtonListY.stream().filter(s->s.isSelected()).findFirst().orElse(null).getText();
+        if (e.getSource() == submitButton) {
+            String keyX = radioButtonListX.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
+            String keyY = radioButtonListY.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
             String average = null;
-            switch(averageComboBox.getSelectedItem().toString()){
+            switch (averageComboBox.getSelectedItem().toString()) {
                 case "No Average":
                     average = "-1";
                     break;
@@ -160,21 +162,29 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
                     average = averageComboBox.getSelectedItem().toString();
                     break;
             }
-            timeSeriesTool.build(inputFile,keyX,keyY,actionTimeField.getText(),average,dateFormatComboBox.getSelectedItem().toString());
-            timeSeriesTool.action();
+            String dateFormat = dateFormatComboBox.getSelectedItem().toString();
+            if (!actionName.equals(Resources.CONTINUOUS_FORECAST)) {
 
-            plotPanel.removeAll();
-            this.remove(plotPanel);
+                timeSeriesTool.build(inputFile, keyX, keyY, actionTimeField.getText(), average, dateFormat);
+                timeSeriesTool.action();
 
-            plotPanel = timeSeriesTool.plot();
-            this.add(plotPanel,BorderLayout.SOUTH);
-            this.revalidate();
-            this.repaint();
+                plotPanel.removeAll();
+                this.remove(plotPanel);
 
+                plotPanel = timeSeriesTool.plot();
+                this.add(plotPanel, BorderLayout.SOUTH);
+                this.revalidate();
+                this.repaint();
+            }
+            else {
+                timeSeriesTool.build(inputFile, keyX, keyY, "0", average, dateFormat);
+
+                new ContinuousForcastView(timeSeriesTool);
+
+            }
         }
 
-
-}
+    }
 
 
 }

@@ -1,8 +1,8 @@
-package modal.tool;
+package modal.timeseriesanalysis;
 
 import modal.timeseriesanalysis.Plot.PlotForecastingVsActual;
-import modal.timeseriesanalysis.Resources;
-import modal.timeseriesanalysis.RunPythonFile;
+import modal.Resources;
+import modal.RunPythonFile;
 
 import javax.swing.*;
 
@@ -23,7 +23,7 @@ public class ForecastVsActual extends TimeSeriesAnalysis{
     }
 
     public  void action(){
-        new RunPythonFile(inputFile,keyX,keyY,2,actionTime,average,dateFormat,0,0).run();
+        new RunPythonFile(this.pythonFile,inputFile,keyX,keyY,2,actionTime,average,dateFormat,0,0).run();
 
     }
 

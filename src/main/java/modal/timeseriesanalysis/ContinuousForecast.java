@@ -1,8 +1,8 @@
-package modal.tool;
+package modal.timeseriesanalysis;
 
-import modal.timeseriesanalysis.Resources;
+import modal.Resources;
 import modal.timeseriesanalysis.Plot.PlotContinuousForecasting;
-import modal.timeseriesanalysis.RunPythonFile;
+import modal.RunPythonFile;
 
 import javax.swing.*;
 
@@ -11,12 +11,6 @@ import javax.swing.*;
  */
 public class ContinuousForecast extends TimeSeriesAnalysis{
 
-    String inputFile;
-    String keyX;
-    String keyY;
-    int actionTime;
-    String average;
-    String dateFormat;
     int resetcsv;
 
     public ContinuousForecast(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){
@@ -29,11 +23,11 @@ public class ContinuousForecast extends TimeSeriesAnalysis{
     }
 
     public void action(){
-        new RunPythonFile(inputFile,keyX,keyY,4,actionTime,average,dateFormat,resetcsv,0).run();
+        new RunPythonFile(this.pythonFile,inputFile,keyX,keyY,4,actionTime,average,dateFormat,resetcsv,0).run();
     }
 
     public  void addValue(float value) {
-        new RunPythonFile(inputFile,keyX,keyY,5,0,average,dateFormat,0,value).run();
+        new RunPythonFile(this.pythonFile,inputFile,keyX,keyY,5,0,average,dateFormat,0,value).run();
     }
 
     public JPanel plot() {
@@ -43,4 +37,13 @@ public class ContinuousForecast extends TimeSeriesAnalysis{
     public ContinuousForecast(){
         super();
     }
+
+    public void setActionTime(int actionTime) {
+        this.actionTime = actionTime;
+    }
+
+
+
+
+
 }

@@ -1,8 +1,8 @@
-package modal.tool;
+package modal.timeseriesanalysis;
 
 import modal.timeseriesanalysis.Plot.PlotPredictionForecastOnce;
-import modal.timeseriesanalysis.Resources;
-import modal.timeseriesanalysis.RunPythonFile;
+import modal.Resources;
+import modal.RunPythonFile;
 
 import javax.swing.*;
 
@@ -23,7 +23,7 @@ public class Predict extends TimeSeriesAnalysis{
     }
 
     public void action(){
-        new RunPythonFile(inputFile,keyX,keyY,1,actionTime,average,dateFormat,0,0).run();
+        new RunPythonFile(this.pythonFile,inputFile,keyX,keyY,1,actionTime,average,dateFormat,0,0).run();
     }
 
     public  JPanel plot(){

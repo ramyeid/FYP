@@ -9,4 +9,5 @@ public interface Tool {
     void action();
     JPanel plot();
     void build(String ... arg);
+
 }

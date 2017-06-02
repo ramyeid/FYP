@@ -42,7 +42,7 @@ public class Application {
         //WARNING : Remove for final product.
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new TimeSeriesAnalysisView(inputFile,2));
+        frame.add(new TimeSeriesAnalysisView(inputFile,4));
         frame.pack();
         frame.setVisible(true);
 

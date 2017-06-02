@@ -1,10 +1,10 @@
-package modal.timeseriesanalysis;
+package modal;
 
 
-import modal.Tool;
-import modal.tool.ForecastOnce;
-import modal.tool.ForecastVsActual;
-import modal.tool.Predict;
+import modal.timeseriesanalysis.ContinuousForecast;
+import modal.timeseriesanalysis.ForecastOnce;
+import modal.timeseriesanalysis.ForecastVsActual;
+import modal.timeseriesanalysis.Predict;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +30,8 @@ public class Resources {
     public static final String FORECAST_VS_ACTUAL = "Forecast vs Actual";
     public static final String CONTINUOUS_FORECAST = "Continuous Forecast";
 
+
+    public static final String Time_Series_Python_File = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/script.py";
 
     public static String  getTimeSeriesAnalysisActionName(int action){
         String result = null;
@@ -58,6 +60,8 @@ public class Resources {
                 return new ForecastVsActual();
             case 3:
                 return new ForecastOnce();
+            case 4:
+                return new ContinuousForecast();
         }
         return null;
     }
