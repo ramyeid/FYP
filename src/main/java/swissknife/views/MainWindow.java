@@ -1,6 +1,13 @@
 package swissknife.views;
 
+<<<<<<< HEAD:src/main/java/swissknife/views/MainWindow.java
 import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
+=======
+import views.timeseriesanalysis.TimeSeriesPredict;
+import views.timeseriesanalysis.TimeSeriesForecastOnce;
+import views.timeseriesanalysis.TimeSeriesForecastVsActual;
+import views.timeseriesanalysis.TimeSeriesContinuousForecast;
+>>>>>>> ad536aaf9ee12cd3e66876bf4f064038a0fe3a74:src/main/java/views/MainWindow.java
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -125,6 +132,7 @@ public class MainWindow extends JFrame
 				TimeSeriesPredict timeSeriesPredictInternalFrame = new TimeSeriesPredict(csvPath);
 				frame.add(timeSeriesPredictInternalFrame);
 				timeSeriesPredictInternalFrame.setVisible(true);
+				timeSeriesPredictInternalFrame.setClosable(true);
 			}
 		});
 		mnTimeSeriesAnalysis.add(mntmPredict);
@@ -135,6 +143,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				TimeSeriesForecastOnce timeSeriesForecastOnceInternalFrame = new TimeSeriesForecastOnce(csvPath);
+				frame.add(timeSeriesForecastOnceInternalFrame);
+				timeSeriesForecastOnceInternalFrame.setVisible(true);
+				timeSeriesForecastOnceInternalFrame.setClosable(true);
 			}
 		});
 		mnTimeSeriesAnalysis.add(mntmForecastOnce);
@@ -145,6 +157,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				TimeSeriesForecastVsActual timeSeriesForecastVsActualInternalFrame = new TimeSeriesForecastVsActual(csvPath);
+				frame.add(timeSeriesForecastVsActualInternalFrame);
+				timeSeriesForecastVsActualInternalFrame.setVisible(true);
+				timeSeriesForecastVsActualInternalFrame.setClosable(true);
 			}
 		});
 		mnTimeSeriesAnalysis.add(mntmForecastVsActual);
@@ -155,6 +171,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				TimeSeriesContinuousForecast timeSeriesContinuousForecastInternalFrame = new TimeSeriesContinuousForecast(csvPath);
+				frame.add(timeSeriesContinuousForecastInternalFrame);
+				timeSeriesContinuousForecastInternalFrame.setVisible(true);
+				timeSeriesContinuousForecastInternalFrame.setClosable(true);
 			}
 		});
 		mnTimeSeriesAnalysis.add(mntmContinuousForecast);
