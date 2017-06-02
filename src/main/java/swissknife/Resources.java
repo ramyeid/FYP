@@ -17,11 +17,18 @@ import java.util.Vector;
  */
 public class Resources {
 
-    public static final String OUTPUT_FILE = System.getProperty("user.dir")+"/src/main/resources/TimeSeriesAnalysis/output.csv";
     public static final Map<String,String> DATE_FORMAT_MAP = new HashMap<String,String>(){{
         put("%Y-%m","yyyy-MM");
     }};
-    public static final String RESOURCES = System.getProperty("user.dir")+"/src/main/resources/TimeSeriesAnalysis/ContinuousForecast/";
+
+
+
+
+    private static String BASE_FILE_TIME_SERIES_ANALYSIS = System.getProperty("user.dir")+"/src/main/resources/TimeSeriesAnalysis/";
+    public static String TSA_FORECAST_ONCE_OUTPUT_FILE = BASE_FILE_TIME_SERIES_ANALYSIS+"/Forecast_Once_Output.csv";
+    public static String TSA_PREDICT_OUTPUT_FILE = BASE_FILE_TIME_SERIES_ANALYSIS +"Predict_Output.csv";
+    public static String TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE = BASE_FILE_TIME_SERIES_ANALYSIS + "Forecast_Once_Output.csv";
+    public static final String CONTINUOS_FORECAST_OUTPUT_FILE = BASE_FILE_TIME_SERIES_ANALYSIS +"ContinuousForecast/";
 
 
     public static final Vector<String> DATE_FORMAT_LIST = new Vector<>(Arrays.asList("%Y-%m"));
@@ -37,6 +44,9 @@ public class Resources {
 
     public static final String TIME_SERIES_PYTHON_FILE = System.getProperty("user.dir")+"/src/main/java/swissknife/modal/timeseriesanalysis/TimeSeriesAnalysis.py";
     public static final String NAIVE_BAYES_PYTHON_FILE = System.getProperty("user.dir")+"/src/main/java/swissknife/modal/naivebayes/NaiveBayes.py";
+
+
+
     public static String  getTimeSeriesAnalysisActionName(int action){
         switch(action) {
             case 1:

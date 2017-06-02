@@ -32,7 +32,7 @@ public class TSAContinuousForecast extends TimeSeriesAnalysis {
     }
 
     public JPanel plot() {
-        return PlotContinuousForecasting.plotContinuousForecasting(Resources.RESOURCES+"Forecasts.txt", Resources.RESOURCES+"Continuous_output.csv", Resources.DATE_FORMAT_MAP.get(dateFormat));
+        return PlotContinuousForecasting.plotContinuousForecasting(Resources.CONTINUOS_FORECAST_OUTPUT_FILE +"Forecasts.txt", Resources.CONTINUOS_FORECAST_OUTPUT_FILE +"Continuous_output.csv", Resources.DATE_FORMAT_MAP.get(dateFormat));
     }
 
     public TSAContinuousForecast(){

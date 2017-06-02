@@ -17,6 +17,7 @@ def parser(x):
 
 def forecastVsActual(keyY,series,actionTime,src):
     outputFile = src+"Forecast_vs_Actual_Output.csv"
+
     X = series[keyY].values
     size = int(len(X)-actionTime)
     train, test = X[0:size], X[size:len(X)]
@@ -56,6 +57,7 @@ def forecastVsActual(keyY,series,actionTime,src):
 
 def predict(keyY,series,actionTime,src,dateFormat):
     outputFile = src+"Predict_Output.csv"
+
     X = series[keyY].values
     model = ARIMA(X,order=(5,1,0))
     model_fit=model.fit(disp=0)
@@ -162,8 +164,8 @@ def callAction(inputFile,action,actionTime,keyX,keyY,setAverage,src,resetCSV,dat
 
 def continuousForecastWithoutActual(inputFile,keyY,keyX,series,actionTime,src,resetCSV,setAverage):
 
-    dataFile = src+"TimeSeriesAnalysis.ContinuousForecast/Continuous_output.csv"
-    outputForecastFile = src+"TimeSeriesAnalysis.ContinuousForecast/Forecasts.txt"
+    dataFile = src+"ContinuousForecast/Continuous_output.csv"
+    outputForecastFile = src+"ContinuousForecast/Forecasts.txt"
 
 
     if resetCSV == 1 : ##new time series analysis
@@ -232,7 +234,7 @@ def copyDatatoTempFile(keyX,series,dateFormat,file):
     series.to_csv(file,index=False)
 
 def addValueToContinuousForecast(src,keyX,keyY,data,dateFormat):
-    dataFile = src+"TimeSeriesAnalysis.ContinuousForecast/Continuous_output.csv"
+    dataFile = src+"ContinuousForecast/Continuous_output.csv"
 
     series = read_csv(dataFile,parse_dates=[keyX],date_parser=parser)
 
@@ -271,7 +273,7 @@ def getNextDate(series,currentDate):
 
 
 cwd = os.getcwd()
-src = cwd+"/src/main/resources/"
+src = cwd+"/src/main/resources/TimeSeriesAnalysis/"
 
 ##These two are sent ready from java.
 

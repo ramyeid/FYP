@@ -28,6 +28,6 @@ public class TSAPredict extends TimeSeriesAnalysis {
     }
 
     public  JPanel plot(){
-        return  PlotPredictionForecastOnce.plotPrediction(Resources.OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat));
+        return  PlotPredictionForecastOnce.plotPrediction(Resources.TSA_PREDICT_OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat));
     }
 }

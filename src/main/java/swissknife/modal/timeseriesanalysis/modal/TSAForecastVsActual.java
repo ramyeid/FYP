@@ -29,6 +29,6 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
     }
 
     public  JPanel plot(){
-        return PlotForecastingVsActual.plotForecasting(Resources.OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat));
+        return PlotForecastingVsActual.plotForecasting(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat));
     }
 }
