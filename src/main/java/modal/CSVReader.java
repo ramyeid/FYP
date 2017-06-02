@@ -30,6 +30,8 @@ public class CSVReader {
 
 
 
+
+
     public <T> ArrayList<ArrayList<T>> getDataCSVForKeys(String keyX, String keyY,boolean gotHeader) {
         String line = "";
         String csvSplitBy = ",";
@@ -78,5 +80,39 @@ public class CSVReader {
                 e.printStackTrace();
                 return null;
         }
+    }
+
+
+
+    public static ArrayList<ArrayList<Double>> readDataFromCSV(String inputFile, int numberOfData){
+        ArrayList<ArrayList<Double>> result = new ArrayList<>();
+        for (int i=0;i<numberOfData;++i){
+            result.add(new ArrayList<Double>());
         }
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(inputFile));
+            String s = null;
+            while ((s = in.readLine()) != null) {
+                if (s.matches(".*[a-zA-Z]+.*")) {
+                    continue;
+                }
+
+                String[] a = s.split(",");
+                for(int i=0;i<numberOfData;++i){
+                    result.get(i).add( Double.valueOf(a[i]));
+                }
+                float actual = Float.valueOf(a[1]);
+                float predicted = Float.valueOf(a[2]);
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+
+        return result;
+
+
+
+    }
 }

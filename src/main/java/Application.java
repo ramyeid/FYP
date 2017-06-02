@@ -1,7 +1,4 @@
-import modal.timeseriesanalysis.RunPythonFile;
 import pages.ContinuousForcastView;
-import pages.Index;
-import pages.TimeSeriesAnalysisView;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -10,6 +7,7 @@ public class Application {
     public static void main(String []args) throws InterruptedException {
 
 
+//        new Test();
 //        new Index();
 //        new TimeSeriesAnalysisView("/Users/ramyeid/Desktop/AirPassengers.csv");
         //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur

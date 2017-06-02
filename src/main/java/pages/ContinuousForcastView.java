@@ -1,11 +1,11 @@
 package pages;
 
+import modal.timeseriesanalysis.Action;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import modal.timeseriesanalysis.Action;
 
 /**
  * Created by ramyeid on 5/28/17.
@@ -76,11 +76,13 @@ public class ContinuousForcastView extends JPanel implements ActionListener {
         this.add(east,BorderLayout.EAST);
         this.add(west, BorderLayout.WEST);
 
+
+
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         frame.pack();
         frame.setVisible(true);
-
 
 
     }
