@@ -9,7 +9,7 @@ import sys
 import csv
 import datetime as datet
 import dateutil.relativedelta as dateutil
-
+import os
 
 #TODO divide into different scripts.
 def parser(x):
@@ -272,8 +272,8 @@ def getNextDate(series,currentDate):
     return d3
 
 
-
-src = "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/"
+cwd = os.getcwd()
+src = cwd+"/src/main/resources/"
 
 ##These two are sent ready from java.
 

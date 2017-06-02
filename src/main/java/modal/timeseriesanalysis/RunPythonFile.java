@@ -13,13 +13,16 @@ public class RunPythonFile {
     int action ;
     int actionTime ;
     String average;
-    final String pythonFile = "/Users/ramyeid/Desktop/Proj/FYP/src/main/java/modal/timeseriesanalysis/script.py";
+    final String pythonFile ;
     int resetCSV; //=1 -> resetCSV // new time series analysus
                   //=2 -> don't reset// old time series for comparison.
     float datatoAdd;
 
 
     public RunPythonFile(String inputFile,String keyX,String keyY,int action,int actionTime, String average,String dateFormat,int resetCSV, float datatoAdd){
+
+        System.out.println(System.getProperty("user.dir"));
+        pythonFile = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/script.py";
         this.inputFile = inputFile;
         this.keyX = keyX;
         this.keyY = keyY;

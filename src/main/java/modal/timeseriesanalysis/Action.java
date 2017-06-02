@@ -2,7 +2,6 @@ package modal.timeseriesanalysis;
 
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,11 +10,13 @@ import java.util.Map;
  */
 public class Action {
 
-    private static final String OUTPUT_FILE ="/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/output.csv";
+    private static final String OUTPUT_FILE = System.getProperty("user.dir")+"/src/main/resources/output.csv";
     private static final Map<String,String> DATE_FORMAT_MAP = new HashMap<String,String>(){{
         put("%Y-%m","yyyy-MM");
     }};
-    public static final String RESOURCES = "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/ContinuousForecast/";
+    public static final String RESOURCES = System.getProperty("user.dir")+"/src/main/resources/ContinuousForecast/";
+
+
 
     public static void predict(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){
         new RunPythonFile(inputFile,keyX,keyY,1,actionTime,average,dateFormat,0,0).run();
