@@ -1,13 +1,9 @@
 package swissknife.views;
 
-<<<<<<< HEAD:src/main/java/swissknife/views/MainWindow.java
 import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
-=======
-import views.timeseriesanalysis.TimeSeriesPredict;
-import views.timeseriesanalysis.TimeSeriesForecastOnce;
-import views.timeseriesanalysis.TimeSeriesForecastVsActual;
-import views.timeseriesanalysis.TimeSeriesContinuousForecast;
->>>>>>> ad536aaf9ee12cd3e66876bf4f064038a0fe3a74:src/main/java/views/MainWindow.java
+import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
+import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
+import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame
 {
-
 	private JPanel contentPane;
 	private static MainWindow frame;
 
@@ -123,8 +118,8 @@ public class MainWindow extends JFrame
 		mnTimeSeriesAnalysis.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mnTimeSeriesAnalysis);
 
-//TSAPredict
-		JMenuItem mntmPredict = new JMenuItem("TSAPredict");
+//Prediction
+		JMenuItem mntmPredict = new JMenuItem("Prediction");
 		mntmPredict.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)

@@ -24,14 +24,14 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
     private JPanel east;
     private JPanel west;
     private JPanel plotPanel;
-    JFrame frame;
+//    JFrame frame;
 
     public ContinuousForcastPanel(Tool timeSeriesTool){
 
         this.timeSeriesTool = (TSAContinuousForecast)timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
 
-        frame = new JFrame(actionName);
+//        frame = new JFrame(actionName);
         actionTime = new TextField(3);
         forecastButton = new Button("Forecast");
         addValueButton = new Button("Add Next Value");
@@ -47,17 +47,12 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         east.add(actionTime);
         east.add(forecastButton);
 
-
         west.add(new Label("Next Value"));
         west.add(addValue);
         west.add(addValueButton);
 
-
-
-
         forecastButton.addActionListener(this);
         addValueButton.addActionListener(this);
-
 
         addValueButton.setEnabled(false);
         addValue.setEnabled(false);
@@ -65,9 +60,6 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         this.setLayout(new BorderLayout());
         this.add(east,BorderLayout.EAST);
         this.add(west, BorderLayout.WEST);
-
-
-
 
     }
 
@@ -82,7 +74,7 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             timeSeriesTool.addValue(value);
             plotPanel = timeSeriesTool.plot();
             this.add(plotPanel,BorderLayout.SOUTH);
-            frame.pack();
+//            frame.pack();
             this.revalidate();
             this.repaint();
         }
@@ -98,7 +90,7 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             timeSeriesTool.setResetCsv(0);
             plotPanel = timeSeriesTool.plot();
             this.add(plotPanel,BorderLayout.SOUTH);
-            frame.pack();
+//            frame.pack();
             this.revalidate();
             this.repaint();
 

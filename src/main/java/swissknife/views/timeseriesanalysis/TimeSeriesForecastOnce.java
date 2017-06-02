@@ -1,6 +1,6 @@
-package views.timeseriesanalysis;
+package swissknife.views.timeseriesanalysis;
 
-import panels.timeseriesanalysis.TimeSeriesAnalysisPanel;
+import swissknife.panels.timeseriesanalysis.TimeSeriesAnalysisPanel;
 
 import javax.swing.*;
 
