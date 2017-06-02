@@ -1,4 +1,4 @@
-package pages;
+package panels.timeseriesanalysis;
 
 import modal.CSVReader;
 import modal.Tool;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 //TODO ADD AVERAGE
 //TODO ADD ACTIONTIME
 //TODO ADD TO SEE HOW ARE THE DATA IN THE FILE BY HOUR OR DAY (FOR AVERAGE).
-public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
+public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     private String inputFile;
     JButton submitButton;
@@ -43,6 +43,7 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
     JPanel centerPanel;
 
     TextField actionTimeField;
+    Label actionTimeLabel = new Label("Action Time");
 
     JPanel plotPanel;
 
@@ -66,7 +67,7 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
     }
 
 
-    public TimeSeriesAnalysisView(String fileName, int action) {
+    public TimeSeriesAnalysisPanel(String fileName, int action) {
         super(new BorderLayout());
 
         this.inputFile = fileName;
@@ -120,9 +121,10 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
         add(centerPanel, BorderLayout.CENTER);
 
         submitButton.setText(actionName);
-        submitPanel.add(new Label("Action Time"));
         if (action != 4) {
             submitPanel.add(actionTimeField);
+            submitPanel.add(actionTimeLabel);
+
         }
         submitPanel.add(submitButton);
 
@@ -179,7 +181,7 @@ public class TimeSeriesAnalysisView extends JPanel implements ActionListener {
             else {
                 timeSeriesTool.build(inputFile, keyX, keyY, "0", average, dateFormat);
 
-                new ContinuousForcastView(timeSeriesTool);
+                new ContinuousForcastPanel(timeSeriesTool);
 
             }
         }

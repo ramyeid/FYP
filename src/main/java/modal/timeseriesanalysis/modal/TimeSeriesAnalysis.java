@@ -8,13 +8,13 @@ import modal.Resources;
  */
 public abstract class TimeSeriesAnalysis implements Tool {
 
-    String inputFile;
-    String keyX;
-    String keyY;
-    int actionTime;
-    String average;
-    String dateFormat;
-    String pythonFile = Resources.Time_Series_Python_File;
+    protected String inputFile;
+    protected String keyX;
+    protected String keyY;
+    protected int actionTime;
+    protected String average;
+    protected String dateFormat;
+    protected String pythonFile = Resources.Time_Series_Python_File;
 
 
     public TimeSeriesAnalysis(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){

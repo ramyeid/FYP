@@ -1,15 +1,16 @@
-package modal.timeseriesanalysis;
+package modal.timeseriesanalysis.modal;
 
 import modal.Resources;
 import modal.timeseriesanalysis.Plot.PlotContinuousForecasting;
 import modal.RunPythonFile;
+import modal.timeseriesanalysis.TimeSeriesAnalysis;
 
 import javax.swing.*;
 
 /**
  * Created by ramyeid on 6/2/17.
  */
-public class ContinuousForecast extends TimeSeriesAnalysis{
+public class ContinuousForecast extends TimeSeriesAnalysis {
 
     int resetcsv;
 

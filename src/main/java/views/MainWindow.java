@@ -1,4 +1,6 @@
-package pages;
+package views;
+
+import views.timeseriesanalysis.TimeSeriesPredict;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

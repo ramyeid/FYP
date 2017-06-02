@@ -1,4 +1,4 @@
-import pages.TimeSeriesAnalysisView;
+import panels.timeseriesanalysis.TimeSeriesAnalysisPanel;
 
 import javax.swing.*;
 
@@ -11,7 +11,7 @@ public class Application {
 
 //        new Test();
 //        new Index();
-//        new TimeSeriesAnalysisView("/Users/ramyeid/Desktop/AirPassengers.csv");
+//        new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv");
         //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
         //2 -- forecast of the last actionTime [-ActionTime] Values to see actual is similar to what the prog predicteed for the last ActionTime values.
 
@@ -37,19 +37,19 @@ public class Application {
 //        int resetCSV = 1;
 //        float data = 0.0f;
 //        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-//        new ContinuousForcastView(inputFile,keyX,keyY,average,dateFormat);
+//        new ContinuousForcastPanel(inputFile,keyX,keyY,average,dateFormat);
 
         //WARNING : Remove for final product.
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new TimeSeriesAnalysisView(inputFile,4));
+        frame.add(new TimeSeriesAnalysisPanel(inputFile,1));
         frame.pack();
         frame.setVisible(true);
 
 
 
 
-//        new TimeSeriesAnalysisView(inputFile);
+//        new TimeSeriesAnalysisPanel(inputFile);
 
 //
 //        System.out.println("now wait");

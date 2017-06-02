@@ -1,15 +1,16 @@
-package modal.timeseriesanalysis;
+package modal.timeseriesanalysis.modal;
 
 import modal.timeseriesanalysis.Plot.PlotForecastingVsActual;
 import modal.Resources;
 import modal.RunPythonFile;
+import modal.timeseriesanalysis.TimeSeriesAnalysis;
 
 import javax.swing.*;
 
 /**
  * Created by ramyeid on 6/2/17.
  */
-public class ForecastVsActual extends TimeSeriesAnalysis{
+public class ForecastVsActual extends TimeSeriesAnalysis {
 
 
 

@@ -1,15 +1,16 @@
-package modal.timeseriesanalysis;
+package modal.timeseriesanalysis.modal;
 
 import modal.timeseriesanalysis.Plot.PlotPredictionForecastOnce;
 import modal.Resources;
 import modal.RunPythonFile;
+import modal.timeseriesanalysis.TimeSeriesAnalysis;
 
 import javax.swing.*;
 
 /**
  * Created by ramyeid on 6/2/17.
  */
-public class ForecastOnce extends TimeSeriesAnalysis{
+public class ForecastOnce extends TimeSeriesAnalysis {
 
 
     public ForecastOnce(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){

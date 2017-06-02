@@ -1,10 +1,10 @@
 package modal;
 
 
-import modal.timeseriesanalysis.ContinuousForecast;
-import modal.timeseriesanalysis.ForecastOnce;
-import modal.timeseriesanalysis.ForecastVsActual;
-import modal.timeseriesanalysis.Predict;
+import modal.timeseriesanalysis.modal.ContinuousForecast;
+import modal.timeseriesanalysis.modal.ForecastOnce;
+import modal.timeseriesanalysis.modal.ForecastVsActual;
+import modal.timeseriesanalysis.modal.Predict;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class Resources {
     public static final String CONTINUOUS_FORECAST = "Continuous Forecast";
 
 
-    public static final String Time_Series_Python_File = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/script.py";
+    public static final String Time_Series_Python_File = System.getProperty("user.dir")+"/src/main/java/modal/timeseriesanalysis/TimeSeriesAnalysis.py";
 
     public static String  getTimeSeriesAnalysisActionName(int action){
         String result = null;

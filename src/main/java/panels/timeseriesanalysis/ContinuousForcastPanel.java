@@ -1,8 +1,8 @@
-package pages;
+package panels.timeseriesanalysis;
 
 import modal.Tool;
 import modal.Resources;
-import modal.timeseriesanalysis.ContinuousForecast;
+import modal.timeseriesanalysis.modal.ContinuousForecast;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by ramyeid on 5/28/17.
  */
-public class ContinuousForcastView extends JPanel implements ActionListener {
+public class ContinuousForcastPanel extends JPanel implements ActionListener {
 
     private TextField actionTime;
     private Button forecastButton;
@@ -26,7 +26,7 @@ public class ContinuousForcastView extends JPanel implements ActionListener {
     private JPanel plotPanel;
     JFrame frame;
 
-    public ContinuousForcastView(Tool timeSeriesTool){
+    public ContinuousForcastPanel(Tool timeSeriesTool){
 
         this.timeSeriesTool = (ContinuousForecast)timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
