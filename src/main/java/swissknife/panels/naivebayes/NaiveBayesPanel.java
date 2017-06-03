@@ -73,11 +73,11 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
 
 
 
-
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.add(this);
-//        frame.pack();
-//        frame.setVisible(true);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(this);
+        frame.pack();
+        frame.setVisible(true);
 
 
     }
