@@ -80,10 +80,10 @@ if action == "2":
 	for i in range(actionTime):
 		data_df_rev[keyToPredict][index] = 0
    		index = index + 1
-   		
 
 
- 
+
+
 percentageActionTime = float(actionTime)/size
 
 features = data_df_rev.values[:,:len(keys)]
