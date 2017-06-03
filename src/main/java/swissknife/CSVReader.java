@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CSVReader {
 
@@ -110,5 +111,24 @@ public class CSVReader {
 
 
 
+    }
+
+    public static float readError(String outputFile, String substring) {
+        float result = 0;
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(outputFile));
+            String line = null;
+            List<String> data = new ArrayList<>();
+            while ((line = in.readLine()) != null) {
+                if (line.contains(substring)) {
+                    result = Float.valueOf(line.substring(substring.length(), line.length()));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

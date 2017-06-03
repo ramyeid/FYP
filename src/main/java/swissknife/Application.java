@@ -1,6 +1,8 @@
 package swissknife;
 
-import swissknife.panels.naivebayes.NaiveBayesPanel;
+import swissknife.panels.timeseriesanalysis.TimeSeriesAnalysisPanel;
+
+import javax.swing.*;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -12,22 +14,22 @@ public class Application {
 
 //        new Test();
 //        new Index();
-//        JFrame frame = new JFrame();
-//        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",2));
-//        frame.pack();
-//        frame.setVisible(true);
+        JFrame frame = new JFrame();
+        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",4));
+        frame.pack();
+        frame.setVisible(true);
 //        //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
         //2 -- forecast of the last actionTime [-ActionTime] Values to see actual is similar to what the prog predicteed for the last ActionTime values.
 
         //3 -- forecast to +ActionTime to see in the future what is going to happen
 
-
-
-        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
-//        String keyToPredict = "var1";
-//        int actionTime = 3300;
-//        new NBPredictVsActual(inputFile,keyToPredict,actionTime).action();
-        new NaiveBayesPanel(inputFile,2);
+//
+//
+//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
+////        String keyToPredict = "var1";
+////        int actionTime = 3300;
+////        new NBPredictVsActual(inputFile,keyToPredict,actionTime).action();
+//        new NaiveBayesPanel(inputFile,1);
 
 
 

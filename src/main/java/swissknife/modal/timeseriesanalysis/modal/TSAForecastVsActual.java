@@ -1,5 +1,6 @@
 package swissknife.modal.timeseriesanalysis.modal;
 
+import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.timeseriesanalysis.Plot.PlotForecastingVsActual;
 import swissknife.modal.timeseriesanalysis.RunTSAPython;
@@ -12,7 +13,7 @@ import javax.swing.*;
  */
 public class TSAForecastVsActual extends TimeSeriesAnalysis {
 
-
+    private float error;
 
     public TSAForecastVsActual(String inputFile, String keyX, String keyY, int actionTime, String average, String dateFormat){
         super(inputFile,keyX,keyY,actionTime,average,dateFormat);
@@ -25,10 +26,16 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
 
     public  void action(){
         new RunTSAPython(inputFile,keyX,keyY,2,actionTime,average,dateFormat,0,0).run();
-
+        error = CSVReader.readError(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,"ERROR MSE: ");
     }
 
     public  JPanel plot(){
         return PlotForecastingVsActual.plotForecasting(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat));
     }
+
+
+    public float getError() {
+        return error;
+    }
 }
+

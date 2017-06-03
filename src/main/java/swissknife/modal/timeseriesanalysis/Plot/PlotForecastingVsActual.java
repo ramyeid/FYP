@@ -25,7 +25,6 @@ import java.util.Date;
 public class PlotForecastingVsActual extends JPanel {
 
 
-    public static float errorMSE;
     public static JPanel plotForecasting(String inputFile, String dateFormat) {
         TimeSeriesCollection timeSeriesCollection = getTimeSeriesFromCSV(inputFile, dateFormat);
         PlotForecastingVsActual temp = new PlotForecastingVsActual();
@@ -76,10 +75,6 @@ public class PlotForecastingVsActual extends JPanel {
             String s = null;
             while ((s = in.readLine()) != null) {
                 if (s.matches(".*[a-zA-Z]+.*")) {
-                    if (s.contains("ERROR MSE: ")) {
-                        errorMSE = Float.valueOf(s.substring(11, s.length()));
-                        System.out.println("ERROR  " + errorMSE);
-                    }
                     continue;
                 }
 

@@ -4,6 +4,7 @@ import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.Tool;
 import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
+import swissknife.modal.timeseriesanalysis.modal.TSAForecastVsActual;
 
 import javax.swing.*;
 import java.awt.*;
@@ -158,8 +159,13 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 plotPanel.removeAll();
                 this.remove(plotPanel);
 
+
                 plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
+                if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)){
+                    centerPanel.add(new Label("MSE ERROR: "+((TSAForecastVsActual)timeSeriesTool).getError()));
+                }
                 this.add(plotPanel, BorderLayout.SOUTH);
+
                 this.revalidate();
                 this.repaint();
             }
