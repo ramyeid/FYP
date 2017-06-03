@@ -15,7 +15,7 @@ public class Application {
 //        new Test();
 //        new Index();
         JFrame frame = new JFrame();
-        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",4));
+        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",2));
         frame.pack();
         frame.setVisible(true);
 //        //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
