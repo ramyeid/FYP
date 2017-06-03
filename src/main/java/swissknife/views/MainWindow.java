@@ -190,19 +190,19 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-//				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
-//				frame.add(naiveBayesPredictInternalFrame);
-//				naiveBayesPredictInternalFrame.setVisible(true);
-//				naiveBayesPredictInternalFrame.setClosable(true);
+				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
+				frame.add(naiveBayesPredictInternalFrame);
+				naiveBayesPredictInternalFrame.setVisible(true);
+				naiveBayesPredictInternalFrame.setClosable(true);
 
-				Bla bla = new Bla(csvPath,1);
-				frame.add(bla);
-				bla.setBounds(0,0,400,400);
-				bla.setVisible(true);
-				bla.setClosable(true);
+//				Bla bla = new Bla(csvPath,1);
+//				frame.add(bla);
+//				bla.setBounds(0,0,400,400);
+//				bla.setVisible(true);
+//				bla.setClosable(true);
 			}
 		});
-		mnNaiveBayes.add(mntmPredict);
+		mnNaiveBayes.add(mntmNBPredict);
 
 		//Forecast Vs Actual (NB)
 		JMenuItem mntmNBForecastVsActual = new JMenuItem("Forecast Vs Actual");

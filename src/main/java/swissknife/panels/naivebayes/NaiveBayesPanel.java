@@ -41,7 +41,7 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
 
 
     public NaiveBayesPanel(String inputFile,int action){
-        super(new BorderLayout());
+//        super(new BorderLayout());
         this.inputFile = inputFile;
         actionName = Resources.getNaiveBayesActionName(action);
         nbTool = Resources.getNaiveBayesTool(action);
@@ -73,11 +73,11 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
 
 
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.pack();
-        frame.setVisible(true);
+//        JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.add(this);
+//        frame.pack();
+//        frame.setVisible(true);
 
 
     }
