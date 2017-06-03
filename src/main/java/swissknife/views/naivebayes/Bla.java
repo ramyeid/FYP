@@ -1,4 +1,4 @@
-package swissknife.panels.naivebayes;
+package swissknife.views.naivebayes;
 
 import swissknife.CSVReader;
 import swissknife.Resources;
@@ -16,7 +16,8 @@ import java.util.List;
  * Created by ramyeid on 6/2/17.
  */
 //TODO GEt error of action 1. Write it the last line of .csv.
-public class NaiveBayesPanel extends JPanel implements ActionListener{
+public class Bla extends JInternalFrame
+{
 
     //action = 1 - Predict And
     //action = 2 - Predict Only
@@ -39,9 +40,16 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
     Tool nbTool;
     Label accuracyLabel;
 
+    JPanel pan;
 
-    public NaiveBayesPanel(String inputFile,int action){
-        super(new BorderLayout());
+    public void resi (int h, int w)
+    {
+        this.resize(h,w);
+    }
+
+
+    public Bla(String inputFile,int action)
+    {
         this.inputFile = inputFile;
         actionName = Resources.getNaiveBayesActionName(action);
         nbTool = Resources.getNaiveBayesTool(action);
@@ -53,15 +61,38 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
         actionTimeField = new TextField(3);
         southPanel = new JPanel();
         accuracyLabel = new Label();
+        pan = new JPanel();
 //        frame = new JFrame();
 
         String[] keysList = CSVReader.getColumnKeys(inputFile);
-        Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
+        Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",pan);
+        pan.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
 
-        this.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
+        submitButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                    resi (500,500);
 
-        submitButton.addActionListener(this);
+                String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
+                    String actionTime = actionTimeField.getText();
+                    nbTool.build(inputFile, keyToPredict, actionTime);
 
+                    switch (actionName)
+                    {
+                        case Resources.NB_PREDICT:
+                            nbTool.action();
+                            break;
+
+                        case Resources.NB_PREDICT_VS_ACTUAL:
+                            nbTool.action();
+                            float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
+                            accuracyLabel.setText("Accuracy :" + accuracy);
+                            southPanel.add(accuracyLabel);
+                            break;
+                    }
+            }
+        });
 
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
 
@@ -69,39 +100,6 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
         southPanel.add(actionTimeField);
         southPanel.add(submitButton);
 
-        this.add(southPanel, BorderLayout.SOUTH);
-
-
-
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.pack();
-        frame.setVisible(true);
-
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource().equals(submitButton)) {
-            String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
-            String actionTime = actionTimeField.getText();
-            nbTool.build(inputFile, keyToPredict, actionTime);
-            switch (actionName) {
-                case Resources.NB_PREDICT:
-                    nbTool.action();
-                    break;
-                case Resources.NB_PREDICT_VS_ACTUAL:
-                    nbTool.action();
-                    float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
-                    accuracyLabel.setText("Accuracy :"+accuracy);
-                    southPanel.add(accuracyLabel);
-//                    frame.pack();
-                    break;
-            }
-
-        }
+        pan.add(southPanel, BorderLayout.SOUTH);
     }
 }

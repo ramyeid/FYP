@@ -6,6 +6,8 @@ import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
 import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 
 import swissknife.views.naivebayes.NaiveBayesPredict;
+import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
+import swissknife.views.naivebayes.Bla;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -148,7 +150,7 @@ public class MainWindow extends JFrame
 		});
 		mnTimeSeriesAnalysis.add(mntmForecastOnce);
 
-		//Forecast Vs Actual
+		//Forecast Vs Actual (TSA)
 		JMenuItem mntmForecastVsActual = new JMenuItem("Forecast vs Actual");
 		mntmForecastVsActual.addActionListener(new ActionListener()
 		{
@@ -188,13 +190,33 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
-				frame.add(naiveBayesPredictInternalFrame);
-				naiveBayesPredictInternalFrame.setVisible(true);
-				naiveBayesPredictInternalFrame.setClosable(true);
+//				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
+//				frame.add(naiveBayesPredictInternalFrame);
+//				naiveBayesPredictInternalFrame.setVisible(true);
+//				naiveBayesPredictInternalFrame.setClosable(true);
+
+				Bla bla = new Bla(csvPath,1);
+				frame.add(bla);
+				bla.setBounds(0,0,400,400);
+				bla.setVisible(true);
+				bla.setClosable(true);
 			}
 		});
 		mnNaiveBayes.add(mntmPredict);
+
+		//Forecast Vs Actual (NB)
+		JMenuItem mntmNBForecastVsActual = new JMenuItem("Forecast Vs Actual");
+		mntmNBForecastVsActual.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath);
+				frame.add(naiveBayesForecastVsActualInternalFrame);
+				naiveBayesForecastVsActualInternalFrame.setVisible(true);
+				naiveBayesForecastVsActualInternalFrame.setClosable(true);
+			}
+		});
+		mnNaiveBayes.add(mntmForecastVsActual);
 
 
 //Bayesian Network
