@@ -5,6 +5,8 @@ import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
 import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 
+import swissknife.views.naivebayes.NaiveBayesPredict;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -118,8 +120,8 @@ public class MainWindow extends JFrame
 		mnTimeSeriesAnalysis.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAlgorithms.add(mnTimeSeriesAnalysis);
 
-//Prediction
-		JMenuItem mntmPredict = new JMenuItem("Prediction");
+		//Prediction
+		JMenuItem mntmPredict = new JMenuItem("Prediction Only");
 		mntmPredict.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -132,7 +134,7 @@ public class MainWindow extends JFrame
 		});
 		mnTimeSeriesAnalysis.add(mntmPredict);
 
-//Forecast Once
+		//Forecast Once
 		JMenuItem mntmForecastOnce = new JMenuItem("Forecast Once");
 		mntmForecastOnce.addActionListener(new ActionListener()
 		{
@@ -146,7 +148,7 @@ public class MainWindow extends JFrame
 		});
 		mnTimeSeriesAnalysis.add(mntmForecastOnce);
 
-//Forecast Vs Actual
+		//Forecast Vs Actual
 		JMenuItem mntmForecastVsActual = new JMenuItem("Forecast vs Actual");
 		mntmForecastVsActual.addActionListener(new ActionListener()
 		{
@@ -160,7 +162,7 @@ public class MainWindow extends JFrame
 		});
 		mnTimeSeriesAnalysis.add(mntmForecastVsActual);
 
-//Continous Forecast
+		//Continous Forecast
 		JMenuItem mntmContinuousForecast = new JMenuItem("Continuous Forecast");
 		mntmContinuousForecast.addActionListener(new ActionListener()
 		{
@@ -176,15 +178,24 @@ public class MainWindow extends JFrame
 
 //Menu Naive Bayes
 
-		JMenuItem mntmNaiveBayes = new JMenuItem("Naive Bayes");
-		mntmNaiveBayes.addActionListener(new ActionListener()
+		JMenu mnNaiveBayes = new JMenu("Naive Bayes");
+		mnNaiveBayes.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnAlgorithms.add(mnNaiveBayes);
+
+		//Prediction only
+		JMenuItem mntmNBPredict = new JMenuItem("Prediction Only");
+		mntmNBPredict.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
+				frame.add(naiveBayesPredictInternalFrame);
+				naiveBayesPredictInternalFrame.setVisible(true);
+				naiveBayesPredictInternalFrame.setClosable(true);
 			}
 		});
-		mntmNaiveBayes.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnAlgorithms.add(mntmNaiveBayes);
+		mnNaiveBayes.add(mntmPredict);
+
 
 //Bayesian Network
 
