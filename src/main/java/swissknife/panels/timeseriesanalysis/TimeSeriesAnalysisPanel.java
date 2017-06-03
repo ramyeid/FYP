@@ -50,21 +50,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
     String actionName;
     Tool timeSeriesTool;
 
-    public void createRadioButtons(String[] keysList, ButtonGroup buttonGroup, JPanel radioButtons, List<JRadioButton> radioButtonList, String axis) {
-        radioButtons.setLayout(new BorderLayout());
-        radioButtons.add(new Label(axis), BorderLayout.NORTH);
-        JPanel tmpPanel = new JPanel();
-        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
 
-        for (int i = 0; i < keysList.length; ++i) {
-            JRadioButton tmp = new JRadioButton(keysList[i]);
-            radioButtonList.add(tmp);
-            tmp.addActionListener(this);
-            buttonGroup.add(tmp);
-            tmpPanel.add(tmp);
-        }
-        radioButtons.add(tmpPanel, BorderLayout.CENTER);
-    }
 
 
     public TimeSeriesAnalysisPanel(String fileName, int action) {
@@ -87,18 +73,17 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         submitPanel = new JPanel();
 
 
-        actionTimeField = new TextField();
+        actionTimeField = new TextField(3);
         plotPanel = new JPanel();
         centerPanel = new JPanel();
 
 
-        actionTimeField.setColumns(3);
 
 
         String[] keysList = CSVReader.getColumnKeys(fileName);
 
-        createRadioButtons(keysList, keysYButtonGroup, radioButtonsPanelY, radioButtonListY, "Y Axis");
-        createRadioButtons(keysList, keysXButtonGroup, radioButtonsPanelX, radioButtonListX, "X Axis");
+        Resources.createRadioButtons(keysList, keysYButtonGroup, radioButtonsPanelY, radioButtonListY, "Y Axis",this);
+        Resources.createRadioButtons(keysList, keysXButtonGroup, radioButtonsPanelX, radioButtonListX, "X Axis",this);
 
 
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));

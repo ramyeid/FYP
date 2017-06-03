@@ -61,6 +61,14 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         this.add(east,BorderLayout.EAST);
         this.add(west, BorderLayout.WEST);
 
+
+        //Ramy: Must add this in order for this panel to show, because if you call a Jpanel
+        // alone new ContinuousForecastPAnel() it will not be visible.
+
+//        JFrame frame = new JFrame();
+//        frame.add(this);
+//        frame.setVisible(true);
+//        frame.pack();
     }
 
 

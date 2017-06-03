@@ -5,25 +5,34 @@ import swissknife.panels.naivebayes.NaiveBayesPanel;
 /**
  * Created by ramyeid on 4/24/17.
  */
+//TODO CONTROL EVERY INPUT FROM THE USER (TEXT FIELD)...
 public class Application {
     public static void main(String []args) throws InterruptedException {
 
 
 //        new Test();
 //        new Index();
-//        new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv");
-        //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
+//        JFrame frame = new JFrame();
+//        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",2));
+//        frame.pack();
+//        frame.setVisible(true);
+//        //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
         //2 -- forecast of the last actionTime [-ActionTime] Values to see actual is similar to what the prog predicteed for the last ActionTime values.
 
         //3 -- forecast to +ActionTime to see in the future what is going to happen
 
 
-//
-        String inputFile = System.getProperty("user.dir")+"/src/main/resources/adult.data.csv";
-//        String keyToPredict = "income";
-//        int actionTime = 10745;
+
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
+//        String keyToPredict = "var1";
+//        int actionTime = 3300;
 //        new NBPredictVsActual(inputFile,keyToPredict,actionTime).action();
-//
+        new NaiveBayesPanel(inputFile,2);
+
+
+
+//        new TimeSeriesAnalysisPanel()
+
 ////
 //        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
 //        String keyToPredict = "var1";
@@ -31,7 +40,7 @@ public class Application {
 //        new NBPredict(inputFile,keyToPredict,actionTime).action();
 //
 
-        new NaiveBayesPanel(inputFile,1);
+//        new NaiveBayesPanel(inputFile,1);
 
 //
 //

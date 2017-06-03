@@ -2,6 +2,8 @@ package swissknife.panels.naivebayes;
 
 import swissknife.CSVReader;
 import swissknife.Resources;
+import swissknife.modal.Tool;
+import swissknife.modal.naivebayes.modal.NBPredictVsActual;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,39 +31,46 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
 
     JFrame frame;
 
+    TextField actionTimeField;
+    JButton submitButton;
+    JPanel southPanel;
 
-    public void createRadioButtons(String[] keysList, ButtonGroup buttonGroup, JPanel radioButtons, List<JRadioButton> radioButtonList, String axis) {
-        radioButtons.setLayout(new BorderLayout());
-        radioButtons.add(new Label(axis), BorderLayout.NORTH);
-        JPanel tmpPanel = new JPanel();
-        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
 
-        for (int i = 0; i < keysList.length; ++i) {
-            JRadioButton tmp = new JRadioButton(keysList[i]);
-            radioButtonList.add(tmp);
-            tmp.addActionListener(this);
-            buttonGroup.add(tmp);
-            tmpPanel.add(tmp);
-        }
-        radioButtons.add(tmpPanel, BorderLayout.CENTER);
-    }
+    Tool nbTool;
+    Label accuracyLabel;
 
 
     public NaiveBayesPanel(String inputFile,int action){
         super(new BorderLayout());
         this.inputFile = inputFile;
         actionName = Resources.getNaiveBayesActionName(action);
+        nbTool = Resources.getNaiveBayesTool(action);
 
+        submitButton = new JButton(actionName);
         keysToPredictButtonGroup = new ButtonGroup();
         radioButtonsPanelKeysToPredict = new JPanel();
         radioButtonListKeysToPredict = new ArrayList<>();
-
-
+        actionTimeField = new TextField(3);
+        southPanel = new JPanel();
+        accuracyLabel = new Label();
         frame = new JFrame();
+
         String[] keysList = CSVReader.getColumnKeys(inputFile);
-        createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict");
+        Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
 
         this.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
+
+        submitButton.addActionListener(this);
+
+
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
+
+        southPanel.add(new Label ("Action Time"));
+        southPanel.add(actionTimeField);
+        southPanel.add(submitButton);
+
+        this.add(southPanel, BorderLayout.SOUTH);
+
 
 
 
@@ -76,5 +85,23 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource().equals(submitButton)) {
+            String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
+            String actionTime = actionTimeField.getText();
+            nbTool.build(inputFile, keyToPredict, actionTime);
+            switch (actionName) {
+                case Resources.NB_PREDICT:
+                    nbTool.action();
+                    break;
+                case Resources.NB_PREDICT_VS_ACTUAL:
+                    nbTool.action();
+                    float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
+                    accuracyLabel.setText("Accuracy :"+accuracy);
+                    southPanel.add(accuracyLabel);
+                    frame.pack();
+                    break;
+            }
+
+        }
     }
 }

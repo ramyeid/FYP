@@ -140,7 +140,8 @@ Date,#Passengers
 1960-07,622.0
 1960-08,606.0
 1960-09,508.0
-<<<<<<< HEAD:src/main/resources/TimeSeriesAnalysis/ContinuousForecast/Continuous_output.csv
-1960-10,490.0
-=======
->>>>>>> ad536aaf9ee12cd3e66876bf4f064038a0fe3a74:src/main/resources/ContinuousForecast/Continuous_output.csv
+1960-10,461.0
+1960-11,390.0
+1960-12,432.0
+1961-01,508.0
+1961-02,461.0
