@@ -13,3 +13,4 @@ public class NaiveBayesPredict extends JInternalFrame
         this.add(panel);
     }
 }
+
