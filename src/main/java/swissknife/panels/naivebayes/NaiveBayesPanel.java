@@ -29,7 +29,7 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
     JPanel radioButtonsPanelKeysToPredict;
     List<JRadioButton> radioButtonListKeysToPredict;
 
-    JFrame frame;
+//    JFrame frame;
 
     TextField actionTimeField;
     JButton submitButton;
@@ -53,7 +53,7 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
         actionTimeField = new TextField(3);
         southPanel = new JPanel();
         accuracyLabel = new Label();
-        frame = new JFrame();
+//        frame = new JFrame();
 
         String[] keysList = CSVReader.getColumnKeys(inputFile);
         Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
@@ -74,10 +74,10 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
 
 
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.pack();
-        frame.setVisible(true);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.add(this);
+//        frame.pack();
+//        frame.setVisible(true);
 
 
     }
@@ -98,7 +98,7 @@ public class NaiveBayesPanel extends JPanel implements ActionListener  {
                     float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
                     accuracyLabel.setText("Accuracy :"+accuracy);
                     southPanel.add(accuracyLabel);
-                    frame.pack();
+//                    frame.pack();
                     break;
             }
 
