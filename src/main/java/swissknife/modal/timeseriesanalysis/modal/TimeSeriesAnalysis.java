@@ -5,9 +5,7 @@ import swissknife.modal.Tool;
 
 import javax.swing.*;
 
-/**
- * Created by ramyeid on 6/2/17.
- */
+
 public abstract class TimeSeriesAnalysis implements Tool {
 
     protected String inputFile;

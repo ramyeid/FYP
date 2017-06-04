@@ -8,9 +8,9 @@ import swissknife.modal.Tool;
  */
 public abstract class NaiveBayes implements Tool {
 
-    String inputFile;
-    String keyToPredict;
-    int actionTime;
+    protected String inputFile;
+    protected String keyToPredict;
+    protected int actionTime;
     protected String pythonFile = Resources.NAIVE_BAYES_PYTHON_FILE;
 
     public NaiveBayes(){
