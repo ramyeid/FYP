@@ -74,9 +74,6 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
         this.add(southPanel, BorderLayout.SOUTH);
 
 
-        this.masterFrame.add(this);
-        this.masterFrame.setVisible(true);
-        this.masterFrame.pack();
 
     }
 

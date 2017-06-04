@@ -121,9 +121,6 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
 
-        this.masterFrame.add(this);
-        this.masterFrame.setVisible(true);
-        this.masterFrame.pack();
 
     }
 

@@ -8,7 +8,9 @@ public class TimeSeriesForecastVsActual extends JInternalFrame
 {
     public TimeSeriesForecastVsActual(String pathCsv,JFrame mainFrame)
     {
-        new TimeSeriesAnalysisPanel(pathCsv,2,this,mainFrame);
+        this.add(new TimeSeriesAnalysisPanel(pathCsv,2,this,mainFrame));
+        this.setVisible(true);
+        this.pack();
     }
 
 }

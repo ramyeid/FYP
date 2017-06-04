@@ -8,7 +8,9 @@ public class TimeSeriesContinuousForecast extends JInternalFrame
 {
     public TimeSeriesContinuousForecast(String pathCsv,JFrame mainFrame)
     {
-        new TimeSeriesAnalysisPanel(pathCsv,4,this,mainFrame);
+        this.add(new TimeSeriesAnalysisPanel(pathCsv,4,this,mainFrame));
+        this.setVisible(true);
+        this.pack();
     }
 
 }

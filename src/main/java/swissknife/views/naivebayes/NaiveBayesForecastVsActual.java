@@ -8,7 +8,8 @@ public class NaiveBayesForecastVsActual extends JInternalFrame
 {
     public NaiveBayesForecastVsActual(String pathCsv)
     {
-        new NaiveBayesPanel(pathCsv,1,this);
-
+        this.add(new NaiveBayesPanel(pathCsv,1,this));
+        this.setVisible(true);
+        this.pack();
     }
 }

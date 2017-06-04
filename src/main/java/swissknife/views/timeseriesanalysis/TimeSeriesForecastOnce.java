@@ -8,7 +8,9 @@ public class TimeSeriesForecastOnce extends JInternalFrame
 {
     public TimeSeriesForecastOnce(String pathCsv,JFrame mainFrame)
     {
-        new TimeSeriesAnalysisPanel(pathCsv,3,this,mainFrame);
+        this.add(new TimeSeriesAnalysisPanel(pathCsv,3,this,mainFrame));
+        this.setVisible(true);
+        this.pack();
     }
 
 }
