@@ -1,7 +1,5 @@
 package swissknife;
 
-import swissknife.panels.naivebayes.NaiveBayesPanel;
-
 /**
  * Created by ramyeid on 4/24/17.
  */
@@ -23,14 +21,26 @@ public class Application {
 
 //
 //
-        String inputFile = System.getProperty("user.dir")+"/src/main/resources/adult.data.csv";
+//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
 //        String keyToPredict = "var1";
 //        int actionTime = 3300;
 //        new NBPredictVsActual(inputFile,keyToPredict,actionTime).action();
-        new NaiveBayesPanel(inputFile,1);
+//        JFrame frame = new JFrame();
+//        frame.add(new LinearRegressionPanel(inputFile,1));
+//        frame.pack();
+//        frame.setVisible(true);
+//
 
 
 
+
+
+//        LRPredictVsActual a = new LRPredictVsActual(inputFile,"var1",3300);
+//        a.action();
+//        System.out.println(a.getError());
+
+//        LRPredict a = new LRPredict(inputFile,"var1",12);
+//        a.action();
 //        new TimeSeriesAnalysisPanel()
 
 ////

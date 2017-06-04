@@ -32,9 +32,9 @@ def forecastVsActual(keyY,series,actionTime,src):
         predictions.append(yhat[0])
         obs = test[t]
         history.append(obs)
-        print('predicted=%f, expected=%f' % (yhat, obs))
+        # print('predicted=%f, expected=%f' % (yhat, obs))
     error = mean_squared_error(test, predictions)
-    print('Test MSE: %.3f' % error)
+    # print('MSE: %.3f' % error)
 
     time = series[keyX].values[size:len(X)]
 
