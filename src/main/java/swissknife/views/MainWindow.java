@@ -1,13 +1,11 @@
 package swissknife.views;
 
-import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
+import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
+import swissknife.views.naivebayes.NaiveBayesPredict;
+import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
-import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
-
-import swissknife.views.naivebayes.NaiveBayesPredict;
-import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
-import swissknife.views.naivebayes.Bla;
+import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -128,9 +126,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				TimeSeriesPredict timeSeriesPredictInternalFrame = new TimeSeriesPredict(csvPath);
+				TimeSeriesPredict timeSeriesPredictInternalFrame = new TimeSeriesPredict(csvPath,MainWindow.this);
 				frame.add(timeSeriesPredictInternalFrame);
 				timeSeriesPredictInternalFrame.setVisible(true);
+				timeSeriesPredictInternalFrame.pack();
 				timeSeriesPredictInternalFrame.setClosable(true);
 			}
 		});
@@ -142,9 +141,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				TimeSeriesForecastOnce timeSeriesForecastOnceInternalFrame = new TimeSeriesForecastOnce(csvPath);
+				TimeSeriesForecastOnce timeSeriesForecastOnceInternalFrame = new TimeSeriesForecastOnce(csvPath,MainWindow.this);
 				frame.add(timeSeriesForecastOnceInternalFrame);
 				timeSeriesForecastOnceInternalFrame.setVisible(true);
+				timeSeriesForecastOnceInternalFrame.pack();
 				timeSeriesForecastOnceInternalFrame.setClosable(true);
 			}
 		});
@@ -156,9 +156,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				TimeSeriesForecastVsActual timeSeriesForecastVsActualInternalFrame = new TimeSeriesForecastVsActual(csvPath);
+				TimeSeriesForecastVsActual timeSeriesForecastVsActualInternalFrame = new TimeSeriesForecastVsActual(csvPath,MainWindow.this);
 				frame.add(timeSeriesForecastVsActualInternalFrame);
 				timeSeriesForecastVsActualInternalFrame.setVisible(true);
+				timeSeriesForecastVsActualInternalFrame.pack();
 				timeSeriesForecastVsActualInternalFrame.setClosable(true);
 			}
 		});
@@ -170,9 +171,10 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				TimeSeriesContinuousForecast timeSeriesContinuousForecastInternalFrame = new TimeSeriesContinuousForecast(csvPath);
+				TimeSeriesContinuousForecast timeSeriesContinuousForecastInternalFrame = new TimeSeriesContinuousForecast(csvPath,MainWindow.this);
 				frame.add(timeSeriesContinuousForecastInternalFrame);
 				timeSeriesContinuousForecastInternalFrame.setVisible(true);
+				timeSeriesContinuousForecastInternalFrame.pack();
 				timeSeriesContinuousForecastInternalFrame.setClosable(true);
 			}
 		});
@@ -193,13 +195,10 @@ public class MainWindow extends JFrame
 				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
 				frame.add(naiveBayesPredictInternalFrame);
 				naiveBayesPredictInternalFrame.setVisible(true);
+				naiveBayesPredictInternalFrame.pack();
 				naiveBayesPredictInternalFrame.setClosable(true);
 
-//				Bla bla = new Bla(csvPath,1);
-//				frame.add(bla);
-//				bla.setBounds(0,0,400,400);
-//				bla.setVisible(true);
-//				bla.setClosable(true);
+
 			}
 		});
 		mnNaiveBayes.add(mntmNBPredict);
@@ -212,11 +211,13 @@ public class MainWindow extends JFrame
 			{
 				NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath);
 				frame.add(naiveBayesForecastVsActualInternalFrame);
+
 				naiveBayesForecastVsActualInternalFrame.setVisible(true);
+				naiveBayesForecastVsActualInternalFrame.pack();
 				naiveBayesForecastVsActualInternalFrame.setClosable(true);
 			}
 		});
-		mnNaiveBayes.add(mntmForecastVsActual);
+		mnNaiveBayes.add(mntmNBForecastVsActual);
 
 
 //Bayesian Network

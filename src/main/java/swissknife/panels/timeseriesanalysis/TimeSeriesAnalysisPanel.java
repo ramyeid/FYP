@@ -52,9 +52,10 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
     Tool timeSeriesTool;
 
 
+    JInternalFrame masterFrame;
+    JFrame mainFrame;
 
-
-    public TimeSeriesAnalysisPanel(String fileName, int action) {
+    public TimeSeriesAnalysisPanel(String fileName, int action,JInternalFrame masterFrame,JFrame mainFrame) {
         super(new BorderLayout());
 
         this.inputFile = fileName;
@@ -117,6 +118,13 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         centerPanel.add(submitPanel);
 
 
+        this.masterFrame = masterFrame;
+        this.mainFrame = mainFrame;
+
+        this.masterFrame.add(this);
+        this.masterFrame.setVisible(true);
+        this.masterFrame.pack();
+
     }
 
 
@@ -166,13 +174,23 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 }
                 this.add(plotPanel, BorderLayout.SOUTH);
 
-                this.revalidate();
-                this.repaint();
+                masterFrame.revalidate();
+                masterFrame.repaint();
+                masterFrame.pack();
+
             }
             else {
                 timeSeriesTool.build(inputFile, keyX, keyY, "0", average, dateFormat);
 
-                new ContinuousForcastPanel(timeSeriesTool);
+                mainFrame.remove(masterFrame);
+
+                JInternalFrame tmpFrame = new JInternalFrame();
+
+                tmpFrame.add(new ContinuousForcastPanel(timeSeriesTool,tmpFrame));
+                tmpFrame.setClosable(true);
+                mainFrame.add(tmpFrame);
+                tmpFrame.setVisible(true);
+                tmpFrame.pack();
 
             }
         }

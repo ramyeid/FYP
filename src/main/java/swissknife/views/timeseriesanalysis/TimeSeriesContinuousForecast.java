@@ -6,10 +6,9 @@ import javax.swing.*;
 
 public class TimeSeriesContinuousForecast extends JInternalFrame
 {
-    public TimeSeriesContinuousForecast(String pathCsv)
+    public TimeSeriesContinuousForecast(String pathCsv,JFrame mainFrame)
     {
-        setBounds(100,100,450,300);
-        this.add(new TimeSeriesAnalysisPanel(pathCsv,4));
+        new TimeSeriesAnalysisPanel(pathCsv,4,this,mainFrame);
     }
 
 }

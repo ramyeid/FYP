@@ -24,14 +24,14 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
     private JPanel east;
     private JPanel west;
     private JPanel plotPanel;
-//    JFrame frame;
 
-    public ContinuousForcastPanel(Tool timeSeriesTool){
+    JInternalFrame masterFrame;
+
+    public ContinuousForcastPanel(Tool timeSeriesTool,JInternalFrame masterFrame){
 
         this.timeSeriesTool = (TSAContinuousForecast)timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
 
-//        frame = new JFrame(actionName);
         actionTime = new TextField(3);
         forecastButton = new Button("Forecast");
         addValueButton = new Button("Add Next Value");
@@ -61,14 +61,11 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         this.add(east,BorderLayout.EAST);
         this.add(west, BorderLayout.WEST);
 
+        this.setVisible(true);
 
-        //Ramy: Must add this in order for this panel to show, because if you call a Jpanel
-        // alone new ContinuousForecastPAnel() it will not be visible.
 
-        JFrame frame = new JFrame();
-        frame.add(this);
-        frame.setVisible(true);
-        frame.pack();
+        this.masterFrame = masterFrame;
+
     }
 
 
@@ -82,9 +79,6 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             timeSeriesTool.addValue(value);
             plotPanel = timeSeriesTool.plot();
             this.add(plotPanel,BorderLayout.SOUTH);
-//            frame.pack();
-            this.revalidate();
-            this.repaint();
         }
 
         else if (e.getSource()==forecastButton){
@@ -98,12 +92,11 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             timeSeriesTool.setResetCsv(0);
             plotPanel = timeSeriesTool.plot();
             this.add(plotPanel,BorderLayout.SOUTH);
-//            frame.pack();
-            this.revalidate();
-            this.repaint();
-
-
         }
+
+        masterFrame.revalidate();
+        masterFrame.repaint();
+        masterFrame.pack();
 
     }
 }

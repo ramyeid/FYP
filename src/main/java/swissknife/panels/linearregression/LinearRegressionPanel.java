@@ -40,10 +40,10 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
     Tool lrTool;
     Label mseErrorLabel;
 
+    JInternalFrame masterFrame;
 
 
-
-    public LinearRegressionPanel(String inputFile,int action){
+    public LinearRegressionPanel(String inputFile,int action,JInternalFrame masterFrame){
 //        super(new BorderLayout());
         this.inputFile = inputFile;
         actionName = Resources.getLinearRegressionName(action);
@@ -74,13 +74,10 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
 
         this.add(southPanel, BorderLayout.SOUTH);
 
-
-
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.add(this);
-//        frame.pack();
-//        frame.setVisible(true);
+        this.masterFrame = masterFrame;
+        this.masterFrame.add(this);
+        this.masterFrame.setVisible(true);
+        this.masterFrame.pack();
 
 
     }
@@ -103,7 +100,9 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
                     float error = ((LRPredictVsActual) lrTool).getError();
                     mseErrorLabel.setText("MSE ERROR: "+error);
                     southPanel.add(mseErrorLabel);
-//                    frame.pack();
+                    masterFrame.revalidate();
+                    masterFrame.repaint();
+                    masterFrame.pack();
                     break;
             }
 

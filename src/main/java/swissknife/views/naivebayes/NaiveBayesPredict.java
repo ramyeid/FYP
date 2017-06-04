@@ -8,9 +8,7 @@ public class NaiveBayesPredict extends JInternalFrame
 {
     public NaiveBayesPredict(String pathCsv)
     {
-        setBounds(100,100,450,300);
-        NaiveBayesPanel panel = new NaiveBayesPanel(pathCsv,2);
-        this.add(panel);
+        new NaiveBayesPanel(pathCsv,2,this);
     }
 }
 

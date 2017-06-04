@@ -38,13 +38,15 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
 
     Tool nbTool;
     Label accuracyLabel;
+    JInternalFrame masterFrame;
 
 
-    public NaiveBayesPanel(String inputFile,int action){
+    public NaiveBayesPanel(String inputFile,int action,JInternalFrame masterFrame){
 //        super(new BorderLayout());
         this.inputFile = inputFile;
         actionName = Resources.getNaiveBayesActionName(action);
         nbTool = Resources.getNaiveBayesTool(action);
+        this.masterFrame = masterFrame;
 
         submitButton = new JButton(actionName);
         keysToPredictButtonGroup = new ButtonGroup();
@@ -72,13 +74,9 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
         this.add(southPanel, BorderLayout.SOUTH);
 
 
-
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.add(this);
-//        frame.pack();
-//        frame.setVisible(true);
-
+        this.masterFrame.add(this);
+        this.masterFrame.setVisible(true);
+        this.masterFrame.pack();
 
     }
 
@@ -98,7 +96,9 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
                     float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
                     accuracyLabel.setText("Accuracy :"+accuracy);
                     southPanel.add(accuracyLabel);
-//                    frame.pack();
+                    masterFrame.revalidate();
+                    masterFrame.repaint();
+                    masterFrame.pack();
                     break;
             }
 
