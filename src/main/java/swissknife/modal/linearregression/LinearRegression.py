@@ -6,6 +6,15 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
+
+# //TODO try klearn.preprocessing.MinMaxScaler to calculate accuracy
+'''
+     # Scale data to [-1, 1] - This is of mayor importance!!!
+        # In this case, I know the range and thus I can (and should) scale
+        # manually. However, this might not always be the case.
+        # Then try sklearn.preprocessing.MinMaxScaler or
+        # sklearn.preprocessing.StandardScaler
+'''
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]
 action = sys.argv[3]
