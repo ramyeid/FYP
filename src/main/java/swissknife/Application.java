@@ -4,6 +4,9 @@ package swissknife;
  * Created by ramyeid on 4/24/17.
  */
 //TODO CONTROL EVERY INPUT FROM THE USER (TEXT FIELD)...
+
+    //TODO ADD CHOICE TO GET NON HEADERS CSV MAYBE AUTOMATIC IF NO HEADERS => CHOOSE COLUMN.
+
 public class Application {
     public static void main(String []args) throws InterruptedException {
 

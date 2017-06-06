@@ -1,5 +1,7 @@
 package swissknife.views;
 
+import swissknife.views.linearregression.LinearRegressionForecastVsActual;
+import swissknife.views.linearregression.LinearRegressionPredict;
 import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
 import swissknife.views.naivebayes.NaiveBayesPredict;
 import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
@@ -12,6 +14,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
+//TODO PACK LOAD CSV
+// BROWSE DIRECTLY NO PATH
+// MENU WRITING SMALLER
+// READ EXCEL FILES NOT JUST CSV
+// PANEL DESIGNS TO BE FIXED
+// OPEN INTERNAL FRAME IN CENTER
+// Graph in new internal frame
+// title for internal frames
+// bring to front new internal
 
 public class MainWindow extends JFrame
 {
@@ -180,7 +193,44 @@ public class MainWindow extends JFrame
 		});
 		mnTimeSeriesAnalysis.add(mntmContinuousForecast);
 
-//Menu Naive Bayes
+//Menu Linear Regression
+
+		JMenu mnLinearRegression = new JMenu("Linear Regression");
+		mnLinearRegression.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnAlgorithms.add(mnLinearRegression);
+
+		//Prediction only (LR)
+		JMenuItem mntmLRPredict = new JMenuItem("Prediction Only");
+		mntmLRPredict.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				LinearRegressionPredict linearRegressionPredictInternalFrame = new LinearRegressionPredict(csvPath);
+				frame.add(linearRegressionPredictInternalFrame);
+				linearRegressionPredictInternalFrame.setVisible(true);
+				linearRegressionPredictInternalFrame.pack();
+				linearRegressionPredictInternalFrame.setClosable(true);
+			}
+		});
+		mnLinearRegression.add(mntmLRPredict);
+
+		//Forecast Vs Actual (LR)
+		JMenuItem mntmLRForecastVsActual = new JMenuItem("Forecast Vs Actual");
+		mntmLRForecastVsActual.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				LinearRegressionForecastVsActual linearRegressionForecastVsActualInternalFrame = new LinearRegressionForecastVsActual(csvPath);
+				frame.add(linearRegressionForecastVsActualInternalFrame);
+
+				linearRegressionForecastVsActualInternalFrame.setVisible(true);
+				linearRegressionForecastVsActualInternalFrame.pack();
+				linearRegressionForecastVsActualInternalFrame.setClosable(true);
+			}
+		});
+		mnLinearRegression.add(mntmLRForecastVsActual);
+
+		//Menu Naive Bayes
 
 		JMenu mnNaiveBayes = new JMenu("Naive Bayes");
 		mnNaiveBayes.setFont(new Font("Segoe UI", Font.PLAIN, 20));
