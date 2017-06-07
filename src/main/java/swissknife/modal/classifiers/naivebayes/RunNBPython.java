@@ -1,4 +1,4 @@
-package swissknife.modal.naivebayes;
+package swissknife.modal.classifiers.naivebayes;
 
 import swissknife.Resources;
 import swissknife.RunPythonFile;

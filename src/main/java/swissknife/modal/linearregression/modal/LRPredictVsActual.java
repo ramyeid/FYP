@@ -3,8 +3,6 @@ package swissknife.modal.linearregression.modal;
 import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.linearregression.RunLRPython;
-import swissknife.modal.naivebayes.RunNBPython;
-import swissknife.modal.naivebayes.modal.NaiveBayes;
 
 /**
  * Created by ramyeid on 6/4/17.

@@ -1,7 +1,7 @@
-package swissknife.modal.naivebayes.modal;
+package swissknife.modal.classifiers.naivebayes.modal;
 
 
-import swissknife.modal.naivebayes.RunNBPython;
+import swissknife.modal.classifiers.naivebayes.RunNBPython;
 
 /**
  * Created by ramyeid on 6/2/17.

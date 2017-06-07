@@ -3,7 +3,7 @@ package swissknife.panels.naivebayes;
 import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.Tool;
-import swissknife.modal.naivebayes.modal.NBPredictVsActual;
+import swissknife.modal.classifiers.naivebayes.modal.NBPredictVsActual;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,7 +90,7 @@ public class NaiveBayesPanel extends JPanel implements ActionListener{
                     break;
                 case Resources.NB_PREDICT_VS_ACTUAL:
                     nbTool.action();
-                    float accuracy = ((NBPredictVsActual) nbTool).getAccuracy();
+                    float accuracy = ((NBPredictVsActual) nbTool).getAccuracy(Resources.NB_PREDICTED_ACTUAL_ONLY_FILE);
                     accuracyLabel.setText("Accuracy :"+accuracy);
                     southPanel.add(accuracyLabel);
                     masterFrame.revalidate();

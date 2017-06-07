@@ -4,8 +4,8 @@ package swissknife;
 import swissknife.modal.Tool;
 import swissknife.modal.linearregression.modal.LRPredict;
 import swissknife.modal.linearregression.modal.LRPredictVsActual;
-import swissknife.modal.naivebayes.modal.NBPredict;
-import swissknife.modal.naivebayes.modal.NBPredictVsActual;
+import swissknife.modal.classifiers.naivebayes.modal.NBPredict;
+import swissknife.modal.classifiers.naivebayes.modal.NBPredictVsActual;
 import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastOnce;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastVsActual;
@@ -49,7 +49,7 @@ public class Resources {
     public static final String NB_PREDICT_VS_ACTUAL = "Predict Vs. Actual";
 
     public static final String TIME_SERIES_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/timeseriesanalysis/TimeSeriesAnalysis.py";
-    public static final String NAIVE_BAYES_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/naivebayes/NaiveBayes.py";
+    public static final String NAIVE_BAYES_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/classifiers/naivebayes/NaiveBayes.py";
     public static final String LINEAR_REGRESSION_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/linearregression/LinearRegression.py";
 
     public static final String NB_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_NB + "Predicted_Actual_Only.csv";
