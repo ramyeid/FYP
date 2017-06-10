@@ -28,6 +28,6 @@ public class TSAForecastOnce extends TimeSeriesAnalysis {
     }
 
     public JPanel plot() {
-        return PlotPredictionForecastOnce.plotForecastOnce(Resources.TSA_FORECAST_ONCE_OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat),actionTime);
+        return PlotPredictionForecastOnce.plotForecastOnce(Resources.TSA_FORECAST_ONCE_OUTPUT_FILE, Resources.DATE_FORMAT_MAP.get(dateFormat),actionTime,keyY);
     }
 }

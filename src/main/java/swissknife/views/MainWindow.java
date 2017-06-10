@@ -2,8 +2,6 @@ package swissknife.views;
 
 import swissknife.views.linearregression.LinearRegressionForecastVsActual;
 import swissknife.views.linearregression.LinearRegressionPredict;
-import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
-import swissknife.views.naivebayes.NaiveBayesPredict;
 import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
@@ -242,11 +240,11 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
-				frame.add(naiveBayesPredictInternalFrame);
-				naiveBayesPredictInternalFrame.setVisible(true);
-				naiveBayesPredictInternalFrame.pack();
-				naiveBayesPredictInternalFrame.setClosable(true);
+//				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
+//				frame.add(naiveBayesPredictInternalFrame);
+//				naiveBayesPredictInternalFrame.setVisible(true);
+//				naiveBayesPredictInternalFrame.pack();
+//				naiveBayesPredictInternalFrame.setClosable(true);
 
 
 			}
@@ -259,12 +257,12 @@ public class MainWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath);
-				frame.add(naiveBayesForecastVsActualInternalFrame);
-
-				naiveBayesForecastVsActualInternalFrame.setVisible(true);
-				naiveBayesForecastVsActualInternalFrame.pack();
-				naiveBayesForecastVsActualInternalFrame.setClosable(true);
+//				NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath);
+//				frame.add(naiveBayesForecastVsActualInternalFrame);
+//
+//				naiveBayesForecastVsActualInternalFrame.setVisible(true);
+//				naiveBayesForecastVsActualInternalFrame.pack();
+//				naiveBayesForecastVsActualInternalFrame.setClosable(true);
 			}
 		});
 		mnNaiveBayes.add(mntmNBForecastVsActual);

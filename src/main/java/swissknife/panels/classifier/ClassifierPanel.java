@@ -27,12 +27,13 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     JPanel radioButtonsPanelKeysToPredict;
     List<JRadioButton> radioButtonListKeysToPredict;
 
-//    JFrame frame;
-
     TextField actionTimeField;
     JButton submitButton;
     JPanel southPanel;
 
+
+    List<JCheckBox> keysToChooseCheckBoxes;
+    JPanel checkBoxesPanel;
 
     Classifier classifierTool;
     Label accuracyLabel;
@@ -40,6 +41,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
 
     public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame){
+        this.setLayout(new BorderLayout());
         classifierTool = (Classifier) tool;
         classifierName = Resources.getClassifierName(classifierTool);
         actionName = Resources.getClassifierActionName(classifierTool.getAction());
@@ -57,9 +59,14 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         southPanel = new JPanel();
         accuracyLabel = new Label();
 
+        keysToChooseCheckBoxes = new ArrayList<>();
+        checkBoxesPanel = new JPanel();
+
         String[] keysList = CSVReader.getColumnKeys(inputFile);
         Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
 
+        createCheckBoxButtons(keysList);
+        this.add(checkBoxesPanel,BorderLayout.EAST);
 
         this.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
 
@@ -78,11 +85,35 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
     }
 
+    private void createCheckBoxButtons(String[] keysList) {
+        checkBoxesPanel.setLayout(new BorderLayout());
+        checkBoxesPanel.add(new Label("Choose keys to do action with"), BorderLayout.NORTH);
+        JPanel tmpPanel = new JPanel();
+        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < keysList.length; ++i) {
+            JCheckBox tmp = new JCheckBox(keysList[i]);
+            tmp.setSelected(true);
+            tmp.addActionListener(this);
+            tmpPanel.add(tmp);
+            keysToChooseCheckBoxes.add(tmp);
+
+        }
+        checkBoxesPanel.add(tmpPanel, BorderLayout.CENTER);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource().equals(submitButton)) {
-            String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
+        String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
+
+        if (e.getSource() instanceof JCheckBox || e.getSource() instanceof JRadioButton){
+            if (keyToPredict!=null) {
+                keysToChooseCheckBoxes.stream().filter(s -> s.isSelected()).filter(s -> s.getText().equals(keyToPredict)).findFirst().orElse(null).setSelected(false);
+            }
+        }
+        else if (e.getSource().equals(submitButton)) {
+
             String actionTime = actionTimeField.getText();
             classifierTool.build(inputFile, keyToPredict, actionTime);
             switch (actionName) {

@@ -8,9 +8,8 @@ import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.time.Hour;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.*;
+import swissknife.Resources;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -27,14 +26,16 @@ import java.util.List;
  * Created by ramyeid on 5/26/17.
  */
 
-//TODO calculate error of predicted. maybe in python same function as forecast function written
-//TODO maybe write this error on the last line of the file and add an if statemtn to the reading.
-    //TODO DIVIDE into 4 classes for each action ( or first 3 actions are the same maybe same class)
+
 public class PlotContinuousForecasting extends JPanel {
 
-    public static JPanel plotContinuousForecasting(String forecasts, String csvFile, String dateFormat){
+    public static String keyY = "";
+    public static int forecastNumber = 0;
 
-     TimeSeriesCollection timeSeriesCollection = createDatasetContinousForecast(forecasts,csvFile,dateFormat);
+    public static JPanel plotContinuousForecasting(String forecasts, String csvFile, String dateFormat, String Ykey) {
+        keyY = Ykey;
+        forecastNumber = 0;
+        TimeSeriesCollection timeSeriesCollection = createDatasetContinousForecast(forecasts, csvFile, dateFormat);
         PlotContinuousForecasting temp = new PlotContinuousForecasting();
         try {
             temp.add(new ChartPanel(createChart(timeSeriesCollection)));
@@ -42,15 +43,12 @@ public class PlotContinuousForecasting extends JPanel {
             e.printStackTrace();
         }
 
-//        RefineryUtilities.centerFrameOnScreen(demo);
         return temp;
     }
 
 
-
-
     public static JFreeChart createChart(TimeSeriesCollection timeSeriesCollection) throws NumberFormatException, IOException {
-        JFreeChart chart = ChartFactory.createXYLineChart("Y vs Time", "Time", "Y", timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createXYLineChart(keyY+" vs. Time", "Time", keyY, timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
 
         XYPlot plot = (XYPlot) chart.getPlot();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -104,7 +102,8 @@ public class PlotContinuousForecasting extends JPanel {
     }
 
     public static TimeSeries getSingleTimeSeriesFromForecast(List<String> tmp, String dateFormat) {
-        final TimeSeries series = new TimeSeries("X",Hour.class);
+        final TimeSeries series = new TimeSeries("#"+forecastNumber, Hour.class);
+        forecastNumber++;
         SimpleDateFormat f = new SimpleDateFormat(dateFormat);
 
         for (int i = 0; i < tmp.size(); ++i) {
@@ -123,11 +122,14 @@ public class PlotContinuousForecasting extends JPanel {
     }
 
 
-
     public static TimeSeriesCollection createDatasetContinousForecast(String forecasts, String csvFile, String dateFormat) {
-        TimeSeries tmp = PlotPredictionForecastOnce.addSingleValueFromcsv(csvFile, dateFormat,"X");
+        TimeSeries tmp = PlotPredictionForecastOnce.addSingleValueFromcsv(csvFile, dateFormat, keyY);
         TimeSeriesCollection tmp_2 = getTimeSeriesFromForecasts(forecasts, dateFormat);
         TimeSeriesCollection result = new TimeSeriesCollection();
+
+        Resources.actualTimeSeries = tmp;
+        Resources.predictedTimeSeriesCollection = tmp_2;
+
 
         result.addSeries(tmp);
         for (int i = 0; i < tmp_2.getSeries().size(); ++i) {
@@ -136,14 +138,6 @@ public class PlotContinuousForecasting extends JPanel {
 
         return result;
     }
-
-
-
-
-    public static float calculteError (TimeSeries actual,TimeSeries predicted){
-        return 0f;
-    }
-
 
 
 }

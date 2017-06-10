@@ -1,27 +1,13 @@
 # Load libraries
-from pandas.tools.plotting import scatter_matrix
-import matplotlib.pyplot as plt
-from sklearn import model_selection
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-import os
 import pandas as pd
-import numpy as np
-# For preprocessing the data
-from sklearn.preprocessing import Imputer
 from sklearn import preprocessing
-# To split the dataset into train and test datasets
-from sklearn.cross_validation import train_test_split
-# To model the Gaussian Navie Bayes classifier
 from sklearn.naive_bayes import GaussianNB
-# To calculate the accuracy score of the model
 from sklearn.metrics import accuracy_score
 import sys
 import os
@@ -48,25 +34,7 @@ def ChooseAlgorithm(algorithmName):
 	elif algorithmName =="SVM":
 		return SVC(),cwd+"SVM/"
 
-'''
-models.append(('LR', LogisticRegression()))
-models.append(('LDA', LinearDiscriminant()))
-models.append(('KNN', KNeighborsClassifier()))
-models.append(('CART', DecisionTreeClassifier()))
-models.append(('NB', GaussianNB()))
-models.append(('SVM', SVC()))
-		'''
-		
-#//TODO Naive Bayes, Linear Regression, Knn same python file create one function that returns the algo to use and enter it as parameter.
-#//Add them to classifier.
-# //TODO try klearn.preprocessing.MinMaxScaler to calculate accuracy
-'''
-     # Scale data to [-1, 1] - This is of mayor importance!!!
-        # In this case, I know the range and thus I can (and should) scale
-        # manually. However, this might not always be the case.
-        # Then try sklearn.preprocessing.MinMaxScaler or
-        # sklearn.preprocessing.StandardScaler
-'''
+
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]
 action = sys.argv[3]

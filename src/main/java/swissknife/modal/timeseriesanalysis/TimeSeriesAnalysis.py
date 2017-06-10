@@ -1,7 +1,6 @@
 from pandas import read_csv
 from pandas import datetime
 import pandas as pd
-from matplotlib import pyplot
 from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 import numpy as np

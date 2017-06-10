@@ -24,8 +24,10 @@ import java.util.Date;
  */
 public class PlotForecastingVsActual extends JPanel {
 
+    public static String keyY;
 
-    public static JPanel plotForecasting(String inputFile, String dateFormat) {
+    public static JPanel plotForecasting(String inputFile, String dateFormat,String yKey) {
+        keyY = yKey;
         TimeSeriesCollection timeSeriesCollection = getTimeSeriesFromCSV(inputFile, dateFormat);
         PlotForecastingVsActual temp = new PlotForecastingVsActual();
 
@@ -41,7 +43,7 @@ public class PlotForecastingVsActual extends JPanel {
 
 
     public static JFreeChart createChart(TimeSeriesCollection timeSeriesCollection) throws NumberFormatException, IOException {
-        JFreeChart chart = ChartFactory.createXYLineChart("Y vs Time", "Time", "Y", timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createXYLineChart(keyY+" vs Time", "Time", keyY, timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
 
         XYPlot plot = (XYPlot) chart.getPlot();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -65,8 +67,8 @@ public class PlotForecastingVsActual extends JPanel {
 
     public static TimeSeriesCollection getTimeSeriesFromCSV(String inputFile, String dateFormat) {
 
-        final TimeSeries seriesPredicted = new TimeSeries("Predicted", Hour.class);
-        final TimeSeries seriesActual = new TimeSeries("Actual", Hour.class);
+        final TimeSeries seriesPredicted = new TimeSeries("Predicted "+keyY, Hour.class);
+        final TimeSeries seriesActual = new TimeSeries("Actual "+keyY, Hour.class);
 
         TimeSeriesCollection result = new TimeSeriesCollection();
         try {

@@ -1,6 +1,10 @@
 package swissknife;
 
 
+import org.jfree.data.time.RegularTimePeriod;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.TimeSeriesDataItem;
 import swissknife.modal.Tool;
 import swissknife.modal.classifier.Classifier;
 import swissknife.modal.classifier.decisiontree.DTPredict;
@@ -81,6 +85,7 @@ public class Resources {
     public static final String TIME_SERIES_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/timeseriesanalysis/TimeSeriesAnalysis.py";
     public static final String LINEAR_REGRESSION_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/linearregression/LinearRegression.py";
     public static final String CLASSIFIER_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/classifier/Classifier.py";
+
 
 
     public static String getTimeSeriesAnalysisActionName(int action) {
@@ -204,6 +209,40 @@ public class Resources {
                 return new LRPredict();
         }
         return null;
+    }
+
+
+
+    public static TimeSeries actualTimeSeries;
+    public static TimeSeriesCollection predictedTimeSeriesCollection;
+
+
+
+    public static ArrayList<Float> calculateAbsoluteError (TimeSeries actual,TimeSeriesCollection predicted){
+        ArrayList<Float> result = new ArrayList<Float>();
+        for (int i=0;i<predicted.getSeriesCount();++i){
+            TimeSeries tmp = predicted.getSeries(i);
+            boolean added = false;
+            float error = 0;
+            for (int j=0;j<tmp.getItemCount();++j){
+                RegularTimePeriod timePeriod;
+                timePeriod = tmp.getTimePeriod(j);
+//                System.out.println("Predicted #"+i+" item #"+j+" Value: "+tmp.getTimePeriod(j) );
+
+
+                TimeSeriesDataItem singleActual = actual.getDataItem(timePeriod);
+                if (singleActual!=null) {
+                    added =true;
+                    TimeSeriesDataItem singlePredicted = tmp.getDataItem(j);
+                    float actualValue = singleActual.getValue().floatValue();
+                    float predictedValue = singlePredicted.getValue().floatValue();
+                    error += actualValue - predictedValue;
+                }
+            }
+            if (added)
+                result.add(Float.valueOf(error));
+        }
+        return result;
     }
 
 }

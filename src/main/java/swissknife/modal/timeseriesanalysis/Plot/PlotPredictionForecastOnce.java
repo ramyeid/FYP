@@ -27,10 +27,11 @@ import java.util.Date;
 //Forecast Once.
 public class PlotPredictionForecastOnce extends JPanel {
 
+    public static String keyY;
 
 
-
-    public static JPanel plotForecastOnce(String inputFile,String dateFormat,int actionTime){
+    public static JPanel plotForecastOnce(String inputFile,String dateFormat,int actionTime,String yKey){
+        keyY = yKey;
         TimeSeriesCollection timeSeriesCollection = getTimeSeriesForecastOnce(inputFile,dateFormat,actionTime);
         PlotPredictionForecastOnce temp = new PlotPredictionForecastOnce();
         try{
@@ -43,7 +44,8 @@ public class PlotPredictionForecastOnce extends JPanel {
     }
 
 
-    public static JPanel plotPrediction(String inputFile, String dateFormat){
+    public static JPanel plotPrediction(String inputFile, String dateFormat,String yKey){
+        keyY = yKey;
         TimeSeriesCollection timeSeriesCollection = getTimeSeriesPrediction(inputFile,dateFormat);
         PlotPredictionForecastOnce temp = new PlotPredictionForecastOnce();
 
@@ -60,7 +62,7 @@ public class PlotPredictionForecastOnce extends JPanel {
 
 
     public static JFreeChart createChart(TimeSeriesCollection timeSeriesCollection) throws NumberFormatException, IOException {
-        JFreeChart chart = ChartFactory.createXYLineChart("Y vs Time", "Time", "Y", timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createXYLineChart(keyY+" vs Time", "Time", keyY, timeSeriesCollection, PlotOrientation.VERTICAL, true, true, false);
 
         XYPlot plot = (XYPlot) chart.getPlot();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -94,8 +96,8 @@ public class PlotPredictionForecastOnce extends JPanel {
 
 
     public static TimeSeriesCollection getTimeSeriesForecastOnce(String inputFile,String dateFormat,int actionTime){
-        TimeSeries predicted = new TimeSeries("Predicted",Hour.class);
-        TimeSeries actual = new TimeSeries("actual",Hour.class);
+        TimeSeries predicted = new TimeSeries("Predicted " + keyY,Hour.class);
+        TimeSeries actual = new TimeSeries("actual " + keyY,Hour.class);
         TimeSeriesCollection result = new TimeSeriesCollection();
 
         TimeSeries tmp = addSingleValueFromcsv(inputFile,dateFormat,"tmp");

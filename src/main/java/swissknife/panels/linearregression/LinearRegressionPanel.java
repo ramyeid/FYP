@@ -79,7 +79,7 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
         this.masterFrame.setVisible(true);
         this.masterFrame.pack();
 
-
+        masterFrame.setTitle(actionName);
     }
 
 
