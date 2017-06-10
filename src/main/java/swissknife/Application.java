@@ -6,172 +6,57 @@ package swissknife;
 //TODO CONTROL EVERY INPUT FROM THE USER (TEXT FIELD)...
 
     //TODO ADD CHOICE TO GET NON HEADERS CSV MAYBE AUTOMATIC IF NO HEADERS => CHOOSE COLUMN.
+//TODO add compare accuracy for classifiers in tool menu.
 
 public class Application {
     public static void main(String []args) throws InterruptedException {
 
+/*
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
+        String keyToPredict = "var1";
+        int actionTime = 3300;
 
-//        new Test();
-//        new Index();
-//        JFrame frame = new JFrame();
-//        frame.add(new TimeSeriesAnalysisPanel("/Users/ramyeid/Desktop/AirPassengers.csv",2));
-//        frame.pack();
-//        frame.setVisible(true);
-//        //1 -- draws the line to see if the values are going up or down -- Coefficient Directeur
-        //2 -- forecast of the last actionTime [-ActionTime] Values to see actual is similar to what the prog predicteed for the last ActionTime values.
+        KNNPredictVsActual knn = new KNNPredictVsActual(inputFile,keyToPredict,actionTime);
+        NBPredictVsActual nb = new NBPredictVsActual(inputFile,keyToPredict,actionTime);
+        SVMPredictVsActual svm = new SVMPredictVsActual(inputFile,keyToPredict,actionTime);
+        DTPredictVsActual dt = new DTPredictVsActual(inputFile,keyToPredict,actionTime);
+        LogRPredictVsActual lr = new LogRPredictVsActual(inputFile,keyToPredict,actionTime);
+        LDPredictVsActual ld = new LDPredictVsActual(inputFile,keyToPredict,actionTime);
 
-        //3 -- forecast to +ActionTime to see in the future what is going to happen
+        knn.action();
+        nb.action();
+        svm.action();
+        dt.action();
+        lr.action();
+        ld.action();
 
-//
-//
-//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
-//        String keyToPredict = "var1";
-//        int actionTime = 3300;
-//        new NBPredictVsActual(inputFile,keyToPredict,actionTime).action();
-//        JFrame frame = new JFrame();
-//        frame.add(new LinearRegressionPanel(inputFile,1));
-//        frame.pack();
-//        frame.setVisible(true);
-//
-
-
-
-
-
-//        LRPredictVsActual a = new LRPredictVsActual(inputFile,"var1",3300);
-//        a.action();
-//        System.out.println(a.getError());
-
-//        LRPredict a = new LRPredict(inputFile,"var1",12);
-//        a.action();
-//        new TimeSeriesAnalysisPanel()
-
-////
-//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
-//        String keyToPredict = "var1";
-//        int actionTime = 12;
-//        new NBPredict(inputFile,keyToPredict,actionTime).action();
-//
-
-//        new NaiveBayesPanel(inputFile,1);
-
-//
-//
-////        System.out.println("predict 2");
-////        //ss1 - predict
-//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/AirPassengers.csv";
-//        String keyX = "Date";
-//        String keyY = "#Passengers";
-////        int action = 3;
-////        int actionTime = 2;
-//        String average = "-1";
-//        String dateFormat ="%Y-%m";
-//        int resetCSV = 1;
-//        float data = 0.0f;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-//        new ContinuousForcastPanel(inputFile,keyX,keyY,average,dateFormat);
-
-        //WARNING : Remove for final product.
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.add(new TimeSeriesAnalysisPanel(inputFile,4));
-//        frame.pack();
-//        frame.setVisible(true);
+        System.out.println("KNN: "+knn.getAccuracy(Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE));
+        System.out.println("NB: "+nb.getAccuracy(Resources.NB_PREDICTED_ACTUAL_ONLY_FILE));
+        System.out.println("SVM: "+svm.getAccuracy(Resources.SVM_PREDICTED_ACTUAL_ONLY_FILE));
+        System.out.println("DT: "+dt.getAccuracy(Resources.DT_PREDICTED_ACTUAL_ONLY_FILE));
+        System.out.println("lr: "+dt.getAccuracy(Resources.LOGR_PREDICTED_ACTUAL_ONLY_FILE));
+        System.out.println("ld: "+dt.getAccuracy(Resources.LD_PREDICTED_ACTUAL_ONLY_FILE));
 
 
 
+        inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
+        keyToPredict = "var1";
+        actionTime = 12;
+        KNNPredict knnP = new KNNPredict(inputFile,keyToPredict,actionTime);
+        NBPredict nbP = new NBPredict(inputFile,keyToPredict,actionTime);
+        SVMPredict svmP = new SVMPredict(inputFile,keyToPredict,actionTime);
+        DTPredict dtP = new DTPredict(inputFile,keyToPredict,actionTime);
+        LogRPredict lrP = new LogRPredict(inputFile,keyToPredict,actionTime);
+        LDPredict ldP = new LDPredict(inputFile,keyToPredict,actionTime);
 
-//        new TimeSeriesAnalysisPanel(inputFile);
+        knnP.action();
+        nbP.action();
+        svmP.action();
+        dtP.action();
+        lrP.action();
+        ldP.action();
+*/
 
-//
-//        System.out.println("now wait");
-////        Thread.sleep(4000);
-//
-//        System.out.println("now add number 508.0");
-//
-//        action = 5;
-//        data = 508.0f;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-
-//
-//        System.out.println("now wait");
-//        Thread.sleep(4000);
-//
-//        System.out.println("now predict once again after 390 for 1 value");
-
-
-//        action = 4;
-//        actionTime = 2;
-//        resetCSV = 0;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-//
-//
-//
-//        System.out.println("now wait");
-//        Thread.sleep(4000);
-//
-//        System.out.println("now add number  461.0");
-//
-//
-//        action = 5;
-//        data = 461.0f;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-//
-//
-//        System.out.println("now wait");
-//        Thread.sleep(4000);
-//
-//        System.out.println("now add predict 2 after  432");
-//
-//
-//        action = 4;
-//        actionTime = 2;
-//        resetCSV = 0;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-//
-//
-
-
-
-//
-//        System.out.println("now wait");
-//        Thread.sleep(10000);
-//        System.out.println("now next");
-////
-//
-//        action = 4;
-//        actionTime = 2;
-//        average = "-1";
-//        dateFormat ="%Y-%m";
-//        resetCSV = 0;
-//        data = 0;
-//        new RunPythonFile(inputFile,keyX,keyY,action,actionTime,average,dateFormat,resetCSV,data).run();
-
-
-
-//
-
-//        String resources = "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/TSAContinuousForecast/";
-//        String srcOutput = "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/output.csv";
-////        PlotContinuousForecasting.plotContinuousForecasting("TEST", resources+"Forecasts.txt",resources+"/Continuous_output.csv","yyyy-MM");
-//
-//        PlotPrediction.plotPrediction("TEST",srcOutput,"yyyy-MM");
-
-////
-//        String csvFile = "/Users/ramyeid/Desktop/Proj/FYP/src/main/resources/AirPassengers.csv";
-//        CSVReader csvReader = new CSVReader(csvFile);
-//        ArrayList<ArrayList<String>> dataFrame = csvReader.getDataCSVForKeys("Date","#Passengers",true);
-//        for (String key:csvReader.getColumnKeys()) {
-//            System.out.println(key);
-//        }
-//        System.out.println(dataFrame.size());
-//        System.out.println(dataFrame.get(0).size());
-//        System.out.println(dataFrame.get(1).size());
-//        System.out.println(dataFrame.get(0).get(0));
-//        System.out.println(dataFrame.get(1).get(0));
-//
-//        for(int i=0;i<dataFrame.get(0).size();++i){
-//            System.out.println(dataFrame.get(0).get(i)+ "\t"+dataFrame.get(1).get(i));
-//        }
     }
+
 }
