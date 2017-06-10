@@ -60,6 +60,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         String[] keysList = CSVReader.getColumnKeys(inputFile);
         Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
 
+
         this.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
 
         submitButton.addActionListener(this);
