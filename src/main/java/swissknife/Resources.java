@@ -39,7 +39,9 @@ public class Resources {
     private static final String BASE_FILE_RF = System.getProperty("user.dir") + "/src/main/resources/RandomForest/";
     private static final String BASE_FILE_GB = System.getProperty("user.dir") + "/src/main/resources/GradientBoosting/";
     private static final String BASE_FILE_LSVC = System.getProperty("user.dir") + "/src/main/resources/LinearSVC/";
-
+    private static final String BASE_FILE_SGD = System.getProperty("user.dir") + "/src/main/resources/StochasticGradientDescent/";
+    private static final String BASE_FILE_ETC = System.getProperty("user.dir") + "/src/main/resources/ExtraTreeClassifier/";
+    private static final String BASE_FILE_RC = System.getProperty("user.dir") + "/src/main/resources/RidgeClassifier/";
 
 
     private static final String BASE_FILE_LR = System.getProperty("user.dir") + "/src/main/resources/LinearRegression/";
@@ -62,7 +64,9 @@ public class Resources {
     public static final String RF_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_RF + "Predicted_Actual_Only.csv";
     public static final String GB_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_GB + "Predicted_Actual_Only.csv";
     public static final String LSVC_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LSVC + "Predicted_Actual_Only.csv";
-
+    public static final String SGD_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_SGD + "Predicted_Actual_Only.csv";
+    public static final String ET_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_ETC + "Predicted_Actual_Only.csv";
+    public static final String RC_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_RC + "Predicted_Actual_Only.csv";
 
 
     public static final String LR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LR + "Predicted_Actual_Only.csv";

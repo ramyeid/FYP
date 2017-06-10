@@ -18,6 +18,6 @@ public class DTPredictVsActual extends DecisionTree {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"DT").run();
+        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"DT",actionKeys).run();
     }
 }

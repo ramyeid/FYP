@@ -21,7 +21,7 @@ public class RFPredictVsActual extends RandomForest {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile, keyToPredict, action, actionTime, "RF").run();
+        new RunClassifierPython(inputFile, keyToPredict, action, actionTime, "RF",actionKeys).run();
 
 
     }

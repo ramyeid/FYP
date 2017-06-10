@@ -19,7 +19,7 @@ public class SVMPredict extends SupportVectorMachine {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"SVM").run();
+        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"SVM",actionKeys).run();
     }
 
 }

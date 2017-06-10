@@ -20,7 +20,7 @@ public class LDPredictVsActual extends LinearDiscriminant {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile, keyToPredict, action, actionTime, "LDA").run();
+        new RunClassifierPython(inputFile, keyToPredict, action, actionTime, "LDA",actionKeys).run();
     }
 
 }

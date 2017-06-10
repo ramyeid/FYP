@@ -14,6 +14,9 @@ import os
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn import svm
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.linear_model import RidgeClassifierCV
 
 
 def ChooseAlgorithm(algorithmName):
@@ -46,12 +49,24 @@ def ChooseAlgorithm(algorithmName):
 	elif algorithmName == "LSVC":
 		return svm.LinearSVC(), cwd + "LinearSVC/"
 
+	elif algorithmName == "SGD":
+		return SGDClassifier(), cwd+"StochasticGradientDescent/"
+
+	elif algorithmName ==  "ET":
+		return ExtraTreesClassifier(),cwd+"ExtraTreeClassifier/"
+
+	elif algorithmName == "RC":
+		return RidgeClassifierCV(), cwd+"RidgeClassifier/"
+
 
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]
 action = sys.argv[3]
 actionTime = int(sys.argv[4])
 algorithmName = sys.argv[5]
+actionKeys = sys.argv[6]
+
+
 
 
 clf,src = ChooseAlgorithm(algorithmName)
@@ -59,11 +74,31 @@ print 'src',src
 
 data_df = pd.read_csv(inputFile,header=0)
 
-keyWithStringAvailable = False
+actionKeys = actionKeys[1:].split('/')
+keys = data_df.columns
+keysToDrop = []
+for i in range(0,len(keys)):
+	if keys[i] not in actionKeys and keys[i]!=keyToPredict:
+		keysToDrop.append(keys[i])
+
+
+for j in range(len(keysToDrop)):
+	data_df = data_df.drop(u""+keysToDrop[j],axis=1)
+
+
+
+
 
 
 
 keys = data_df.columns
+print keys
+
+keyWithStringAvailable = False
+
+
+
+
 keysWithStringValue =[]
 for i in range(len(keys)):
 	if (str(data_df[keys[i]][0]).replace('.','').isdigit() == False and str(data_df[keys[i]][0]) != ""):
@@ -128,6 +163,7 @@ target = data_df_rev.values[:,len(keys)]
 
 # features_train, features_test, target_train, target_test = train_test_split(features,target, test_size = (percentageActionTime), random_state = 10)
 
+print features
 
 target_test = target[size-actionTime:]
 target_train = target[:size-actionTime]

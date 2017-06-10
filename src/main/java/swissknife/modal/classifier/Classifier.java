@@ -15,6 +15,7 @@ public abstract class Classifier implements Tool {
     protected int action;
     protected String fileToReadAccuracy;
     protected String algorithmName;
+    protected String actionKeys;
 
     public Classifier(){
 
@@ -30,6 +31,7 @@ public abstract class Classifier implements Tool {
         inputFile = arg[0];
         keyToPredict = arg[1];
         actionTime = Integer.valueOf(arg[2]);
+        actionKeys = arg[3];
     }
 
     private void calculateAccuracy(){

@@ -38,6 +38,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     Classifier classifierTool;
     Label accuracyLabel;
     JInternalFrame masterFrame;
+    String keyToPredict = null;
 
 
     public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame){
@@ -105,17 +106,39 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
-
+        for (JRadioButton radioTmp:radioButtonListKeysToPredict){
+            if (radioTmp.isSelected()){
+                keyToPredict=radioTmp.getText();
+            }
+        }
         if (e.getSource() instanceof JCheckBox || e.getSource() instanceof JRadioButton){
             if (keyToPredict!=null) {
-                keysToChooseCheckBoxes.stream().filter(s -> s.isSelected()).filter(s -> s.getText().equals(keyToPredict)).findFirst().orElse(null).setSelected(false);
+                for (JCheckBox tmp:keysToChooseCheckBoxes){
+                    if (tmp.getText().equals(keyToPredict)){
+                        tmp.setSelected(false);
+                    }
+                }
             }
         }
         else if (e.getSource().equals(submitButton)) {
 
+
+            List<String> keysNotToDrop = new ArrayList<>();
+            for(JCheckBox tmp:keysToChooseCheckBoxes){
+                if (tmp.isSelected()){
+                    keysNotToDrop.add(tmp.getText());
+                }
+            }
+
+            String actionKeys ="";
+            for (int i=0;i<keysNotToDrop.size();++i){
+                actionKeys += "/"+keysNotToDrop.get(i);
+            }
+            System.out.println(actionKeys);
+
             String actionTime = actionTimeField.getText();
-            classifierTool.build(inputFile, keyToPredict, actionTime);
+
+            classifierTool.build(inputFile, keyToPredict, actionTime,actionKeys);
             switch (actionName) {
                 case Resources.CLASSIFIER_PREDICT:
                     classifierTool.action();

@@ -19,7 +19,7 @@ public class LogRPredict extends LogisticRegression
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"LR").run();
+        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"LR",actionKeys).run();
     }
 
 }

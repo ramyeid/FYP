@@ -18,7 +18,7 @@ public class GBPredictVsActual extends GradientBoosting {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"GB").run();
+        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"GB",actionKeys).run();
     }
 }
 

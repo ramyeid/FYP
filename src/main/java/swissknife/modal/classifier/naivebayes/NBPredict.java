@@ -21,7 +21,7 @@ public class NBPredict extends NaiveBayes {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"NB").run();
+        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"NB",actionKeys).run();
     }
 
 }

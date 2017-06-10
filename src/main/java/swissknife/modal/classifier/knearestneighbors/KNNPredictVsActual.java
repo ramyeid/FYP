@@ -18,6 +18,6 @@ public class KNNPredictVsActual extends KNearestNeighbors {
 
     @Override
     public void action() {
-        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"KNN").run();
+        new RunClassifierPython(inputFile, keyToPredict, action, actionTime,"KNN",actionKeys).run();
     }
 }

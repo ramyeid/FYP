@@ -1,23 +1,9 @@
 package swissknife;
 
-import swissknife.modal.classifier.decisiontree.DTPredict;
-import swissknife.modal.classifier.decisiontree.DTPredictVsActual;
-import swissknife.modal.classifier.gradientboosting.GBPredict;
-import swissknife.modal.classifier.gradientboosting.GBPredictVsActual;
-import swissknife.modal.classifier.knearestneighbors.KNNPredict;
 import swissknife.modal.classifier.knearestneighbors.KNNPredictVsActual;
-import swissknife.modal.classifier.lineardiscriminant.LDPredict;
-import swissknife.modal.classifier.lineardiscriminant.LDPredictVsActual;
-import swissknife.modal.classifier.linearsvm.LSVCPredict;
-import swissknife.modal.classifier.linearsvm.LSVCPredictVsActual;
-import swissknife.modal.classifier.logisticregression.LogRPredict;
-import swissknife.modal.classifier.logisticregression.LogRPredictVsActual;
-import swissknife.modal.classifier.naivebayes.NBPredict;
-import swissknife.modal.classifier.naivebayes.NBPredictVsActual;
-import swissknife.modal.classifier.randomforest.RFPredict;
-import swissknife.modal.classifier.randomforest.RFPredictVsActual;
-import swissknife.modal.classifier.svm.SVMPredict;
-import swissknife.modal.classifier.svm.SVMPredictVsActual;
+import swissknife.panels.classifier.ClassifierPanel;
+
+import javax.swing.*;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -42,14 +28,17 @@ import swissknife.modal.classifier.svm.SVMPredictVsActual;
 //TODO - CHECK ERROR CALCULATE IN CONTINUOUSFORECAST FUNCTION IN PLOTCONTINUOUSFORECAST.
     //TODO CHECK WITH MEZHER IF ABSOLUTE ERROR IS OKAY.
 //TODO CHECK http://www.scipy-lectures.org/packages/scikit-learn/    3.6.3.1. K-means clustering
+
+
+//TODO CHECK THIS FOR ALL ALGORITHMS http://scikit-learn.org/stable/model_selection.html#model-selection
+//TODO CHECK THIS FOR ALL ALGORITHMS http://scikit-learn.org/stable/supervised_learning.html#supervised-learning
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-/*
+
         String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
-        KNNPredictVsActual knn = new KNNPredictVsActual();
         JFrame frame = new JFrame();
         JInternalFrame intFrame = new JInternalFrame();
-        ClassifierPanel classifierPanel = new ClassifierPanel(knn,inputFile,intFrame);
+        ClassifierPanel classifierPanel = new ClassifierPanel(new KNNPredictVsActual(),inputFile,intFrame);
         intFrame.add(classifierPanel);
         intFrame.setVisible(true);
         intFrame.pack();
@@ -57,10 +46,10 @@ public class Application {
         frame.add(intFrame);
         frame.setVisible(true);
         frame.pack();
-    */
 
 
 
+/*
 
 
         String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
@@ -76,6 +65,9 @@ public class Application {
         RFPredictVsActual rf = new RFPredictVsActual(inputFile,keyToPredict,actionTime);
         GBPredictVsActual gb = new GBPredictVsActual(inputFile,keyToPredict,actionTime);
         LSVCPredictVsActual lsvc = new LSVCPredictVsActual(inputFile,keyToPredict,actionTime);
+        SGDPredictVsActual sgd = new SGDPredictVsActual(inputFile,keyToPredict,actionTime);
+        ETPredictVsActual et = new ETPredictVsActual(inputFile,keyToPredict,actionTime);
+        RCPredictVsActual rc = new RCPredictVsActual(inputFile,keyToPredict,actionTime);
 
         gb.action();
         rf.action();
@@ -86,6 +78,9 @@ public class Application {
         lr.action();
         ld.action();
         lsvc.action();
+        sgd.action();
+        et.action();
+        rc.action();
 
         System.out.println("KNN: "+knn.getAccuracy());
         System.out.println("NB: "+nb.getAccuracy());
@@ -96,6 +91,9 @@ public class Application {
         System.out.println("rf: "+rf.getAccuracy());
         System.out.println("gb: "+gb.getAccuracy());
         System.out.println("lsvc"+ lsvc.getAccuracy());
+        System.out.println("sgdc"+ sgd.getAccuracy());
+        System.out.println("etc"+ et.getAccuracy());
+        System.out.println("rc"+ rc.getAccuracy());
 
 
         inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
@@ -110,6 +108,9 @@ public class Application {
         RFPredict rfP = new RFPredict(inputFile,keyToPredict,actionTime);
         GBPredict gbP = new GBPredict(inputFile,keyToPredict,actionTime);
         LSVCPredict lsvcP = new LSVCPredict(inputFile,keyToPredict,actionTime);
+        SGDPredict sgdP = new SGDPredict(inputFile,keyToPredict,actionTime);
+        ETPredict etP  = new ETPredict(inputFile,keyToPredict,actionTime);
+        RCPredict rcP = new RCPredict(inputFile,keyToPredict,actionTime);
 
         knnP.action();
         nbP.action();
@@ -120,8 +121,11 @@ public class Application {
         rfP.action();
         gbP.action();
         lsvcP.action();
+        sgdP.action();
+        etP.action();
+        rcP.action();
 
-
+*/
 
 /*
         System.out.println("NOW LINEAR STUFF - TEST");

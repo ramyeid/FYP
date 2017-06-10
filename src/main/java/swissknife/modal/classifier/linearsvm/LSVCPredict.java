@@ -17,7 +17,7 @@ public class LSVCPredict extends LinearSVC{
     }
     @Override
     public void action(){
-        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"LSVC").run();
+        new RunClassifierPython(inputFile,keyToPredict,action,actionTime,"LSVC",actionKeys).run();
     }
 }
 
