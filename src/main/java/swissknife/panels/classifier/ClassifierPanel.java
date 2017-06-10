@@ -43,7 +43,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame){
         this.setLayout(new BorderLayout());
         classifierTool = (Classifier) tool;
-        classifierName = Resources.getClassifierName(classifierTool);
+        classifierName = classifierTool.getAlgorithmName();
         actionName = Resources.getClassifierActionName(classifierTool.getAction());
         this.inputFile = inputFile;
 
@@ -122,7 +122,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     break;
                 case Resources.CLASSIFIER_PREDICT_VS_ACTUAL:
                     classifierTool.action();
-                    float accuracy = classifierTool.getAccuracy(Resources.getAccuracyFile(classifierName));
+                    float accuracy = classifierTool.getAccuracy();
                     accuracyLabel.setText("Accuracy :"+accuracy);
                     southPanel.add(accuracyLabel);
                     masterFrame.revalidate();

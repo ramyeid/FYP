@@ -6,21 +6,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 import swissknife.modal.Tool;
-import swissknife.modal.classifier.Classifier;
-import swissknife.modal.classifier.decisiontree.DTPredict;
-import swissknife.modal.classifier.decisiontree.DTPredictVsActual;
-import swissknife.modal.classifier.knearestneighbors.KNNPredict;
-import swissknife.modal.classifier.knearestneighbors.KNNPredictVsActual;
-import swissknife.modal.classifier.lineardiscriminant.LDPredict;
-import swissknife.modal.classifier.lineardiscriminant.LDPredictVsActual;
-import swissknife.modal.classifier.logisticregression.LogRPredict;
-import swissknife.modal.classifier.logisticregression.LogRPredictVsActual;
-import swissknife.modal.classifier.naivebayes.NBPredict;
-import swissknife.modal.classifier.naivebayes.NBPredictVsActual;
-import swissknife.modal.classifier.svm.SVMPredict;
-import swissknife.modal.classifier.svm.SVMPredictVsActual;
-import swissknife.modal.linearregression.modal.LRPredict;
-import swissknife.modal.linearregression.modal.LRPredictVsActual;
+import swissknife.modal.test.linearregression.LRPredict;
+import swissknife.modal.test.linearregression.LRPredictVsActual;
 import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastOnce;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastVsActual;
@@ -44,12 +31,20 @@ public class Resources {
 
     private static final String BASE_FILE_TSA = System.getProperty("user.dir") + "/src/main/resources/TimeSeriesAnalysis/";
     private static final String BASE_FILE_NB = System.getProperty("user.dir") + "/src/main/resources/NaiveBayes/";
-    private static final String BASE_FILE_LR = System.getProperty("user.dir") + "/src/main/resources/LinearRegression/";
     private static final String BASE_FILE_KNN = System.getProperty("user.dir") + "/src/main/resources/KNearestNeighbors/";
     private static final String BASE_FILE_SVM = System.getProperty("user.dir") + "/src/main/resources/SVM/";
     private static final String BASE_FILE_DT = System.getProperty("user.dir") + "/src/main/resources/DecisionTree/";
     private static final String BASE_FILE_LOGR = System.getProperty("user.dir") + "/src/main/resources/LogisticRegression/";
     private static final String BASE_FILE_LD = System.getProperty("user.dir") + "/src/main/resources/LinearDiscriminant/";
+    private static final String BASE_FILE_RF = System.getProperty("user.dir") + "/src/main/resources/RandomForest/";
+    private static final String BASE_FILE_GB = System.getProperty("user.dir") + "/src/main/resources/GradientBoosting/";
+    private static final String BASE_FILE_LSVC = System.getProperty("user.dir") + "/src/main/resources/LinearSVC/";
+
+
+
+    private static final String BASE_FILE_LR = System.getProperty("user.dir") + "/src/main/resources/LinearRegression/";
+
+
 
     public static final String TSA_FORECAST_ONCE_OUTPUT_FILE = BASE_FILE_TSA + "/Forecast_Once_Output.csv";
 
@@ -60,11 +55,17 @@ public class Resources {
 
     public static final String KNN_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_KNN + "Predicted_Actual_Only.csv";
     public static final String NB_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_NB + "Predicted_Actual_Only.csv";
-    public static final String LR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LR + "Predicted_Actual_Only.csv";
     public static final String SVM_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_SVM + "Predicted_Actual_Only.csv";
     public static final String DT_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_DT + "Predicted_Actual_Only.csv";
     public static final String LOGR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LOGR + "Predicted_Actual_Only.csv";
     public static final String LD_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LD + "Predicted_Actual_Only.csv";
+    public static final String RF_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_RF + "Predicted_Actual_Only.csv";
+    public static final String GB_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_GB + "Predicted_Actual_Only.csv";
+    public static final String LSVC_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LSVC + "Predicted_Actual_Only.csv";
+
+
+
+    public static final String LR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LR + "Predicted_Actual_Only.csv";
 
 
     public static final Vector<String> DATE_FORMAT_LIST = new Vector<>(Arrays.asList("%Y-%m"));
@@ -83,9 +84,8 @@ public class Resources {
 
 
     public static final String TIME_SERIES_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/timeseriesanalysis/TimeSeriesAnalysis.py";
-    public static final String LINEAR_REGRESSION_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/linearregression/LinearRegression.py";
+    public static final String LINEAR_REGRESSION_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/test/Test.py";
     public static final String CLASSIFIER_PYTHON_FILE = System.getProperty("user.dir") + "/src/main/java/swissknife/modal/classifier/Classifier.py";
-
 
 
     public static String getTimeSeriesAnalysisActionName(int action) {
@@ -113,42 +113,7 @@ public class Resources {
         return null;
     }
 
-    public static String getClassifierName(Classifier classifier) {
-        if (classifier instanceof SVMPredict || classifier instanceof SVMPredictVsActual) {
-            return "Support Vector Machine";
-        } else if (classifier instanceof DTPredict || classifier instanceof DTPredictVsActual) {
-            return "Decision Tree";
-        } else if (classifier instanceof KNNPredict || classifier instanceof KNNPredictVsActual) {
-            return "K Nearest Neighbors";
-        } else if (classifier instanceof LDPredict || classifier instanceof LDPredictVsActual) {
-            return "Linear Discriminant Analysis";
-        } else if (classifier instanceof LogRPredict || classifier instanceof LogRPredictVsActual) {
-            return "Logistic Regression";
-        } else if (classifier instanceof NBPredict || classifier instanceof NBPredictVsActual) {
-            return "Naive Bayes";
-        }
-        return null;
-    }
 
-
-
-    public static String getAccuracyFile(String classifierName) {
-        switch(classifierName){
-            case "Support Vector Machine":
-                return SVM_PREDICTED_ACTUAL_ONLY_FILE;
-            case "Decision Tree":
-                return DT_PREDICTED_ACTUAL_ONLY_FILE;
-            case "K Nearest Neighbors":
-                return KNN_PREDICTED_ACTUAL_ONLY_FILE;
-            case "Linear Discriminant Analysis":
-                return LD_PREDICTED_ACTUAL_ONLY_FILE;
-            case "Logistic Regression":
-                return LOGR_PREDICTED_ACTUAL_ONLY_FILE;
-            case "Naive Bayes":
-                return NB_PREDICTED_ACTUAL_ONLY_FILE;
-        }
-        return null;
-    }
 
     public static Tool getTimeSeriesAnalysisTool(int action) {
         switch (action) {
@@ -164,15 +129,6 @@ public class Resources {
         return null;
     }
 
-    public static Tool getNaiveBayesTool(int action) {
-        switch (action) {
-            case 1:
-                return new NBPredictVsActual();
-            case 2:
-                return new NBPredict();
-        }
-        return null;
-    }
 
 
     public static void createRadioButtons(String[] keysList, ButtonGroup buttonGroup, JPanel radioButtons, List<JRadioButton> radioButtonList, String axis, JPanel panel) {
@@ -217,7 +173,7 @@ public class Resources {
     public static TimeSeriesCollection predictedTimeSeriesCollection;
 
 
-
+    //Continuous Forecast function.
     public static ArrayList<Float> calculateAbsoluteError (TimeSeries actual,TimeSeriesCollection predicted){
         ArrayList<Float> result = new ArrayList<Float>();
         for (int i=0;i<predicted.getSeriesCount();++i){

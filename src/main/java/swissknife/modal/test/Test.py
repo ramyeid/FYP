@@ -6,14 +6,22 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
+def ChooseAlgorithm(algorithmName):
+    cwd = os.getcwd()
+    cwd = cwd + "/src/main/resources/"
+    if algorithmName=="LR":
+        return LinearRegression(), cwd + "LinearRegression/"
 
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]
 action = sys.argv[3]
 actionTime = sys.argv[4]
+algorithmName = sys.argv[5]
 
-cwd = os.getcwd()
-src = cwd + "/src/main/resources/LinearRegression/"
+
+clf,src = ChooseAlgorithm(algorithmName)
+print 'src',src
+
 
 data_df = pd.read_csv(inputFile, header=0)
 
@@ -80,7 +88,7 @@ target_train = target[:size - actionTime]
 features_train = features[:size - actionTime]
 features_test = features[size - actionTime:]
 
-clf = LinearRegression()
+
 clf.fit(features_train, target_train)
 target_pred = clf.predict(features_test)
 

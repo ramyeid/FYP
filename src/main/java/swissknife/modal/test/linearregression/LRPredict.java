@@ -1,6 +1,6 @@
-package swissknife.modal.linearregression.modal;
+package swissknife.modal.test.linearregression;
 
-import swissknife.modal.linearregression.RunLRPython;
+import swissknife.modal.test.RunTestPython;
 
 /**
  * Created by ramyeid on 6/4/17.
@@ -8,13 +8,16 @@ import swissknife.modal.linearregression.RunLRPython;
 public class LRPredict extends LinearRegression {
     public LRPredict(){
         super();
+        this.action = 2;
     }
     public LRPredict(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
+        this.action = 2;
     }
     @Override
     public void action(){
-        new RunLRPython(inputFile,keyToPredict,2,actionTime).run();
+        new RunTestPython(inputFile,keyToPredict,action,actionTime,"LR").run();
     }
 }
+
 

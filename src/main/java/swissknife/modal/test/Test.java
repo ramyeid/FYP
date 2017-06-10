@@ -1,25 +1,23 @@
-package swissknife.modal.classifier;
+package swissknife.modal.test;
 
 import swissknife.CSVReader;
 import swissknife.modal.Tool;
 
 /**
- * Created by ramyeid on 6/7/17.
+ * Created by ramyeid on 6/10/17.
  */
-public abstract class Classifier implements Tool {
-
+public abstract class Test implements Tool{
     protected String inputFile;
     protected String keyToPredict;
     protected int actionTime;
-    private float accuracy;
+    private float mseError;
     protected int action;
-    protected String fileToReadAccuracy;
+    protected String fileToReadError;
     protected String algorithmName;
 
-    public Classifier(){
-
+    public Test(){
     }
-    public Classifier(String inputFile,String keyToPredict,int actionTime){
+    public Test(String inputFile,String keyToPredict,int actionTime){
         this.inputFile = inputFile;
         this.keyToPredict = keyToPredict;
         this.actionTime = actionTime;
@@ -32,14 +30,13 @@ public abstract class Classifier implements Tool {
         actionTime = Integer.valueOf(arg[2]);
     }
 
-    private void calculateAccuracy(){
-        accuracy = CSVReader.readError(fileToReadAccuracy, "ACCURACY: ");
-
+    private void calculateError(){
+        mseError = CSVReader.readError(fileToReadError, "ERROR MSE: ");
     }
 
-    public float getAccuracy() {
-        calculateAccuracy();
-        return accuracy;
+    public float getMseError() {
+        calculateError();
+        return mseError;
     }
 
     public int getAction() {

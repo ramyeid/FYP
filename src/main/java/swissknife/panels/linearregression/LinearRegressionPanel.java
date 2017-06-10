@@ -3,7 +3,7 @@ package swissknife.panels.linearregression;
 import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.Tool;
-import swissknife.modal.linearregression.modal.LRPredictVsActual;
+import swissknife.modal.test.Test;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,18 +37,21 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
     JPanel southPanel;
 
 
-    Tool lrTool;
+    Test testTool;
     Label mseErrorLabel;
 
     JInternalFrame masterFrame;
+    String algorithmName;
 
 
-    public LinearRegressionPanel(String inputFile,int action,JInternalFrame masterFrame){
+    public LinearRegressionPanel(Tool tool,String inputFile,JInternalFrame masterFrame){
 //        super(new BorderLayout());
-        this.inputFile = inputFile;
-        actionName = Resources.getLinearRegressionName(action);
-        lrTool = Resources.getLinearRegressionTool(action);
 
+        testTool = (Test) tool;
+        algorithmName = testTool.getAlgorithmName();
+        actionName = Resources.getClassifierActionName(testTool.getAction());
+
+        this.inputFile = inputFile;
         submitButton = new JButton(actionName);
         keysToPredictButtonGroup = new ButtonGroup();
         radioButtonsPanelKeysToPredict = new JPanel();
@@ -79,7 +82,7 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
         this.masterFrame.setVisible(true);
         this.masterFrame.pack();
 
-        masterFrame.setTitle(actionName);
+        masterFrame.setTitle(algorithmName);
     }
 
 
@@ -90,14 +93,14 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
         if (e.getSource().equals(submitButton)) {
             String keyToPredict = radioButtonListKeysToPredict.stream().filter(s -> s.isSelected()).findFirst().orElse(null).getText();
             String actionTime = actionTimeField.getText();
-            lrTool.build(inputFile, keyToPredict, actionTime);
+            testTool.build(inputFile, keyToPredict, actionTime);
             switch (actionName) {
                 case Resources.LR_PREDICT:
-                    lrTool.action();
+                    testTool.action();
                     break;
                 case Resources.LR_PREDICT_VS_ACTUAL:
-                    lrTool.action();
-                    float error = ((LRPredictVsActual) lrTool).getError();
+                    testTool.action();
+                    float error =  ((Test)testTool).getMseError();
                     mseErrorLabel.setText("MSE ERROR: "+error);
                     southPanel.add(mseErrorLabel);
                     masterFrame.revalidate();

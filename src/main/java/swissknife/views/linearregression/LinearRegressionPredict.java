@@ -1,5 +1,6 @@
 package swissknife.views.linearregression;
 
+import swissknife.modal.test.linearregression.LRPredict;
 import swissknife.panels.linearregression.LinearRegressionPanel;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class LinearRegressionPredict extends JInternalFrame
 {
     public LinearRegressionPredict(String pathCsv)
     {
-        this.add(new LinearRegressionPanel(pathCsv,2,this));
+        this.add(new LinearRegressionPanel(new LRPredict(),pathCsv,this));
         this.setVisible(true);
         this.pack();
     }

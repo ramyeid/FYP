@@ -1,5 +1,6 @@
 package swissknife.modal.classifier.knearestneighbors;
 
+import swissknife.Resources;
 import swissknife.modal.classifier.Classifier;
 
 /**
@@ -9,6 +10,14 @@ public abstract class KNearestNeighbors  extends Classifier{
 
     public KNearestNeighbors(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
+        super.fileToReadAccuracy = Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE;
+        super.algorithmName = "K Nearest Neighbors";
     }
-    public KNearestNeighbors(){}
+    public KNearestNeighbors(){
+        super.fileToReadAccuracy = Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE;
+        super.algorithmName = "K Nearest Neighbors";
+
+    }
 }
+
+

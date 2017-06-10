@@ -1,5 +1,24 @@
 package swissknife;
 
+import swissknife.modal.classifier.decisiontree.DTPredict;
+import swissknife.modal.classifier.decisiontree.DTPredictVsActual;
+import swissknife.modal.classifier.gradientboosting.GBPredict;
+import swissknife.modal.classifier.gradientboosting.GBPredictVsActual;
+import swissknife.modal.classifier.knearestneighbors.KNNPredict;
+import swissknife.modal.classifier.knearestneighbors.KNNPredictVsActual;
+import swissknife.modal.classifier.lineardiscriminant.LDPredict;
+import swissknife.modal.classifier.lineardiscriminant.LDPredictVsActual;
+import swissknife.modal.classifier.linearsvm.LSVCPredict;
+import swissknife.modal.classifier.linearsvm.LSVCPredictVsActual;
+import swissknife.modal.classifier.logisticregression.LogRPredict;
+import swissknife.modal.classifier.logisticregression.LogRPredictVsActual;
+import swissknife.modal.classifier.naivebayes.NBPredict;
+import swissknife.modal.classifier.naivebayes.NBPredictVsActual;
+import swissknife.modal.classifier.randomforest.RFPredict;
+import swissknife.modal.classifier.randomforest.RFPredictVsActual;
+import swissknife.modal.classifier.svm.SVMPredict;
+import swissknife.modal.classifier.svm.SVMPredictVsActual;
+
 /**
  * Created by ramyeid on 4/24/17.
  */
@@ -22,7 +41,7 @@ package swissknife;
 
 //TODO - CHECK ERROR CALCULATE IN CONTINUOUSFORECAST FUNCTION IN PLOTCONTINUOUSFORECAST.
     //TODO CHECK WITH MEZHER IF ABSOLUTE ERROR IS OKAY.
-
+//TODO CHECK http://www.scipy-lectures.org/packages/scikit-learn/    3.6.3.1. K-means clustering
 public class Application {
     public static void main(String[] args) throws InterruptedException {
 /*
@@ -41,7 +60,9 @@ public class Application {
     */
 
 
-/*
+
+
+
         String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
         String keyToPredict = "var1";
         int actionTime = 3300;
@@ -52,21 +73,29 @@ public class Application {
         DTPredictVsActual dt = new DTPredictVsActual(inputFile,keyToPredict,actionTime);
         LogRPredictVsActual lr = new LogRPredictVsActual(inputFile,keyToPredict,actionTime);
         LDPredictVsActual ld = new LDPredictVsActual(inputFile,keyToPredict,actionTime);
+        RFPredictVsActual rf = new RFPredictVsActual(inputFile,keyToPredict,actionTime);
+        GBPredictVsActual gb = new GBPredictVsActual(inputFile,keyToPredict,actionTime);
+        LSVCPredictVsActual lsvc = new LSVCPredictVsActual(inputFile,keyToPredict,actionTime);
 
+        gb.action();
+        rf.action();
         knn.action();
         nb.action();
         svm.action();
         dt.action();
         lr.action();
         ld.action();
+        lsvc.action();
 
-        System.out.println("KNN: "+knn.getAccuracy(Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE));
-        System.out.println("NB: "+nb.getAccuracy(Resources.NB_PREDICTED_ACTUAL_ONLY_FILE));
-        System.out.println("SVM: "+svm.getAccuracy(Resources.SVM_PREDICTED_ACTUAL_ONLY_FILE));
-        System.out.println("DT: "+dt.getAccuracy(Resources.DT_PREDICTED_ACTUAL_ONLY_FILE));
-        System.out.println("lr: "+dt.getAccuracy(Resources.LOGR_PREDICTED_ACTUAL_ONLY_FILE));
-        System.out.println("ld: "+dt.getAccuracy(Resources.LD_PREDICTED_ACTUAL_ONLY_FILE));
-
+        System.out.println("KNN: "+knn.getAccuracy());
+        System.out.println("NB: "+nb.getAccuracy());
+        System.out.println("SVM: "+svm.getAccuracy());
+        System.out.println("DT: "+dt.getAccuracy());
+        System.out.println("lr: "+lr.getAccuracy());
+        System.out.println("ld: "+ld.getAccuracy());
+        System.out.println("rf: "+rf.getAccuracy());
+        System.out.println("gb: "+gb.getAccuracy());
+        System.out.println("lsvc"+ lsvc.getAccuracy());
 
 
         inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
@@ -78,6 +107,9 @@ public class Application {
         DTPredict dtP = new DTPredict(inputFile,keyToPredict,actionTime);
         LogRPredict lrP = new LogRPredict(inputFile,keyToPredict,actionTime);
         LDPredict ldP = new LDPredict(inputFile,keyToPredict,actionTime);
+        RFPredict rfP = new RFPredict(inputFile,keyToPredict,actionTime);
+        GBPredict gbP = new GBPredict(inputFile,keyToPredict,actionTime);
+        LSVCPredict lsvcP = new LSVCPredict(inputFile,keyToPredict,actionTime);
 
         knnP.action();
         nbP.action();
@@ -85,7 +117,33 @@ public class Application {
         dtP.action();
         lrP.action();
         ldP.action();
+        rfP.action();
+        gbP.action();
+        lsvcP.action();
+
+
+
+/*
+        System.out.println("NOW LINEAR STUFF - TEST");
+
+        LRPredictVsActual linR = new LRPredictVsActual(inputFile,keyToPredict,actionTime);
+
+        linR.action();
+
+        System.out.println("linr"+ linR.getMseError());
+
+
+
+
+        System.out.println("NOW LINEAR STUFF - TEST");
+
+        LRPredict linRP = new LRPredict(inputFile,keyToPredict,actionTime);
+
+        linRP.action();
 */
+
+
+
 
     }
 

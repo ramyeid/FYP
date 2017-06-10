@@ -11,6 +11,9 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 import sys
 import os
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn import svm
 
 
 def ChooseAlgorithm(algorithmName):
@@ -33,6 +36,15 @@ def ChooseAlgorithm(algorithmName):
 
 	elif algorithmName =="SVM":
 		return SVC(),cwd+"SVM/"
+
+	elif algorithmName == "RF":
+		return RandomForestClassifier(),cwd+"RandomForest/"
+
+	elif algorithmName =="GB":
+		return GradientBoostingClassifier(),cwd+"GradientBoosting/"
+
+	elif algorithmName == "LSVC":
+		return svm.LinearSVC(), cwd + "LinearSVC/"
 
 
 inputFile = sys.argv[1]
