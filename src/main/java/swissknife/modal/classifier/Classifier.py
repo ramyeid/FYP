@@ -92,7 +92,6 @@ for j in range(len(keysToDrop)):
 
 
 keys = data_df.columns
-print keys
 
 keyWithStringAvailable = False
 
@@ -163,7 +162,6 @@ target = data_df_rev.values[:,len(keys)]
 
 # features_train, features_test, target_train, target_test = train_test_split(features,target, test_size = (percentageActionTime), random_state = 10)
 
-print features
 
 target_test = target[size-actionTime:]
 target_train = target[:size-actionTime]

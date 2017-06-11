@@ -51,4 +51,8 @@ public abstract class Classifier implements Tool {
     public String getAlgorithmName() {
         return algorithmName;
     }
+
+    public void setActionKeys(String actionKeys) {
+        this.actionKeys = actionKeys;
+    }
 }
