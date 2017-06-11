@@ -24,6 +24,9 @@ import swissknife.modal.classifier.stochasticgradientdescent.SGDPredict;
 import swissknife.modal.classifier.stochasticgradientdescent.SGDPredictVsActual;
 import swissknife.modal.classifier.svm.SVMPredict;
 import swissknife.modal.classifier.svm.SVMPredictVsActual;
+import swissknife.panels.classifier.ClassifierPanel;
+
+import javax.swing.*;
 
 /**
  * Created by ramyeid on 4/24/17.
