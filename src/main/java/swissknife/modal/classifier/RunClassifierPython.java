@@ -14,7 +14,7 @@ public class RunClassifierPython extends RunPythonFile {
     int actionTime ;
     String pythonFile = Resources.CLASSIFIER_PYTHON_FILE;
     String algorithmName;
-    String actionKeys;
+    String actionKeys ;
 
     public RunClassifierPython(String inputFile,String keyToPredict,int action,int actionTime,String algoName,String actionKeys){
         this.inputFile = inputFile;
