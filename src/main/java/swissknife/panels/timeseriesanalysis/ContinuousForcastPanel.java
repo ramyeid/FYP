@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by ramyeid on 5/28/17.
@@ -23,12 +24,15 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
     String actionName = Resources.TSA_CONTINUOUS_FORECAST;
     private JPanel east;
     private JPanel west;
+    private JPanel center; // for errors.
     private JPanel plotPanel;
 
     JInternalFrame masterFrame;
 
+
     public ContinuousForcastPanel(Tool timeSeriesTool,JInternalFrame masterFrame){
 
+        masterFrame.setTitle("Continuous Forecast");
         this.timeSeriesTool = (TSAContinuousForecast)timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
 
@@ -39,6 +43,7 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         east = new JPanel();
         west = new JPanel();
         plotPanel = new JPanel();
+        center = new JPanel();
 
         east.setLayout(new BoxLayout(east,BoxLayout.Y_AXIS));
         west.setLayout(new BoxLayout(west,BoxLayout.Y_AXIS));
@@ -94,9 +99,38 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             this.add(plotPanel,BorderLayout.SOUTH);
         }
 
+        populateCenterPanel();
+
+
+
         masterFrame.revalidate();
         masterFrame.repaint();
         masterFrame.pack();
 
     }
+
+    private void populateCenterPanel() {
+        center.removeAll();
+        JPanel panelText = new JPanel();
+        JPanel panelErrorValue = new JPanel();
+        panelText.setLayout(new BoxLayout(panelText, BoxLayout.Y_AXIS));
+        panelErrorValue.setLayout(new BoxLayout(panelErrorValue, BoxLayout.Y_AXIS));
+        ArrayList<Float> values = Resources.calculateAbsoluteError(Resources.actualTimeSeries,Resources.predictedTimeSeriesCollection);
+        for(int i=0;i<values.size();++i){
+            if (i==0){
+                JLabel mainText = new JLabel("Forecast #");
+                panelText.add(mainText);
+                JLabel mainError = new JLabel("Absolute Error");
+                panelErrorValue.add(mainError);
+            }
+            JLabel error = new JLabel(""+values.get(i));
+            JLabel forecastNumber = new JLabel(""+i);
+            panelErrorValue.add(error);
+            panelText.add(forecastNumber);
+        }
+        center.add(panelText);
+        center.add(panelErrorValue);
+        this.add(center,BorderLayout.CENTER);
+    }
+
 }

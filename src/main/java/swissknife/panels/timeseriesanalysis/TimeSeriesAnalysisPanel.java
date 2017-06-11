@@ -14,15 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//TODO ADD SAVE GRAPH
-//TODO ADD ERROR FOR  ACTION. FORECAST VS. ACTUAL, CONTINUOUS FORECAST
-//TODO FORECAST VS. ACTUAL GET THE ERROR FROM PYTHON SCRIPT.
-//TODO CONTINUOUS FORECAST IMPLEMENT FUNCTION PLOT CONTINUOUS FORECASTING.
-//TODO maybe put output.txt files in a frame that can be accessed with file->output values.
-//TODO Continuous Forecast on a different thread.
-//TODO ADD AVERAGE
-//TODO ADD ACTIONTIME
-//TODO ADD TO SEE HOW ARE THE DATA IN THE FILE BY HOUR OR DAY (FOR AVERAGE).
+//TODO ADD MORE AVERAGE
+//TODO ADD MORE DATE FORMAT
 public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     private String inputFile;
@@ -120,6 +113,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
+        this.masterFrame.setTitle(actionName);
 
 
     }
