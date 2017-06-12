@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/main/resources/BernoulliNaiveBayes/Predicted_Actual_Result.csv
 ,Sex,Length,Diameter,Height,Whole weight,Shucked weight,Viscera weight,Shell weight,Rings,var0,var1,var1 Actual & Predicted
 0,1,1,1,1,0,0,1,1,1,0,1,1.0
 1,1,1,1,1,0,1,0,1,1,0,0,0.0
@@ -9999,3 +10000,5 @@
 9997,0,1,0,0,0,0,1,1,1,0,0,1.0
 9998,0,0,0,0,0,0,1,0,0,0,0,0.0
 9999,1,1,1,0,0,0,1,1,1,0,0,1.0
+=======
+>>>>>>> 9684e57c50319d413cb1d7b06d02644090482674:src/main/resources/NaiveBayes/Predicted_Actual_Result.csv
