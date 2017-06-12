@@ -15,14 +15,14 @@ import java.awt.event.ActionListener;
 
 
 //TODO PACK LOAD CSV
-// BROWSE DIRECTLY NO PATH
-// MENU WRITING SMALLER
-// READ EXCEL FILES NOT JUST CSV
-// PANEL DESIGNS TO BE FIXED
-// OPEN INTERNAL FRAME IN CENTER
-// Graph in new internal frame
-// title for internal frames
-// bring to front new internal
+//TODO BROWSE DIRECTLY NO PATH
+//TODO MENU WRITING SMALLER
+//TODO READ EXCEL FILES NOT JUST CSV
+//TODO PANEL DESIGNS TO BE FIXED
+//TODO OPEN INTERNAL FRAME IN CENTER
+//TODO Graph in new internal frame
+//TODO title for internal frames
+//TODO bring to front new internal
 
 public class MainWindow extends JFrame
 {

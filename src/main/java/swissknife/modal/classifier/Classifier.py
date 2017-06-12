@@ -17,13 +17,14 @@ from sklearn import svm
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import RidgeClassifierCV
+from sklearn.naive_bayes import BernoulliNB
 
 
 def ChooseAlgorithm(algorithmName):
 	cwd = os.getcwd()
 	cwd = cwd + "/src/main/resources/"
-	if algorithmName=="NB":
-		return GaussianNB(), cwd + "NaiveBayes/"
+	if algorithmName=="GNB":
+		return GaussianNB(), cwd + "GaussianNaiveBayes/"
 
 	elif algorithmName == "KNN":
 		return KNeighborsClassifier(), cwd+"KNearestNeighbors/"
@@ -58,6 +59,8 @@ def ChooseAlgorithm(algorithmName):
 	elif algorithmName == "RC":
 		return RidgeClassifierCV(), cwd+"RidgeClassifier/"
 
+	elif algorithmName == "BNB":
+		return BernoulliNB(),cwd+"BernoulliNaiveBayes/"
 
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]

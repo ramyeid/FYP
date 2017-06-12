@@ -10,12 +10,12 @@ public abstract class LinearSVC extends Classifier {
 
     public LinearSVC(){
         super.fileToReadAccuracy = Resources.LSVC_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Linear SVC";
+        super.algorithmName = Resources.LINEAR_SVC;
     }
 
     public LinearSVC(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.LSVC_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Linear SVC";
+        super.algorithmName = Resources.LINEAR_SVC;
     }
 }

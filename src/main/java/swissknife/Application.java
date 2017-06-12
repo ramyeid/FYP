@@ -1,29 +1,8 @@
 package swissknife;
 
-import swissknife.modal.classifier.decisiontree.DTPredict;
-import swissknife.modal.classifier.decisiontree.DTPredictVsActual;
-import swissknife.modal.classifier.extratreeclassifier.ETPredict;
-import swissknife.modal.classifier.extratreeclassifier.ETPredictVsActual;
-import swissknife.modal.classifier.gradientboosting.GBPredict;
-import swissknife.modal.classifier.gradientboosting.GBPredictVsActual;
-import swissknife.modal.classifier.knearestneighbors.KNNPredict;
-import swissknife.modal.classifier.knearestneighbors.KNNPredictVsActual;
-import swissknife.modal.classifier.lineardiscriminant.LDPredict;
-import swissknife.modal.classifier.lineardiscriminant.LDPredictVsActual;
-import swissknife.modal.classifier.linearsvm.LSVCPredict;
-import swissknife.modal.classifier.linearsvm.LSVCPredictVsActual;
-import swissknife.modal.classifier.logisticregression.LogRPredict;
-import swissknife.modal.classifier.logisticregression.LogRPredictVsActual;
-import swissknife.modal.classifier.naivebayes.NBPredict;
-import swissknife.modal.classifier.naivebayes.NBPredictVsActual;
-import swissknife.modal.classifier.randomforest.RFPredict;
-import swissknife.modal.classifier.randomforest.RFPredictVsActual;
-import swissknife.modal.classifier.ridge.RCPredict;
-import swissknife.modal.classifier.ridge.RCPredictVsActual;
-import swissknife.modal.classifier.stochasticgradientdescent.SGDPredict;
-import swissknife.modal.classifier.stochasticgradientdescent.SGDPredictVsActual;
-import swissknife.modal.classifier.svm.SVMPredict;
-import swissknife.modal.classifier.svm.SVMPredictVsActual;
+import swissknife.panels.comparetools.CompareToolsPanel;
+
+import javax.swing.*;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -52,6 +31,8 @@ import swissknife.modal.classifier.svm.SVMPredictVsActual;
 
 //TODO CHECK THIS FOR ALL ALGORITHMS http://scikit-learn.org/stable/model_selection.html#model-selection
 //TODO CHECK THIS FOR ALL ALGORITHMS http://scikit-learn.org/stable/supervised_learning.html#supervised-learning
+
+//TODO in CompareToolsPanel add a menu bar that selects and deselects all algorithms // and actionKeys.
 public class Application {
     public static void main(String[] args) throws InterruptedException {
 
@@ -67,13 +48,26 @@ public class Application {
 //        frame.setVisible(true);
 //        frame.pack();
 
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
+        JFrame frame = new JFrame();
+        JInternalFrame intFrame = new JInternalFrame();
+        CompareToolsPanel compareToolsPanel = new CompareToolsPanel(inputFile,intFrame,frame);
+        intFrame.add(compareToolsPanel);
+        intFrame.setVisible(true);
+        intFrame.pack();
+
+        frame.add(intFrame);
+        frame.setVisible(true);
+        frame.pack();
+
+        /*
 
         String inputFile = System.getProperty("user.dir") + "/src/main/resources/data_2.csv";
         String keyToPredict = "var1";
         int actionTime = 3300;
 
         KNNPredictVsActual knn = new KNNPredictVsActual(inputFile, keyToPredict, actionTime);
-        NBPredictVsActual nb = new NBPredictVsActual(inputFile, keyToPredict, actionTime);
+        GNBPredictVsActual nb = new GNBPredictVsActual(inputFile, keyToPredict, actionTime);
         SVMPredictVsActual svm = new SVMPredictVsActual(inputFile, keyToPredict, actionTime);
         DTPredictVsActual dt = new DTPredictVsActual(inputFile, keyToPredict, actionTime);
         LogRPredictVsActual lr = new LogRPredictVsActual(inputFile, keyToPredict, actionTime);
@@ -84,7 +78,7 @@ public class Application {
         SGDPredictVsActual sgd = new SGDPredictVsActual(inputFile, keyToPredict, actionTime);
         ETPredictVsActual et = new ETPredictVsActual(inputFile, keyToPredict, actionTime);
         RCPredictVsActual rc = new RCPredictVsActual(inputFile, keyToPredict, actionTime);
-
+        BNBPredictVsActual bnb = new BNBPredictVsActual(inputFile, keyToPredict, actionTime);
 
         String actionKeys = "";
         String[] keys = CSVReader.getColumnKeys(inputFile);
@@ -106,6 +100,23 @@ public class Application {
         sgd.setActionKeys(actionKeys);
         et.setActionKeys(actionKeys);
         rc.setActionKeys(actionKeys);
+        bnb.setActionKeys(actionKeys);
+
+        knn.action();
+        nb.action();
+        svm.action();
+        dt.action();
+        lr.action();
+        ld.action();
+        rf.action();
+        gb.action();
+        lsvc.action();
+        sgd.action();
+        et.action();
+        rc.action();
+        bnb.action();
+
+
         System.out.println("KNN: " + knn.getAccuracy());
         System.out.println("NB: " + nb.getAccuracy());
         System.out.println("SVM: " + svm.getAccuracy());
@@ -118,13 +129,13 @@ public class Application {
         System.out.println("sgdc" + sgd.getAccuracy());
         System.out.println("etc" + et.getAccuracy());
         System.out.println("rc" + rc.getAccuracy());
-
+        System.out.println("bnb " + bnb.getAccuracy());
 
         inputFile = System.getProperty("user.dir") + "/src/main/resources/data_2_Empty.csv";
         keyToPredict = "var1";
         actionTime = 12;
         KNNPredict knnP = new KNNPredict(inputFile, keyToPredict, actionTime);
-        NBPredict nbP = new NBPredict(inputFile, keyToPredict, actionTime);
+        GNBPredict nbP = new GNBPredict(inputFile, keyToPredict, actionTime);
         SVMPredict svmP = new SVMPredict(inputFile, keyToPredict, actionTime);
         DTPredict dtP = new DTPredict(inputFile, keyToPredict, actionTime);
         LogRPredict lrP = new LogRPredict(inputFile, keyToPredict, actionTime);
@@ -135,6 +146,7 @@ public class Application {
         SGDPredict sgdP = new SGDPredict(inputFile, keyToPredict, actionTime);
         ETPredict etP = new ETPredict(inputFile, keyToPredict, actionTime);
         RCPredict rcP = new RCPredict(inputFile, keyToPredict, actionTime);
+        BNBPredict bnbP = new BNBPredict(inputFile,keyToPredict,actionTime);
 
         knnP.setActionKeys(actionKeys);
         nbP.setActionKeys(actionKeys);
@@ -148,6 +160,7 @@ public class Application {
         sgdP.setActionKeys(actionKeys);
         etP.setActionKeys(actionKeys);
         rcP.setActionKeys(actionKeys);
+        bnbP.setActionKeys(actionKeys);
 
         knnP.action();
         nbP.action();
@@ -161,8 +174,8 @@ public class Application {
         sgdP.action();
         etP.action();
         rcP.action();
-
-
+        bnbP.action();
+*/
 
 /*
         System.out.println("NOW LINEAR STUFF - TEST");

@@ -11,12 +11,12 @@ public abstract class GradientBoosting extends Classifier {
     public GradientBoosting(String inputFile, String keyToPredict, int actionTime) {
         super(inputFile, keyToPredict, actionTime);
         super.fileToReadAccuracy = Resources.GB_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Gradient Boosting Classifier";
+        super.algorithmName = Resources.GRADIENT_BOOSTING_CLASSIFIER;
     }
 
     public GradientBoosting() {
         super.fileToReadAccuracy = Resources.GB_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Gradient Boosting Classifier";
+        super.algorithmName = Resources.GRADIENT_BOOSTING_CLASSIFIER;
     }
 }
 

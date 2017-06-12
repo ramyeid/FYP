@@ -11,11 +11,11 @@ public abstract class KNearestNeighbors  extends Classifier{
     public KNearestNeighbors(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "K Nearest Neighbors";
+        super.algorithmName = Resources.K_NEAREST_NEIGHBORS;
     }
     public KNearestNeighbors(){
         super.fileToReadAccuracy = Resources.KNN_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "K Nearest Neighbors";
+        super.algorithmName = Resources.K_NEAREST_NEIGHBORS;
 
     }
 }

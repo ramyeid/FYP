@@ -11,11 +11,11 @@ public abstract class DecisionTree extends Classifier {
     public DecisionTree(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.DT_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Decision Tree";
+        super.algorithmName = Resources.DECISION_TREE;
     }
     public DecisionTree(){
         super.fileToReadAccuracy = Resources.DT_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Decision Tree";
+        super.algorithmName = Resources.DECISION_TREE;
 
     }
 

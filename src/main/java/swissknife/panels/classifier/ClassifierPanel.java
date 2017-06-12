@@ -66,7 +66,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         String[] keysList = CSVReader.getColumnKeys(inputFile);
         Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
 
-        createCheckBoxButtons(keysList);
+        createCheckBoxButtonsForActionKeys(keysList,checkBoxesPanel,keysToChooseCheckBoxes,this);
         this.add(checkBoxesPanel,BorderLayout.EAST);
 
         this.add(radioButtonsPanelKeysToPredict,BorderLayout.WEST);
@@ -86,7 +86,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
     }
 
-    private void createCheckBoxButtons(String[] keysList) {
+    public static void createCheckBoxButtonsForActionKeys(String[] keysList, JPanel checkBoxesPanel, List<JCheckBox> keysToChooseCheckBoxes, JPanel mainPanel) {
         checkBoxesPanel.setLayout(new BorderLayout());
         checkBoxesPanel.add(new Label("Choose keys to do action with"), BorderLayout.NORTH);
         JPanel tmpPanel = new JPanel();
@@ -95,7 +95,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         for (int i = 0; i < keysList.length; ++i) {
             JCheckBox tmp = new JCheckBox(keysList[i]);
             tmp.setSelected(true);
-            tmp.addActionListener(this);
+            tmp.addActionListener((ActionListener) mainPanel);
             tmpPanel.add(tmp);
             keysToChooseCheckBoxes.add(tmp);
 
@@ -156,4 +156,5 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
         }
     }
+
 }

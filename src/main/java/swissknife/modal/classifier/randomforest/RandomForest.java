@@ -10,12 +10,12 @@ public abstract class RandomForest extends Classifier{
     public RandomForest(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.RF_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Random Forest";
+        super.algorithmName = Resources.RANDOM_FOREST;
 
     }
     public RandomForest(){
         super.fileToReadAccuracy = Resources.RF_PREDICTED_ACTUAL_ONLY_FILE;
-        super.algorithmName = "Random Forest";
+        super.algorithmName = Resources.RANDOM_FOREST;
     }
 }
 

@@ -1,6 +1,6 @@
 //package swissknife.views.naivebayes;
 //
-//import swissknife.panels.naivebayes.NaiveBayesPanel;
+//import swissknife.panels.gaussiannaivebayes.NaiveBayesPanel;
 //
 //import javax.swing.*;
 //
