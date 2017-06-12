@@ -4,9 +4,9 @@
 //
 //import javax.swing.*;
 //
-//public class NaiveBayesPredict extends JInternalFrame
+//public class GaussianNaiveBayesPredict extends JInternalFrame
 //{
-//    public NaiveBayesPredict(String pathCsv)
+//    public GaussianNaiveBayesPredict(String pathCsv)
 //    {
 //        this.add(new NaiveBayesPanel(pathCsv,2,this));
 //        this.setVisible(true);
@@ -14,16 +14,16 @@
 //    }
 //}
 //
-package swissknife.views.naivebayes;
+package swissknife.views.gaussiannaivebayes;
 
 import swissknife.modal.classifier.gaussiannaivebayes.GNBPredict;
 import swissknife.panels.classifier.ClassifierPanel;
 
 import javax.swing.*;
 
-public class NaiveBayesPredict extends JInternalFrame
+public class GaussianNaiveBayesPredict extends JInternalFrame
 {
-    public NaiveBayesPredict(String pathCsv, JFrame mainFrame)
+    public GaussianNaiveBayesPredict(String pathCsv, JFrame mainFrame)
     {
         this.add(new ClassifierPanel(new GNBPredict(),pathCsv,this));
         this.setVisible(true);

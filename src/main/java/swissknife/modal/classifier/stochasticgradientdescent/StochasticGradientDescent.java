@@ -11,11 +11,15 @@ public abstract class StochasticGradientDescent extends Classifier{
     public StochasticGradientDescent(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.SGD_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.SGD_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.SGD_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.STOCHASTIC_GRADIENT_DESCENT;
 
     }
     public StochasticGradientDescent(){
         super.fileToReadAccuracy = Resources.SGD_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.SGD_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.SGD_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.STOCHASTIC_GRADIENT_DESCENT;
     }
 

@@ -134,7 +134,6 @@ public class ClassifierPanel extends JPanel implements ActionListener {
             for (int i=0;i<keysNotToDrop.size();++i){
                 actionKeys += "/"+keysNotToDrop.get(i);
             }
-            System.out.println(actionKeys);
 
             String actionTime = actionTimeField.getText();
 

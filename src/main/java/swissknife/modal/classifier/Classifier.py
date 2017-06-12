@@ -201,14 +201,14 @@ if action == "1":
 		predicted_Actual.append(target_pred[i])
 	
 	df[keyToPredict+" Actual & Predicted"] = predicted_Actual
-	df.to_csv(src+"Predicted_Actual_Result.csv")
+	df.to_csv(src+"Predicted_Actual_Result.csv",index=False)
 	
 	
 
 	df_2 = pd.DataFrame()
 	df_2[keyToPredict] = tmp_df[keyToPredict][(size-len(target_pred)):size]
 	df_2[ keyToPredict + "Predicted"] = target_pred
-	df_2.to_csv(src+"Predicted_Actual_Only.csv")
+	df_2.to_csv(src+"Predicted_Actual_Only.csv",index=False)
 
 	with open(src+"Predicted_Actual_Only.csv",'a') as f:
 		f.write("ACCURACY: "+str(result));
@@ -220,8 +220,10 @@ if action == "1":
 if action == "2":
 	df = pd.DataFrame()
 	tmp_df = pd.read_csv(inputFile,header=0)
+
+
+
 	originalKeys = tmp_df.columns
-	
 	originalKeys = filter(lambda a: a != keyToPredict, originalKeys)
 	for i in range(len(originalKeys)):
 		df[originalKeys[i]] = tmp_df[originalKeys[i]]
@@ -235,7 +237,7 @@ if action == "2":
 		predicted_Actual.append(target_pred[i])
 			
 	df[keyToPredict+'Predict & Actual'] = predicted_Actual
-	df.to_csv(src+"Predicted_result.csv")
+	df.to_csv(src+"Predicted_result.csv",index=False)
 
 	print target_pred
 #     

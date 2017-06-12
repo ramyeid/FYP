@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class CSVReader {
-
 
 
     public static String[] getColumnKeys(String csvFile) {
@@ -26,64 +27,58 @@ public class CSVReader {
     }
 
 
-
-
-
-    public <T> ArrayList<ArrayList<T>> getDataCSVForKeys(String csvFile,String keyX, String keyY,boolean gotHeader) {
+    public static ArrayList<ArrayList<String>> getDataCSVForKeys(String csvFile, String... keysWanted) {
+        Boolean gotHeader = true;
         String line = "";
-        String csvSplitBy = ",";
+        String csvDelimiter = ",";
 
-        ArrayList<T> dataX = new ArrayList<>();
-        ArrayList<T> dataY = new ArrayList<>();
-
-        int indexX = 0;
-        int indexY = 1;
-
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        for (int i = 0; i < keysWanted.length; ++i) {
+            data.add(new ArrayList<String>());
+        }
+        HashMap<Integer, Integer> arrayListIndexToCSVIndex = new HashMap<>();
+        HashSet<Integer> indexOfKeysWanted = new HashSet<>();
+        int index = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
+                if (line.contains("ACCURACY:") || line.contains("ERROR MSE:")){
+                    continue;
+                }
                 if (gotHeader == true) {
                     gotHeader = false;
-                    String[] keys = line.split(csvSplitBy);
+                    String[] keys = line.split(csvDelimiter);
                     for (int i = 0; i < keys.length; ++i) {
-                        if (keys[i].equals(keyX)) {
-                            indexX = i;
-                        } else if (keys[i].equals(keyY)) {
-                            indexY = i;
+                        for (String keyWanted : keysWanted) {
+                            if (keys[i].equals(keyWanted) && !(indexOfKeysWanted.contains(i))) {
+                                indexOfKeysWanted.add(Integer.valueOf(i));
+                                arrayListIndexToCSVIndex.put(i,index);
+                                data.get(index).add(keyWanted);
+                                index = index+1;
+                            }
                         }
                     }
-
+                    continue;
                 }
-                T[] data = (T[]) line.split(csvSplitBy);
-                for (int i = 0; i < data.length; ++i) {
-                    if (i == indexX) {
-                        dataX.add(data[i]);
-                    } else if (i == indexY) {
-                        dataY.add(data[i]);
+                String[] values = line.split(csvDelimiter);
+                for (int i = 0; i < values.length; ++i) {
+                    if (indexOfKeysWanted.contains(i)) {
+                        int dataIndex = arrayListIndexToCSVIndex.get(i);
+                        data.get(dataIndex).add(values[i]);
                     }
                 }
             }
-            ArrayList<ArrayList<T>> temp = new ArrayList<>();
-            temp.add(dataX);
-            temp.add(dataY);
-            return temp;
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        catch(FileNotFoundException e){
-                e.printStackTrace();
-                return null;
-        }
-        catch(IOException e){
-                e.printStackTrace();
-                return null;
-        }
+        return data;
     }
 
 
-
-    public static ArrayList<ArrayList<Double>> readDataFromCSV(String inputFile, int numberOfData){
+    public static ArrayList<ArrayList<Double>> readDataFromCSV(String inputFile, int numberOfData) {
         ArrayList<ArrayList<Double>> result = new ArrayList<>();
-        for (int i=0;i<numberOfData;++i){
+        for (int i = 0; i < numberOfData; ++i) {
             result.add(new ArrayList<Double>());
         }
         try {
@@ -95,8 +90,8 @@ public class CSVReader {
                 }
 
                 String[] a = s.split(",");
-                for(int i=0;i<numberOfData;++i){
-                    result.get(i).add( Double.valueOf(a[i]));
+                for (int i = 0; i < numberOfData; ++i) {
+                    result.get(i).add(Double.valueOf(a[i]));
                 }
                 float actual = Float.valueOf(a[1]);
                 float predicted = Float.valueOf(a[2]);
@@ -108,7 +103,6 @@ public class CSVReader {
         }
 
         return result;
-
 
 
     }

@@ -10,11 +10,15 @@ public abstract class SupportVectorMachine extends Classifier{
     public SupportVectorMachine(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.SVM_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.SVM_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.SVM_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.SUPPORT_VECTOR_MACHINE;
 
     }
     public SupportVectorMachine(){
         super.fileToReadAccuracy = Resources.SVM_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.SVM_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.SVM_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.SUPPORT_VECTOR_MACHINE;
     }
 }

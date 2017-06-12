@@ -10,11 +10,15 @@ public abstract class RidgeClassifier extends Classifier{
     public RidgeClassifier(String inputFile,String keyToPredict,int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.RC_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.RC_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.RC_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.RIDGE_CLASSIFIER;
 
     }
     public RidgeClassifier(){
         super.fileToReadAccuracy = Resources.RC_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.RC_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.RC_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.RIDGE_CLASSIFIER;
     }
 }

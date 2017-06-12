@@ -4,9 +4,9 @@ import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.classifier.Classifier;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.panels.showvalues.ShowValues;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +16,16 @@ import java.util.List;
 /**
  * Created by ramyeid on 6/11/17.
  */
-//TODO if predict vs actual - just a table comparing the accuracy
-//TODO if predict open a new Panel with excel like layout showing values of prediction.
+//TODO ADD  A MENU BAR TOOLS - SHOW VALUES (IT S ALWAYS DISABLED)
+//TODO HERE ENABLE THIS MENU BAR AND HE CAN SEE 3 DIFFERENT LISTS.
+//TODO HE CAN SEE ALL COLUMNS ALL VALUES
+//TODO HE CAN SEE ALL COLUMNS VALUES OF ACTIONTIME
+
+//TODO HE CAN SEE ACTIONKEYS COLUMNS ALL VALUES
+//TODO HE CAN SEE ACTIONKEYS COLUMNS VALUES OF ACTIONTIME
+
+//TODO HE CAN SEE KEYTOPREDICT COLUMN ALL VALUES
+//TODO HE CAN SEE KEYTOPREDICT COLUMN VALUES OF ACTIONTIME
 public class CompareToolsPanel extends JPanel implements ActionListener {
 
 
@@ -46,7 +54,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
     String keyToPredict = "";
 
-    public CompareToolsPanel(String inputFile, JInternalFrame masterFrame,JFrame mainFrame) {
+    public CompareToolsPanel(String inputFile, JInternalFrame masterFrame, JFrame mainFrame) {
         this.inputFile = inputFile;
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
@@ -200,27 +208,27 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
                 }
             }
 
-            for(int i=0;i<algorithmNameChosenList.size();++i){
-                Classifier classifier = Resources.getClassifierForNameAndAction(algorithmNameChosenList.get(i),action);
-                classifier.build(inputFile,keyToPredict,actionTime,actionKeys);
+            for (int i = 0; i < algorithmNameChosenList.size(); ++i) {
+                Classifier classifier = Resources.getClassifierForNameAndAction(algorithmNameChosenList.get(i), action);
+                classifier.build(inputFile, keyToPredict, actionTime, actionKeys);
                 classifier.action();
                 classifiersChosen.add(classifier);
             }
 
             comparisonAndSubmitSouth.removeAll();
             this.remove(comparisonAndSubmitSouth);
-            switch(action){
+
+            switch (action) {
                 case 1:
-                    addAccuracy();
-                    comparisonAndSubmitSouth.add(submitButton);
-                    this.add(comparisonAndSubmitSouth,BorderLayout.SOUTH);
-                    this.revalidate();
-                    this.repaint();
+                    showAccuracies();
                     break;
                 case 2:
-                    //TODO FILL HERE.
+                    showValues();
                     break;
             }
+
+            comparisonAndSubmitSouth.add(submitButton);
+            this.add(comparisonAndSubmitSouth, BorderLayout.SOUTH);
             masterFrame.revalidate();
             masterFrame.repaint();
             masterFrame.pack();
@@ -228,52 +236,64 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         }
     }
 
+    private void showValues() {
 
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        data.add(new ArrayList<>());
+        data.add(new ArrayList<>());
+        data.get(0).add("Algorithm Name");
+        data.get(1).add("Values Predicted");
 
-    public void addAccuracy() {
-//        String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
-
-        DefaultTableModel tableModel = new DefaultTableModel(new String[]{"Algorithm Name","Accuracy"}, 0);
-        // The 0 argument is number rows.
-        JTable table = new JTable(tableModel);
-;
-        for (int i=0;i<classifiersChosen.size();++i){
-            float accuracy = classifiersChosen.get(i).getAccuracy();
-            String name = classifiersChosen.get(i).getAlgorithmName();
-            Object []data ={name,accuracy};
-            tableModel.addRow(data);
+        for (int i = 0; i < classifiersChosen.size(); ++i) {
+            ArrayList<String> result = classifiersChosen.get(i).getValuesOfPredictedForActionTime_Predict();
+            String tmpResult = "";
+            for (int j = 0; j < result.size(); ++j) {
+                tmpResult += result.get(j);
+                if (j != result.size() - 1) {
+                    tmpResult += ", ";
+                }
+            }
+            data.get(0).add(classifiersChosen.get(i).getAlgorithmName());
+            data.get(1).add(tmpResult);
         }
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setSize(table.getSize());
-
-//        mainFrame.remove(masterFrame);
         JInternalFrame tmpFrame = new JInternalFrame();
 
-        tmpFrame.add(scrollPane);
+        tmpFrame.add(new ShowValues(data,masterFrame,mainFrame));
+        tmpFrame.setTitle("Algorithms Predicted Values");
         tmpFrame.setClosable(true);
         mainFrame.add(tmpFrame);
         tmpFrame.setVisible(true);
-        tmpFrame.setSize(table.getSize());
         tmpFrame.pack();
 
-//        comparisonAndSubmitSouth.add(scrollPane);
+    }
 
-//        JPanel mainTmp = new JPanel();
-//        JPanel tmpAlgorithmNames = new JPanel();
-//        JPanel tmpAccuracy = new JPanel();
-//        tmpAlgorithmNames.setLayout(new BoxLayout(tmpAlgorithmNames, BoxLayout.Y_AXIS));
-//        tmpAccuracy.setLayout(new BoxLayout(tmpAccuracy, BoxLayout.Y_AXIS));
-//        tmpAccuracy.add(new JLabel("Accuracy"));
-//        tmpAlgorithmNames.add(new JLabel("Algorithms"));
-//
-//        for(int i=0;i<classifiersChosen.size();++i){
-//            tmpAccuracy.add(new JLabel(""+classifiersChosen.get(i).getAccuracy()));
-//            tmpAlgorithmNames.add(new JLabel(classifiersChosen.get(i).getAlgorithmName()));
-//        }
-//        mainTmp.add(tmpAlgorithmNames);
-//        mainTmp.add(tmpAccuracy);
-//        comparisonAndSubmitSouth.add(mainTmp);
+
+    public void showAccuracies() {
+
+        ;
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        data.add(new ArrayList<String>());
+        data.add(new ArrayList<String>());
+
+        data.get(0).add("AlgorithmName");
+        data.get(1).add("Accuracy");
+        for (int i = 0; i < classifiersChosen.size(); ++i) {
+            float accuracy = classifiersChosen.get(i).getAccuracy();
+            String name = classifiersChosen.get(i).getAlgorithmName();
+            data.get(0).add(name);
+            data.get(1).add("" + accuracy);
+        }
+
+
+        JInternalFrame tmpFrame = new JInternalFrame();
+
+        tmpFrame.add(new ShowValues(data, masterFrame, mainFrame));
+        tmpFrame.setTitle("Algorithms Accuracies");
+        tmpFrame.setClosable(true);
+        mainFrame.add(tmpFrame);
+        tmpFrame.setVisible(true);
+        tmpFrame.pack();
     }
 
 

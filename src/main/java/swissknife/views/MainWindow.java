@@ -1,10 +1,33 @@
 package swissknife.views;
 
+import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesForecastVsActual;
+import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesPredict;
+import swissknife.views.decisiontree.DecisionTreeForecastVsActual;
+import swissknife.views.decisiontree.DecisionTreePredict;
 import swissknife.views.extratree.ExtraTreeForecastVsActual;
+import swissknife.views.extratree.ExtraTreePredict;
+import swissknife.views.gaussiannaivebayes.GaussianNaiveBayesForecastVsActual;
+import swissknife.views.gaussiannaivebayes.GaussianNaiveBayesPredict;
 import swissknife.views.gradientboosting.GradientBoostingForecastVsActual;
 import swissknife.views.gradientboosting.GradientBoostingPredict;
+import swissknife.views.knearestneighbors.KNearestNeighborsForecastVsActual;
+import swissknife.views.knearestneighbors.KNearestNeighborsPredict;
+import swissknife.views.lineardiscriminant.LinearDiscriminantForecastVsActual;
+import swissknife.views.lineardiscriminant.LinearDiscriminantPredict;
 import swissknife.views.linearregression.LinearRegressionForecastVsActual;
 import swissknife.views.linearregression.LinearRegressionPredict;
+import swissknife.views.linearsvm.LinearSvmForecastVsActual;
+import swissknife.views.linearsvm.LinearSvmPredict;
+import swissknife.views.logisticregression.LogisticRegressionForecastVsActual;
+import swissknife.views.logisticregression.LogisticRegressionPredict;
+import swissknife.views.randomforest.RandomForestForecastVsActual;
+import swissknife.views.randomforest.RandomForestPredict;
+import swissknife.views.ridge.RidgeForecastVsActual;
+import swissknife.views.ridge.RidgePredict;
+import swissknife.views.stochasticgradientdescent.StochasticGradientDescentForecastVsActual;
+import swissknife.views.stochasticgradientdescent.StochasticGradientDescentPredict;
+import swissknife.views.supportvectormachine.SupportVectorMachineForecastVsActual;
+import swissknife.views.supportvectormachine.SupportVectorMachinePredict;
 import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
 import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
@@ -12,9 +35,11 @@ import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 //
 ////TODO PACK LOAD CSV
@@ -164,8 +189,8 @@ import java.awt.event.ActionListener;
 //		});
 //		mnTimeSeriesAnalysis.add(mntmForecastOnce);
 //
-//		//Forecast Vs Actual (TSA)
-//		JMenuItem mntmForecastVsActual = new JMenuItem("Forecast vs Actual");
+//		//Predict Vs Actual (TSA)
+//		JMenuItem mntmForecastVsActual = new JMenuItem("Predict Vs Actual");
 //		mntmForecastVsActual.addActionListener(new ActionListener()
 //		{
 //			public void actionPerformed(ActionEvent e)
@@ -215,8 +240,8 @@ import java.awt.event.ActionListener;
 //		});
 //		mnLinearRegression.add(mntmLRPredict);
 //
-//		//Forecast Vs Actual (LR)
-//		JMenuItem mntmLRForecastVsActual = new JMenuItem("Forecast Vs Actual");
+//		//Predict Vs Actual (LR)
+//		JMenuItem mntmLRForecastVsActual = new JMenuItem("Predict Vs Actual");
 //		mntmLRForecastVsActual.addActionListener(new ActionListener()
 //		{
 //			public void actionPerformed(ActionEvent e)
@@ -243,7 +268,7 @@ import java.awt.event.ActionListener;
 //		{
 //			public void actionPerformed(ActionEvent e)
 //			{
-////				NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath);
+////				GaussianNaiveBayesPredict naiveBayesPredictInternalFrame = new GaussianNaiveBayesPredict(csvPath);
 ////				frame.add(naiveBayesPredictInternalFrame);
 ////				naiveBayesPredictInternalFrame.setVisible(true);
 ////				naiveBayesPredictInternalFrame.pack();
@@ -254,13 +279,13 @@ import java.awt.event.ActionListener;
 //		});
 //		mnNaiveBayes.add(mntmNBPredict);
 //
-//		//Forecast Vs Actual (NB)
-//		JMenuItem mntmNBForecastVsActual = new JMenuItem("Forecast Vs Actual");
+//		//Predict Vs Actual (NB)
+//		JMenuItem mntmNBForecastVsActual = new JMenuItem("Predict Vs Actual");
 //		mntmNBForecastVsActual.addActionListener(new ActionListener()
 //		{
 //			public void actionPerformed(ActionEvent e)
 //			{
-////				NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath);
+////				GaussianNaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new GaussianNaiveBayesForecastVsActual(csvPath);
 ////				frame.add(naiveBayesForecastVsActualInternalFrame);
 ////
 ////				naiveBayesForecastVsActualInternalFrame.setVisible(true);
@@ -397,51 +422,9 @@ import java.awt.event.ActionListener;
 //		csvInternalFrame.getContentPane().add(btnDoneCsv);
 //	}
 //}
-
 /**
  * Created by joeabdelnour on 6/11/17.
  */
-
-import swissknife.views.decisiontree.DecisionTreeForecastVsActual;
-import swissknife.views.decisiontree.DecisionTreePredict;
-import swissknife.views.extratree.ExtraTreeForecastVsActual;
-import swissknife.views.extratree.ExtraTreePredict;
-import swissknife.views.gradientboosting.GradientBoostingForecastVsActual;
-import swissknife.views.gradientboosting.GradientBoostingPredict;
-import swissknife.views.knearestneighbors.KNearestNeighborsForecastVsActual;
-import swissknife.views.knearestneighbors.KNearestNeighborsPredict;
-import swissknife.views.lineardiscriminant.LinearDiscriminantForecastVsActual;
-import swissknife.views.lineardiscriminant.LinearDiscriminantPredict;
-import swissknife.views.linearregression.LinearRegressionForecastVsActual;
-import swissknife.views.linearregression.LinearRegressionPredict;
-import swissknife.views.linearsvm.LinearSvmForecastVsActual;
-import swissknife.views.linearsvm.LinearSvmPredict;
-import swissknife.views.logisticregression.LogisticRegressionForecastVsActual;
-import swissknife.views.logisticregression.LogisticRegressionPredict;
-import swissknife.views.naivebayes.NaiveBayesForecastVsActual;
-import swissknife.views.naivebayes.NaiveBayesPredict;
-import swissknife.views.randomforest.RandomForestForecastVsActual;
-import swissknife.views.randomforest.RandomForestPredict;
-import swissknife.views.ridge.RidgeForecastVsActual;
-import swissknife.views.ridge.RidgePredict;
-import swissknife.views.stochasticgradientdescent.StochasticGradientDescentForecastVsActual;
-import swissknife.views.stochasticgradientdescent.StochasticGradientDescentPredict;
-import swissknife.views.supportvectormachine.SupportVectorMachineForecastVsActual;
-import swissknife.views.supportvectormachine.SupportVectorMachinePredict;
-import swissknife.views.timeseriesanalysis.TimeSeriesContinuousForecast;
-import swissknife.views.timeseriesanalysis.TimeSeriesForecastOnce;
-import swissknife.views.timeseriesanalysis.TimeSeriesForecastVsActual;
-import swissknife.views.timeseriesanalysis.TimeSeriesPredict;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileFilter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class MainWindow extends JFrame
 {
@@ -487,6 +470,7 @@ public class MainWindow extends JFrame
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
+
 
 
         //*******************
@@ -570,7 +554,7 @@ public class MainWindow extends JFrame
             }
         });
         mnDecisionTree.add(mntmDTPrediction);
-        JMenuItem mntmDTForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmDTForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmDTForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -603,7 +587,7 @@ public class MainWindow extends JFrame
             }
         });
         mnExtraTree.add(mntmETPrediction);
-        JMenuItem mntmETForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmETForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmETForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -636,7 +620,7 @@ public class MainWindow extends JFrame
             }
         });
         mnGradientBoosting.add(mntmGBPrediction);
-        JMenuItem mntmGBForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmGBForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmGBForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -669,7 +653,7 @@ public class MainWindow extends JFrame
             }
         });
         mnKNearestNeighbors.add(mntmKNNPrediction);
-        JMenuItem mntmKNNForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmKNNForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmKNNForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -702,7 +686,7 @@ public class MainWindow extends JFrame
             }
         });
         mnLinearDiscriminant.add(mntmLDPrediction);
-        JMenuItem mntmLDForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmLDForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmLDForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -735,7 +719,7 @@ public class MainWindow extends JFrame
             }
         });
         mnLinearRegression.add(mntmLiRPrediction);
-        JMenuItem mntmLiRForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmLiRForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmLiRForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -768,7 +752,7 @@ public class MainWindow extends JFrame
             }
         });
         mnLinearSvm.add(mntmLSVMPrediction);
-        JMenuItem mntmLSVMForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmLSVMForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmLSVMForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -801,7 +785,7 @@ public class MainWindow extends JFrame
             }
         });
         mnLogisticRegression.add(mntmLoRPrediction);
-        JMenuItem mntmLoRForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmLoRForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmLoRForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -816,37 +800,76 @@ public class MainWindow extends JFrame
         mnLogisticRegression.add(mntmLoRForecastVsActual);
 
         //*********************
-        //**** Naive Bayes ****
+        //**** Gaussian Naive Bayes ****
         //*********************
 
-        JMenu mnNaiveBayes = new JMenu("Naive Bayes");
-        mnTools.add(mnNaiveBayes);
-        JMenuItem mntmNBPrediction = new JMenuItem("Prediction");
-        mntmNBPrediction.addActionListener(new ActionListener()
+        JMenu mnGaussianNaiveBayes = new JMenu("Gaussian Naive Bayes");
+        mnTools.add(mnGaussianNaiveBayes);
+        JMenuItem mntmGNBPrediction = new JMenuItem("Prediction");
+        mntmGNBPrediction.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                NaiveBayesPredict naiveBayesPredictInternalFrame = new NaiveBayesPredict(csvPath, MainWindow.this);
-                frame.add(naiveBayesPredictInternalFrame);
-                naiveBayesPredictInternalFrame.setVisible(true);
-                naiveBayesPredictInternalFrame.pack();
-                naiveBayesPredictInternalFrame.setClosable(true);
+                GaussianNaiveBayesPredict gaussianNaiveBayesPredictInternalFrame = new GaussianNaiveBayesPredict(csvPath, MainWindow.this);
+                frame.add(gaussianNaiveBayesPredictInternalFrame);
+                gaussianNaiveBayesPredictInternalFrame.setVisible(true);
+                gaussianNaiveBayesPredictInternalFrame.pack();
+                gaussianNaiveBayesPredictInternalFrame.setClosable(true);
             }
         });
-        mnNaiveBayes.add(mntmNBPrediction);
-        JMenuItem mntmNBForecastVsActual = new JMenuItem("Forecast Vs Actual");
-        mntmNBForecastVsActual.addActionListener(new ActionListener()
+        mnGaussianNaiveBayes.add(mntmGNBPrediction);
+        JMenuItem mntmGNBForecastVsActual = new JMenuItem("Predict Vs Actual");
+        mntmGNBForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                NaiveBayesForecastVsActual naiveBayesForecastVsActualInternalFrame = new NaiveBayesForecastVsActual(csvPath, MainWindow.this);
-                frame.add(naiveBayesForecastVsActualInternalFrame);
-                naiveBayesForecastVsActualInternalFrame.setVisible(true);
-                naiveBayesForecastVsActualInternalFrame.pack();
-                naiveBayesForecastVsActualInternalFrame.setClosable(true);
+                GaussianNaiveBayesForecastVsActual gaussianNaiveBayesForecastVsActualInternalFrame = new GaussianNaiveBayesForecastVsActual(csvPath, MainWindow.this);
+                frame.add(gaussianNaiveBayesForecastVsActualInternalFrame);
+                gaussianNaiveBayesForecastVsActualInternalFrame.setVisible(true);
+                gaussianNaiveBayesForecastVsActualInternalFrame.pack();
+                gaussianNaiveBayesForecastVsActualInternalFrame.setClosable(true);
             }
         });
-        mnNaiveBayes.add(mntmNBForecastVsActual);
+        mnGaussianNaiveBayes.add(mntmGNBForecastVsActual);
+
+
+
+
+        //*********************
+        //**** Bernoulli Naive Bayes ****
+        //*********************
+
+        JMenu mnBernoulliNaiveBayes = new JMenu("Bernoulli Naive Bayes");
+        mnTools.add(mnBernoulliNaiveBayes);
+        JMenuItem mntmBNBPrediction = new JMenuItem("Prediction");
+        mntmBNBPrediction.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                BernoulliNaiveBayesPredict bernoulliNaiveBayesPredictInternalFrame = new BernoulliNaiveBayesPredict(csvPath, MainWindow.this);
+                frame.add(bernoulliNaiveBayesPredictInternalFrame);
+                bernoulliNaiveBayesPredictInternalFrame.setVisible(true);
+                bernoulliNaiveBayesPredictInternalFrame.pack();
+                bernoulliNaiveBayesPredictInternalFrame.setClosable(true);
+            }
+        });
+        mnBernoulliNaiveBayes.add(mntmBNBPrediction);
+        JMenuItem mntmBNBForecastVsActual = new JMenuItem("Predict Vs Actual");
+        mntmBNBForecastVsActual.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                BernoulliNaiveBayesForecastVsActual bernoulliNaiveBayesForecastVsActualInternalFrame = new BernoulliNaiveBayesForecastVsActual(csvPath, MainWindow.this);
+                frame.add(bernoulliNaiveBayesForecastVsActualInternalFrame);
+                bernoulliNaiveBayesForecastVsActualInternalFrame.setVisible(true);
+                bernoulliNaiveBayesForecastVsActualInternalFrame.pack();
+                bernoulliNaiveBayesForecastVsActualInternalFrame.setClosable(true);
+            }
+        });
+        mnBernoulliNaiveBayes.add(mntmBNBForecastVsActual);
+
+
+
 
         //***********************
         //**** Random Forest ****
@@ -867,7 +890,7 @@ public class MainWindow extends JFrame
             }
         });
         mnRandomForest.add(mntmRFPrediction);
-        JMenuItem mntmRFForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmRFForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmRFForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -900,7 +923,7 @@ public class MainWindow extends JFrame
             }
         });
         mnRidge.add(mntmRidgePredicition);
-        JMenuItem mntmRidgeForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmRidgeForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmRidgeForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -933,7 +956,7 @@ public class MainWindow extends JFrame
             }
         });
         mnStochasticGradientDescent.add(mntmSGDPrediction);
-        JMenuItem mntmSGDForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmSGDForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmSGDForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -966,7 +989,7 @@ public class MainWindow extends JFrame
             }
         });
         mnSupportVectotMachine.add(mntmSVMPrediction);
-        JMenuItem mntmSVMForecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenuItem mntmSVMForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmSVMForecastVsActual.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)

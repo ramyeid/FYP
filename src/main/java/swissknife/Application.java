@@ -33,7 +33,11 @@ import javax.swing.*;
 //TODO CHECK THIS FOR ALL ALGORITHMS http://scikit-learn.org/stable/supervised_learning.html#supervised-learning
 
 //TODO in CompareToolsPanel add a menu bar that selects and deselects all algorithms // and actionKeys.
+
+//TODO CHECK URGENT THAT VALUES OF ACCURACIES ARE CORRECT IN THE SHOW ACCURACIES - COMPARE PANEL.
 public class Application {
+
+
     public static void main(String[] args) throws InterruptedException {
 
 //        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
@@ -48,7 +52,8 @@ public class Application {
 //        frame.setVisible(true);
 //        frame.pack();
 
-        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2.csv";
+////
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
         JFrame frame = new JFrame();
         JInternalFrame intFrame = new JInternalFrame();
         CompareToolsPanel compareToolsPanel = new CompareToolsPanel(inputFile,intFrame,frame);
@@ -60,7 +65,9 @@ public class Application {
         frame.setVisible(true);
         frame.pack();
 
-        /*
+
+
+/*
 
         String inputFile = System.getProperty("user.dir") + "/src/main/resources/data_2.csv";
         String keyToPredict = "var1";
@@ -130,7 +137,7 @@ public class Application {
         System.out.println("etc" + et.getAccuracy());
         System.out.println("rc" + rc.getAccuracy());
         System.out.println("bnb " + bnb.getAccuracy());
-
+/*
         inputFile = System.getProperty("user.dir") + "/src/main/resources/data_2_Empty.csv";
         keyToPredict = "var1";
         actionTime = 12;

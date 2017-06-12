@@ -100,11 +100,64 @@ public class Resources {
     public static final String LR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LR + "Predicted_Actual_Only.csv";
 
 
+
+
+
+
+
+    public static final String KNN_PREDICTED_RESULT_FILE = BASE_FILE_KNN + "Predicted_result.csv";
+    public static final String GNB_PREDICTED_RESULT_FILE = BASE_FILE_GNB + "Predicted_result.csv";
+    public static final String SVM_PREDICTED_RESULT_FILE = BASE_FILE_SVM + "Predicted_result.csv";
+    public static final String DT_PREDICTED_RESULT_FILE = BASE_FILE_DT + "Predicted_result.csv";
+    public static final String LOGR_PREDICTED_RESULT_FILE = BASE_FILE_LOGR + "Predicted_result.csv";
+    public static final String LD_PREDICTED_RESULT_FILE = BASE_FILE_LD + "Predicted_result.csv";
+    public static final String RF_PREDICTED_RESULT_FILE = BASE_FILE_RF + "Predicted_result.csv";
+    public static final String GB_PREDICTED_RESULT_FILE = BASE_FILE_GB + "Predicted_result.csv";
+    public static final String LSVC_PREDICTED_RESULT_FILE = BASE_FILE_LSVC + "Predicted_result.csv";
+    public static final String SGD_PREDICTED_RESULT_FILE = BASE_FILE_SGD + "Predicted_result.csv";
+    public static final String ET_PREDICTED_RESULT_FILE = BASE_FILE_ETC + "Predicted_result.csv";
+    public static final String RC_PREDICTED_RESULT_FILE = BASE_FILE_RC + "Predicted_result.csv";
+    public static final String BNB_PREDICTED_RESULT_FILE = BASE_FILE_BNB + "Predicted_result.csv";
+
+    public static final String LR_PREDICTED_RESULT_FILE = BASE_FILE_LR + "Predicted_result.csv";
+
+
+
+
+    public static final String KNN_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_KNN + "Predicted_Actual_Result.csv";
+    public static final String GNB_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_GNB + "Predicted_Actual_Result.csv";
+    public static final String SVM_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_SVM + "Predicted_Actual_Result.csv";
+    public static final String DT_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_DT + "Predicted_Actual_Result.csv";
+    public static final String LOGR_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_LOGR + "Predicted_Actual_Result.csv";
+    public static final String LD_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_LD + "Predicted_Actual_Result.csv";
+    public static final String RF_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_RF + "Predicted_Actual_Result.csv";
+    public static final String GB_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_GB + "Predicted_Actual_Result.csv";
+    public static final String LSVC_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_LSVC + "Predicted_Actual_Result.csv";
+    public static final String SGD_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_SGD + "Predicted_Actual_Result.csv";
+    public static final String ET_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_ETC + "Predicted_Actual_Result.csv";
+    public static final String RC_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_RC + "Predicted_Actual_Result.csv";
+    public static final String BNB_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_BNB + "Predicted_Actual_Result.csv";
+
+    public static final String LR_PREDICTED_ACTUAL_FILE = BASE_FILE_LR + "Predicted_Actual_Result.csv";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static final Vector<String> DATE_FORMAT_LIST = new Vector<>(Arrays.asList("%Y-%m"));
     public static final Vector<String> AVERAGE_LIST = new Vector<>(Arrays.asList("No Average"));
     public static final String TSA_PREDICT = "Predict";
     public static final String TSA_FORECAST_ONCE = "Forecast Once";
-    public static final String TSA_FORECAST_VS_ACTUAL = "Forecast vs Actual";
+    public static final String TSA_FORECAST_VS_ACTUAL = "Predict Vs Actual";
     public static final String TSA_CONTINUOUS_FORECAST = "Continuous Forecast";
 
 

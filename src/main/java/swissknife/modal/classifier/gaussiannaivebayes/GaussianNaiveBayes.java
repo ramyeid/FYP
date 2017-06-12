@@ -11,11 +11,15 @@ public abstract class GaussianNaiveBayes extends Classifier {
     public GaussianNaiveBayes(String inputFile, String keyToPredict, int actionTime){
         super(inputFile,keyToPredict,actionTime);
         super.fileToReadAccuracy = Resources.GNB_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.GNB_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.GNB_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.GAUSSIAN_NAIVE_BAYES;
 
     }
     public GaussianNaiveBayes(){
         super.fileToReadAccuracy = Resources.GNB_PREDICTED_ACTUAL_ONLY_FILE;
+        super.fileToReadPredicted = Resources.GNB_PREDICTED_RESULT_FILE;
+        super.fileAllResultsPvsA = Resources.GNB_PREDICTED_ACTUAL_RESULT_FILE;
         super.algorithmName = Resources.GAUSSIAN_NAIVE_BAYES;
 
     }
