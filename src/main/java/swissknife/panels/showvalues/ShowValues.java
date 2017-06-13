@@ -23,8 +23,8 @@ public class ShowValues extends JPanel {
                 return false;
             }
         };
-        JTable table = new JTable(tableModel);
 
+        JTable table = new JTable(tableModel);
 
         for (int j = 1; j < data.get(0).size(); j++) {
             Vector<String> result = new Vector<String>();

@@ -1,5 +1,8 @@
 package swissknife.views;
 
+import swissknife.CSVReader;
+import swissknife.panels.comparetools.CompareToolsPanel;
+import swissknife.panels.showvalues.ShowValues;
 import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesForecastVsActual;
 import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesPredict;
 import swissknife.views.decisiontree.DecisionTreeForecastVsActual;
@@ -40,17 +43,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 //
 ////TODO PACK LOAD CSV
-////TODO BROWSE DIRECTLY NO PATH
-////TODO MENU WRITING SMALLER
 ////TODO READ EXCEL FILES NOT JUST CSV
 ////TODO PANEL DESIGNS TO BE FIXED
-////TODO OPEN INTERNAL FRAME IN CENTER
 ////TODO Graph in new internal frame
-////TODO title for internal frames
-////TODO bring to front new internal
 
 
 public class MainWindow extends JFrame
@@ -62,6 +61,7 @@ public class MainWindow extends JFrame
     private String csvPath;
 
     private JMenu mnTools;
+    private JMenuItem mnShowInputCSV;
 
     /**
      * Launch the application.
@@ -109,22 +109,16 @@ public class MainWindow extends JFrame
         JMenu mnFile = new JMenu("File");
 
 
+
+
+
         menuBar.add(mnFile);
         JMenuItem mntmLoadCsv = new JMenuItem("Load CSV");
         mnFile.add(mntmLoadCsv);
 
 
-        //keyToPredict column, actionTime values
-        //keyToPredict column, all values
-        //actionKeys columns, ActionTime values
-        //actionKeys columns, all values
-        //actionKeys Columns, actionTime Values
-        //Columns Actual And Predicted, actiontime Values
-        //all columns, actionTime values -- For Predict and Predict Vs Actual
-        //all columns, all values -- For Predict and Predict Vs Actual
 
 
-        JMenuItem mntm
         mntmLoadCsv.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -151,6 +145,7 @@ public class MainWindow extends JFrame
                 else
                 {
                     mnTools.setEnabled(true);
+                    mnShowInputCSV.setEnabled(true);
                 }
             }
         });
@@ -744,6 +739,113 @@ public class MainWindow extends JFrame
                 timeSeriesContinuousForecastInternalFrame.setClosable(true);
             }
         });
+        mnTimeSeriesAnalysis.add(mntmTSAContinuousForecast);
+
+
+
+        //*********************
+        //*********************
+        //**** SHOW VALUES ****
+        //*********************
+        //*********************
+
+
+        //keyToPredict column, actionTime values
+        //keyToPredict column, all values
+        //actionKeys columns, ActionTime values
+        //actionKeys columns, all values
+        //actionKeys Columns, actionTime Values
+        //Columns Actual And Predicted, actiontime Values
+        //all columns, actionTime values -- For Predict and Predict Vs Actual
+        //all columns, all values -- For Predict and Predict Vs Actual
+
+        JMenu mnShowValues = new JMenu("Show values");
+
+        mnShowInputCSV = new JMenuItem("csv"); // done
+        JMenu mnSVPredict = new JMenu("Predict");
+        JMenu mnSVPredictVsActual = new JMenu("Predict Vs Actual");
+        JMenu mnSVTimeSeriesAnalysis = new JMenu("Time Series Analysis");
+
+        //Predict
+        mnSVPredict.add(new JMenuItem("all values"));
+        mnSVPredict.add(new JMenuItem("all values for action time"));
+        mnSVPredict.add(new JMenuItem("action keys values"));
+        mnSVPredict.add(new JMenuItem("action keys values for action time"));
+        mnSVPredict.add(new JMenuItem("key to predict values"));
+        mnSVPredict.add(new JMenuItem("key to predict values for action time"));
+
+
+        //Predict vs Actual
+        mnSVPredictVsActual.add(new JMenuItem("all values"));
+        mnSVPredictVsActual.add(new JMenuItem("all values for action time"));
+        mnSVPredictVsActual.add(new JMenuItem("Actual and Predicted values for action time"));
+        mnSVPredictVsActual.add(new JMenuItem("action keys columns for action time"));
+
+
+
+        //Time Series Analysis
+        //TODO do these.
+
+
+
+
+
+        mnSVPredict.setEnabled(false);
+        mnSVPredictVsActual.setEnabled(false);
+        mnSVTimeSeriesAnalysis.setEnabled(false);
+        mnShowInputCSV.setEnabled(false);
+
+
+        mnShowValues.add(mnShowInputCSV);
+        mnShowValues.add(mnSVPredict);
+        mnShowValues.add(mnSVPredictVsActual);
+        mnShowValues.add(mnSVTimeSeriesAnalysis);
+
+        menuBar.add(mnShowValues);
+
+        mnShowInputCSV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<ArrayList<String>> result =
+                        CSVReader.getDataCSVForKeys(csvPath, CSVReader.getColumnKeys(csvPath));
+                JInternalFrame masterFrame = new JInternalFrame();
+                masterFrame.add(new ShowValues(result,masterFrame,MainWindow.this));
+                String [] tmp = csvPath.split("/");
+                String csvFile = tmp[tmp.length-1];
+                MainWindow.this.add(masterFrame);
+                masterFrame.setTitle(csvFile);
+                masterFrame.setVisible(true);
+                masterFrame.setClosable(true);
+                masterFrame.pack();
+
+            }
+        });
+
+
+
+
+        //*******************
+        //*******************
+        //**** Comparison****
+        //*******************
+        //*******************
+
+        JMenu mnComparison = new JMenu("Comparison");
+        menuBar.add(mnComparison);
+        JMenuItem mntmCompareTools = new JMenuItem("Compare Tools");
+        mnComparison.add(mntmCompareTools);
+        mntmCompareTools.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame masterFrame = new JInternalFrame();
+                masterFrame.add(new CompareToolsPanel(csvPath,masterFrame,MainWindow.this));
+                MainWindow.this.add(masterFrame);
+                masterFrame.setVisible(true);
+                masterFrame.setClosable(true);
+                masterFrame.pack();
+            }
+        });
+
 
 
         //*******************
@@ -752,7 +854,6 @@ public class MainWindow extends JFrame
         //*******************
         //*******************
 
-        mnTimeSeriesAnalysis.add(mntmTSAContinuousForecast);
         JMenu mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
         JMenuItem mntmAbout = new JMenuItem("About");
@@ -770,6 +871,8 @@ public class MainWindow extends JFrame
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+
+
     }
 }
 

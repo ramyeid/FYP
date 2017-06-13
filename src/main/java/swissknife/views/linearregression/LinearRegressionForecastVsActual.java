@@ -15,5 +15,6 @@ public class LinearRegressionForecastVsActual extends JInternalFrame
         this.add(new LinearRegressionPanel(new LRPredictVsActual(),pathCsv,this));
         this.setVisible(true);
         this.pack();
+
     }
 }

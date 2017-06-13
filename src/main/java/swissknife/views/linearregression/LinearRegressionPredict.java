@@ -15,5 +15,6 @@ public class LinearRegressionPredict extends JInternalFrame
         this.add(new LinearRegressionPanel(new LRPredict(),pathCsv,this));
         this.setVisible(true);
         this.pack();
+
     }
 }

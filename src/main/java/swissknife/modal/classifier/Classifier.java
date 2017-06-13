@@ -89,6 +89,7 @@ public abstract class Classifier implements Tool {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         for (int i = 0; i < data.size(); ++i) {
             result.add(new ArrayList<>());
+            result.get(i).add(data.get(i).get(0));
             for (int j = data.get(i).size() - actionTime; j < data.get(i).size(); ++j) {
                 result.get(i).add(data.get(i).get(j));
             }
@@ -104,6 +105,7 @@ public abstract class Classifier implements Tool {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         for (int i = 0; i < data.size(); ++i) {
             result.add(new ArrayList<>());
+            result.get(i).add(data.get(i).get(0));
             for (int j = data.get(i).size() - actionTime; j < data.get(i).size(); ++j) {
                 result.get(i).add(data.get(i).get(j));
             }
@@ -122,6 +124,7 @@ public abstract class Classifier implements Tool {
 
         for (int i = 0; i < data.size(); ++i) {
             result.add(new ArrayList<>());
+            result.get(i).add(data.get(i).get(0));
             for (int j = data.get(i).size() - actionTime; j < data.get(i).size(); ++j) {
                 result.get(i).add(data.get(i).get(j));
             }
@@ -139,13 +142,13 @@ public abstract class Classifier implements Tool {
         return CSVReader.getDataCSVForKeys(fileToReadPredicted,action_Keys);
     }
 
-
     //actionKeys columns, ActionTime values
     public ArrayList<ArrayList<String>> getValuesOfActionKeysForActiontime_Predict(){
         ArrayList<ArrayList<String>> data = getValuesOfActionKeys_Predict();
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         for (int i = 0; i < data.size(); ++i) {
             result.add(new ArrayList<>());
+            result.get(i).add(data.get(i).get(0));
             for (int j = data.get(i).size() - actionTime; j < data.get(i).size(); ++j) {
                 result.get(i).add(data.get(i).get(j));
             }
@@ -158,10 +161,12 @@ public abstract class Classifier implements Tool {
         return CSVReader.getDataCSVForKeys(fileToReadPredicted, this.keyToPredict + "Predict & Actual").get(0);
     }
 
+
     //keyToPredict column, actionTime values
     public ArrayList<String> getValuesOfPredictedForActionTime_Predict() {
         List<String> data = getValuesOfPredicted_Predict();
         ArrayList<String> result = new ArrayList<>();
+        result.add(data.get(0));
         for (int i = data.size() - this.actionTime; i < data.size(); ++i) {
             result.add(data.get(i));
         }
