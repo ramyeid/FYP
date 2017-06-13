@@ -70,8 +70,8 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
         createCheckBoxButtonsForActionKeys(keysList,checkBoxesPanel,keysToChooseCheckBoxes,this);
 
-        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, keysList.length*20+30);
-        checkBoxesPanel.setBounds(230, 20, 196, keysList.length*20+30);
+        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length+1)*20+30);
+        checkBoxesPanel.setBounds(230, 20, 196, (keysList.length+1)*20+30);
         southPanel.setBounds(15, 30+checkBoxesPanel.getHeight(), 388, 120);
 
         this.add(checkBoxesPanel);
@@ -162,8 +162,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                 case Resources.CLASSIFIER_PREDICT:
                     this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1).setEnabled(true);
                     classifierTool.action();
-
-
+                    
                     ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
                     ArrayList<ArrayList<String>>result = new ArrayList<>();
                     result.add(data);
