@@ -162,7 +162,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                 case Resources.CLASSIFIER_PREDICT:
                     this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1).setEnabled(true);
                     classifierTool.action();
-                    
+
                     ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
                     ArrayList<ArrayList<String>>result = new ArrayList<>();
                     result.add(data);
