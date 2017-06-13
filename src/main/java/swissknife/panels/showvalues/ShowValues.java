@@ -39,6 +39,7 @@ public class ShowValues extends JPanel {
         }
 
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setSize(table.getSize());
         this.add(scrollPane);
     }
 }
