@@ -61,6 +61,7 @@ public class MainWindow extends JFrame
     private String csvPath;
 
     private JMenu mnTools;
+    private JMenu mnComparison;
     private JMenuItem mnShowInputCSV;
 
     /**
@@ -145,6 +146,7 @@ public class MainWindow extends JFrame
                 else
                 {
                     mnTools.setEnabled(true);
+                    mnComparison.setEnabled(true);
                     mnShowInputCSV.setEnabled(true);
                 }
             }
@@ -826,11 +828,11 @@ public class MainWindow extends JFrame
 
         //*******************
         //*******************
-        //**** Comparison****
+        //**** Comparison ****
         //*******************
         //*******************
 
-        JMenu mnComparison = new JMenu("Comparison");
+        mnComparison = new JMenu("Comparison");
         menuBar.add(mnComparison);
         JMenuItem mntmCompareTools = new JMenuItem("Compare Tools");
         mnComparison.add(mntmCompareTools);
@@ -845,6 +847,7 @@ public class MainWindow extends JFrame
                 masterFrame.pack();
             }
         });
+        mnComparison.setEnabled(false);
 
 
 
