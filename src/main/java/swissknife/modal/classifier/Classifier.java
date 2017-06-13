@@ -77,10 +77,12 @@ public abstract class Classifier implements Tool {
 
 
 //PREDICT & PREDICT VS ACTUAL.
+
     //all columns, all values -- For Predict and Predict Vs Actual
     public ArrayList<ArrayList<String>> getAllValues(String file) {
         return CSVReader.getDataCSVForKeys(file, CSVReader.getColumnKeys(file));
     }
+
     //all columns, actionTime values -- For Predict and Predict Vs Actual
     public ArrayList<ArrayList<String>> getAllValuesForActionTime(String file) {
         ArrayList<ArrayList<String>> data = getAllValues(file);
@@ -96,7 +98,6 @@ public abstract class Classifier implements Tool {
 //PREDICT VS ACTUAL.
 
 
-    //TODO TEST IT
     //Columns Actual And Predicted, actiontime Values
     public ArrayList<ArrayList<String>> getValuesOfActualAndPredictedForActionTime(){
         ArrayList<ArrayList<String>> data = CSVReader.getDataCSVForKeys(this.fileToReadAccuracy,CSVReader.getColumnKeys(fileToReadAccuracy));
@@ -137,6 +138,7 @@ public abstract class Classifier implements Tool {
         String []action_Keys = tmpActionKeys.substring(1).split("/");
         return CSVReader.getDataCSVForKeys(fileToReadPredicted,action_Keys);
     }
+
 
     //actionKeys columns, ActionTime values
     public ArrayList<ArrayList<String>> getValuesOfActionKeysForActiontime_Predict(){
