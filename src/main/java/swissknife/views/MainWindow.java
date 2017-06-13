@@ -549,6 +549,8 @@ public class MainWindow extends JFrame
                 DecisionTreePredict decisionTreePredictInternalFrame = new DecisionTreePredict(csvPath, MainWindow.this);
                 frame.add(decisionTreePredictInternalFrame);
                 decisionTreePredictInternalFrame.setVisible(true);
+                decisionTreePredictInternalFrame.setLocation((frame.getWidth() - decisionTreePredictInternalFrame.getWidth())/2,
+                        (frame.getHeight()- decisionTreePredictInternalFrame.getHeight())/2);
                 decisionTreePredictInternalFrame.pack();
                 decisionTreePredictInternalFrame.setClosable(true);
             }
@@ -562,6 +564,8 @@ public class MainWindow extends JFrame
                 DecisionTreeForecastVsActual decisionTreeForecastVsActualInternalFrame = new DecisionTreeForecastVsActual(csvPath, MainWindow.this);
                 frame.add(decisionTreeForecastVsActualInternalFrame);
                 decisionTreeForecastVsActualInternalFrame.setVisible(true);
+                decisionTreeForecastVsActualInternalFrame.setLocation((frame.getWidth() - decisionTreeForecastVsActualInternalFrame.getWidth())/2,
+                        (frame.getHeight()- decisionTreeForecastVsActualInternalFrame.getHeight())/2);
                 decisionTreeForecastVsActualInternalFrame.pack();
                 decisionTreeForecastVsActualInternalFrame.setClosable(true);
             }
@@ -799,12 +803,20 @@ public class MainWindow extends JFrame
         });
         mnLogisticRegression.add(mntmLoRForecastVsActual);
 
+
+
         //*********************
-        //**** Gaussian Naive Bayes ****
+        //**** Naive Bayes ****
         //*********************
 
+        JMenu mnNaiveBayes = new JMenu("Naive Bayes");
+        mnTools.add(mnNaiveBayes);
+
+
+        //Gaussian Naive Bayes
+
         JMenu mnGaussianNaiveBayes = new JMenu("Gaussian Naive Bayes");
-        mnTools.add(mnGaussianNaiveBayes);
+        mnNaiveBayes.add(mnGaussianNaiveBayes);
         JMenuItem mntmGNBPrediction = new JMenuItem("Prediction");
         mntmGNBPrediction.addActionListener(new ActionListener()
         {
@@ -833,14 +845,10 @@ public class MainWindow extends JFrame
         mnGaussianNaiveBayes.add(mntmGNBForecastVsActual);
 
 
-
-
-        //*********************
-        //**** Bernoulli Naive Bayes ****
-        //*********************
+        //Bernoulli Naive Bayes
 
         JMenu mnBernoulliNaiveBayes = new JMenu("Bernoulli Naive Bayes");
-        mnTools.add(mnBernoulliNaiveBayes);
+        mnNaiveBayes.add(mnBernoulliNaiveBayes);
         JMenuItem mntmBNBPrediction = new JMenuItem("Prediction");
         mntmBNBPrediction.addActionListener(new ActionListener()
         {
@@ -869,6 +877,40 @@ public class MainWindow extends JFrame
         mnBernoulliNaiveBayes.add(mntmBNBForecastVsActual);
 
 
+
+
+        //*************************
+        //**** Neural Networks ****
+        //*************************
+
+        JMenu mnNeuralNetworks = new JMenu("Neural Networks");
+        mnTools.add(mnNeuralNetworks);
+        JMenuItem mntmNNPrediction = new JMenuItem("Prediction");
+        mntmNNPrediction.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                RandomForestPredict randomForestPredictInternalFrame = new RandomForestPredict(csvPath, MainWindow.this);
+                frame.add(randomForestPredictInternalFrame);
+                randomForestPredictInternalFrame.setVisible(true);
+                randomForestPredictInternalFrame.pack();
+                randomForestPredictInternalFrame.setClosable(true);
+            }
+        });
+        mnNeuralNetworks.add(mntmNNPrediction);
+        JMenuItem mntmNNForecastVsActual = new JMenuItem("Predict Vs Actual");
+        mntmNNForecastVsActual.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                RandomForestForecastVsActual randomForestForecastVsActualInternalFrame = new RandomForestForecastVsActual(csvPath, MainWindow.this);
+                frame.add(randomForestForecastVsActualInternalFrame);
+                randomForestForecastVsActualInternalFrame.setVisible(true);
+                randomForestForecastVsActualInternalFrame.pack();
+                randomForestForecastVsActualInternalFrame.setClosable(true);
+            }
+        });
+        mnNeuralNetworks.add(mntmNNForecastVsActual);
 
 
         //***********************
