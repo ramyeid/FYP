@@ -48,8 +48,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         this.inputFile = inputFile;
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
-        this.setLayout(null);
-        this.masterFrame.setSize(400,700);
+        this.setLayout(new BorderLayout());
         comparisonAndSubmitSouth = new JPanel();
         chooseAlgorithmsActionPanelWEST = new JPanel();
         submitButton = new JButton("Generate");
@@ -78,10 +77,9 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         submitButton.addActionListener(this);
         comparisonAndSubmitSouth.add(submitButton);
 
-        this.add(chooseAlgorithmsActionPanelWEST);
-        chooseAlgorithmsActionPanelWEST.setBounds(10,10,150,280);
-        this.add(comparisonAndSubmitSouth);
-        this.add(keysPanelCenter);
+        this.add(chooseAlgorithmsActionPanelWEST, BorderLayout.WEST);
+        this.add(comparisonAndSubmitSouth, BorderLayout.SOUTH);
+        this.add(keysPanelCenter, BorderLayout.CENTER);
 
 
     }
