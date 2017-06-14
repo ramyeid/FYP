@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 //TODO ADD MORE AVERAGE
 //TODO ADD MORE DATE FORMAT
 //TODO all actions on different threads.
-
+//TODO test continuous forecast for opening new panels -> desktop pane testing.
 public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     private String inputFile;

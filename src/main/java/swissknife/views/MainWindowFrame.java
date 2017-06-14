@@ -47,6 +47,9 @@ import java.util.ArrayList;
 /**
  * Created by ramyeid on 6/14/17.
  */
+
+//TODO Scroll pane enable scroll horizontally.
+
 public class MainWindowFrame extends JFrame{
 
     String csvPath;
