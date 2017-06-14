@@ -54,11 +54,6 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
         this.setLayout(null);
-        this.setSize(600, 400);
-        this.masterFrame.setSize(620,400);
-        this.masterFrame.setMaximumSize(new Dimension(620, 400));
-        this.masterFrame.setMinimumSize(new Dimension(620, 400));
-
 
         comparisonAndSubmitSouth = new JPanel();
         chooseAlgorithmsActionPanelWEST = new JPanel();
@@ -114,7 +109,21 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         this.add(comparisonAndSubmitSouth);
         comparisonAndSubmitSouth.setBounds(500,80+keysPanelCenter.getHeight(),100,100);
 
+        if(keysCheckBoxPanel.getHeight()>350)
+        {
+            this.setSize(715, 50+keysCheckBoxPanel.getHeight());
+            this.masterFrame.setSize(735,20+keysCheckBoxPanel.getHeight());
+            this.masterFrame.setMaximumSize(new Dimension(735, 20+keysCheckBoxPanel.getHeight()));
+            this.masterFrame.setMinimumSize(new Dimension(735, 20+keysCheckBoxPanel.getHeight()));
+        }
 
+        else
+        {
+            this.setSize(715,400);
+            this.masterFrame.setSize(735,410);
+            this.masterFrame.setMaximumSize(new Dimension(735, 410));
+            this.masterFrame.setMinimumSize(new Dimension(735, 410));
+        }
     }
 
     private void addKeyToPredict() {
@@ -257,7 +266,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
             comparisonAndSubmitSouth.add(submitButton);
             this.add(comparisonAndSubmitSouth, BorderLayout.SOUTH);
-            masterFrame.pack();
+
 
         }
     }
@@ -273,7 +282,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         for (int i = 0; i < classifiersChosen.size(); ++i) {
             ArrayList<String> result = classifiersChosen.get(i).getValuesOfPredictedForActionTime_Predict();
             String tmpResult = "";
-            for (int j = 0; j < result.size(); ++j) {
+            for (int j = 1; j < result.size(); ++j) {
                 tmpResult += result.get(j);
                 if (j != result.size() - 1) {
                     tmpResult += ", ";
@@ -287,7 +296,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
 
         JInternalFrame iF = new JInternalFrame();
-        iF.add(new ShowValues(data,masterFrame,mainFrame));
+        iF.add(new ShowValues(data,iF,mainFrame));
 
         iF.setTitle("Algorithms Predicted Values");
         iF.setClosable(true);
@@ -322,7 +331,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
 
         JInternalFrame iF = new JInternalFrame();
-        iF.add(new ShowValues(data, masterFrame, mainFrame));
+        iF.add(new ShowValues(data, iF, mainFrame));
 
         iF.setTitle("Algorithms Accuracies");
         iF.setClosable(true);

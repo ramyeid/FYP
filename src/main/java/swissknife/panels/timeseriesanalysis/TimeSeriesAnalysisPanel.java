@@ -160,23 +160,23 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         add(centerPanel);
         centerPanel.setBounds(350,15,300,100);
         this.add(submitPanel);
-        submitPanel.setBounds(350,110,200,100);
+        submitPanel.setBounds(370,110,200,130);
 
 
         if(radioButtonsPanel.getHeight()>230)
         {
-            this.setSize(600, 50+radioButtonsPanel.getHeight());
-            this.masterFrame.setSize(620,70+radioButtonsPanel.getHeight());
-            this.masterFrame.setMaximumSize(new Dimension(620, 70+radioButtonsPanel.getHeight()));
-            this.masterFrame.setMinimumSize(new Dimension(620, 70+radioButtonsPanel.getHeight()));
+            this.setSize(600, 20+radioButtonsPanel.getHeight());
+            this.masterFrame.setSize(620,20+radioButtonsPanel.getHeight());
+            this.masterFrame.setMaximumSize(new Dimension(620, 20+radioButtonsPanel.getHeight()));
+            this.masterFrame.setMinimumSize(new Dimension(620, 20+radioButtonsPanel.getHeight()));
         }
 
         else
         {
-            this.setSize(600,250);
-            this.masterFrame.setSize(620,260);
-            this.masterFrame.setMaximumSize(new Dimension(620, 260));
-            this.masterFrame.setMinimumSize(new Dimension(620, 260));
+            this.setSize(600,200);
+            this.masterFrame.setSize(620,210);
+            this.masterFrame.setMaximumSize(new Dimension(620, 210));
+            this.masterFrame.setMinimumSize(new Dimension(620, 210));
         }
 
     }
@@ -297,12 +297,15 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
 
 
-
+                masterFrame.repaint();
+                masterFrame.revalidate();
 
 
 //                plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
                 if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)) {
-                    centerPanel.add(new Label("MSE ERROR: " + ((TSAForecastVsActual) timeSeriesTool).getError()));
+                    JLabel mse = new JLabel("MSE ERROR: " + ((TSAForecastVsActual) timeSeriesTool).getError());
+                    submitPanel.add(mse);
+                    mse.setBounds(5,60,180,20);
                 }
 //                this.add(plotPanel, BorderLayout.SOUTH);
 
@@ -322,10 +325,6 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 iF.pack();
                 iF.setClosable(true);
                 mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
-
-
-
-
 
             }
         }
