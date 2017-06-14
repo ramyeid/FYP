@@ -10,14 +10,17 @@ import java.util.Vector;
  */
 public class ShowValues extends JPanel {
 
+    JInternalFrame masterFrame;
+    JFrame mainFrame;
+
     public ShowValues(ArrayList<ArrayList<String>> data, JInternalFrame masterFrame, JFrame mainFrame) {
 
         Vector<String> columnNames = new Vector<String>();
-        for(int i=0;i<data.size();++i){
+        for (int i = 0; i < data.size(); ++i) {
             columnNames.add(data.get(i).get(0));
         }
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames,0) {
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -38,8 +41,23 @@ public class ShowValues extends JPanel {
             }
         }
 
+        this.masterFrame = masterFrame;
+        this.mainFrame = mainFrame;
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setSize(table.getSize());
+
+        this.setLayout(null);
+        this.setSize(scrollPane.getWidth()+10,scrollPane.getHeight()+10);
+        scrollPane.setBounds(10,10,scrollPane.getWidth(),scrollPane.getHeight());
         this.add(scrollPane);
+//        this.masterFrame.setSize(10,10);
+//        this.masterFrame.pack();
+
+//        scrollPane.setSize(table.getSize());
+//        this.setSize(scrollPane.getWidth(),scrollPane.getHeight());
+
+
+//        this.masterFrame.setMaximumSize(new Dimension(10 + scrollPane.getWidth(), 10 + scrollPane.getHeight()));
+//        this.masterFrame.setMinimumSize(new Dimension(10 + scrollPane.getWidth(), 10 + scrollPane.getHeight()));
+
     }
 }
