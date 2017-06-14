@@ -44,11 +44,21 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
     String keyToPredict = "";
 
+    JPanel actionPanel;
+    JPanel actionTimePanel;
+    JPanel keysCheckBoxPanel;
+
     public CompareToolsPanel(String inputFile, JInternalFrame masterFrame, JFrame mainFrame) {
         this.inputFile = inputFile;
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
-        this.setLayout(new BorderLayout());
+        this.setLayout(null);
+        this.setSize(600, 400);
+        this.masterFrame.setSize(620,400);
+        this.masterFrame.setMaximumSize(new Dimension(620, 400));
+        this.masterFrame.setMinimumSize(new Dimension(620, 400));
+
+
         comparisonAndSubmitSouth = new JPanel();
         chooseAlgorithmsActionPanelWEST = new JPanel();
         submitButton = new JButton("Generate");
@@ -58,13 +68,16 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         chooseActionList = new ArrayList<>();
 
         keysPanelCenter = new JPanel();
+        actionTimePanel = new JPanel();
+
         actionKeysCheckBoxList = new ArrayList<>();
         keysToPredictButtonGroup = new ButtonGroup();
         radioButtonListKeysToPredict = new ArrayList<>();
 
         classifiersChosen = new ArrayList<>();
 
-        actionTimeTextField = new JTextField(3);
+        actionTimeTextField = new JTextField(4);
+
         addAlgorithmsCheckBox();
         addActionRadioButtonsAndActionTime();
 
@@ -73,13 +86,32 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         addKeyToPredict();
         addKeysForAction();
 
+        JLabel actionTimeLabel = new JLabel("Action Time");
+
+        actionTimePanel.add(actionTimeLabel);
+        actionTimePanel.add(actionTimeTextField);
+
+        int numberOfKeys = CSVReader.getColumnKeys(inputFile).length;
+
         this.masterFrame.setTitle("Comparing Algorithms");
         submitButton.addActionListener(this);
         comparisonAndSubmitSouth.add(submitButton);
 
-        this.add(chooseAlgorithmsActionPanelWEST, BorderLayout.WEST);
-        this.add(comparisonAndSubmitSouth, BorderLayout.SOUTH);
-        this.add(keysPanelCenter, BorderLayout.CENTER);
+        this.add(chooseAlgorithmsActionPanelWEST);
+        chooseAlgorithmsActionPanelWEST.setBounds(15,20,250,350);
+        chooseAlgorithmsActionPanelWEST.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(keysPanelCenter);
+        keysPanelCenter.setBounds(300,20, 150, 40+(numberOfKeys+1)*20);
+        keysPanelCenter.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(keysCheckBoxPanel);
+        keysCheckBoxPanel.setBounds(500,20,200,40+(numberOfKeys+1)*20);
+        keysCheckBoxPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(actionPanel);
+        actionPanel.setBounds(300,40+keysPanelCenter.getHeight(),200,60);
+        this.add(actionTimePanel);
+        actionTimePanel.setBounds(480,40+keysPanelCenter.getHeight(),200,30);
+        this.add(comparisonAndSubmitSouth);
+        comparisonAndSubmitSouth.setBounds(500,80+keysPanelCenter.getHeight(),100,100);
 
 
     }
@@ -92,16 +124,15 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
 
     private void addKeysForAction() {
-        JPanel tmp = new JPanel();
+        keysCheckBoxPanel = new JPanel();
 
-        ClassifierPanel.createCheckBoxButtonsForActionKeys(CSVReader.getColumnKeys(inputFile), tmp, actionKeysCheckBoxList, this);
-        keysPanelCenter.add(tmp);
+        ClassifierPanel.createCheckBoxButtonsForActionKeys(CSVReader.getColumnKeys(inputFile), keysCheckBoxPanel, actionKeysCheckBoxList, this);
     }
 
 
     private void addActionRadioButtonsAndActionTime() {
-        JPanel tmpPanel = new JPanel();
-        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
+        actionPanel = new JPanel();
+        actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.Y_AXIS));
 
         JRadioButton tmp, tmp_2;
         tmp = new JRadioButton("Predict");
@@ -109,11 +140,11 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
         tmp.addActionListener(this);
         tmp_2.addActionListener(this);
-
-        JPanel tmpPanel_2 = new JPanel();
-        tmpPanel_2.add(new JLabel("Action Time"));
-        tmpPanel_2.add(actionTimeTextField);
-
+//
+//        JPanel tmpPanel_2 = new JPanel();
+//        tmpPanel_2.add(new JLabel("Action Time"));
+//        tmpPanel_2.add(actionTimeTextField);
+//
 
         chooseActionList.add(tmp);
         chooseActionList.add(tmp_2);
@@ -122,23 +153,29 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         chooseActionButtonGroup.add(tmp_2);
 
 
-        tmpPanel.add(tmp);
-        tmpPanel.add(tmp_2);
-        tmpPanel.add(tmpPanel_2);
-        chooseAlgorithmsActionPanelWEST.add(tmpPanel);
+        actionPanel.add(tmp);
+        actionPanel.add(tmp_2);
+//        tmpPanel.add(tmpPanel_2);
+//        chooseAlgorithmsActionPanelWEST.add(tmpPanel);
 
     }
 
     private void addAlgorithmsCheckBox() {
-        JPanel tmpPanel = new JPanel();
-        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
+        chooseAlgorithmsActionPanelWEST = new JPanel();
+        chooseAlgorithmsActionPanelWEST.setLayout(new BoxLayout(chooseAlgorithmsActionPanelWEST, BoxLayout.Y_AXIS));
+        JLabel title = new JLabel("Choose algorithms to compare :");
+        chooseAlgorithmsActionPanelWEST.add(title);
+        chooseAlgorithmsActionPanelWEST.add(new JLabel(" "));
+
+//        JPanel tmpPanel = new JPanel();
+//        tmpPanel.setLayout(new BoxLayout(tmpPanel, BoxLayout.Y_AXIS));
         for (int i = 0; i < Resources.classifierNames.size(); ++i) {
             JCheckBox tmp = new JCheckBox(Resources.classifierNames.get(i));
             tmp.addActionListener(this);
             chooseAlgorithmsList.add(tmp);
-            tmpPanel.add(tmp);
+            chooseAlgorithmsActionPanelWEST.add(tmp);
         }
-        chooseAlgorithmsActionPanelWEST.add(tmpPanel);
+//        chooseAlgorithmsActionPanelWEST.add(tmpPanel);
     }
 
     @Override
@@ -219,8 +256,6 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
             comparisonAndSubmitSouth.add(submitButton);
             this.add(comparisonAndSubmitSouth, BorderLayout.SOUTH);
-            masterFrame.revalidate();
-            masterFrame.repaint();
             masterFrame.pack();
 
         }
@@ -261,7 +296,6 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
     public void showAccuracies() {
 
-        ;
         ArrayList<ArrayList<String>> data = new ArrayList<>();
         data.add(new ArrayList<String>());
         data.add(new ArrayList<String>());

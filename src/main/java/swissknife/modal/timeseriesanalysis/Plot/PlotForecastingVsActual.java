@@ -26,6 +26,7 @@ public class PlotForecastingVsActual extends JPanel {
 
     public static String keyY;
 
+
     public static JPanel plotForecasting(String inputFile, String dateFormat,String yKey) {
         keyY = yKey;
         TimeSeriesCollection timeSeriesCollection = getTimeSeriesFromCSV(inputFile, dateFormat);
@@ -66,7 +67,6 @@ public class PlotForecastingVsActual extends JPanel {
 
 
     public static TimeSeriesCollection getTimeSeriesFromCSV(String inputFile, String dateFormat) {
-
         final TimeSeries seriesPredicted = new TimeSeries("Predicted "+keyY, Hour.class);
         final TimeSeries seriesActual = new TimeSeries("Actual "+keyY, Hour.class);
 

@@ -4,7 +4,9 @@ import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.Tool;
 import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
+import swissknife.modal.timeseriesanalysis.modal.TSAForecastOnce;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastVsActual;
+import swissknife.panels.showvalues.ShowValues;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 //TODO ADD MORE AVERAGE
 //TODO ADD MORE DATE FORMAT
@@ -39,7 +42,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
     TextField actionTimeField;
     Label actionTimeLabel = new Label("Action Time");
 
-    JPanel plotPanel;
+//    JPanel plotPanel;
 
     String actionName;
     Tool timeSeriesTool;
@@ -47,8 +50,9 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     JInternalFrame masterFrame;
     JFrame mainFrame;
+    JInternalFrame plotInternalFrame;
 
-    public TimeSeriesAnalysisPanel(String fileName, int action,JInternalFrame masterFrame,JFrame mainFrame) {
+    public TimeSeriesAnalysisPanel(String fileName, int action, JInternalFrame masterFrame, JFrame mainFrame) {
         super(new BorderLayout());
 
         this.inputFile = fileName;
@@ -69,16 +73,16 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
 
         actionTimeField = new TextField(3);
-        plotPanel = new JPanel();
+//        plotPanel = new JPanel();
+        plotInternalFrame = new JInternalFrame();
+
         centerPanel = new JPanel();
-
-
 
 
         String[] keysList = CSVReader.getColumnKeys(fileName);
 
-        Resources.createRadioButtons(keysList, keysYButtonGroup, radioButtonsPanelY, radioButtonListY, "Y Axis",this);
-        Resources.createRadioButtons(keysList, keysXButtonGroup, radioButtonsPanelX, radioButtonListX, "X Axis",this);
+        Resources.createRadioButtons(keysList, keysYButtonGroup, radioButtonsPanelY, radioButtonListY, "Y Axis", this);
+        Resources.createRadioButtons(keysList, keysXButtonGroup, radioButtonsPanelX, radioButtonListX, "X Axis", this);
 
 
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -150,34 +154,88 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                     break;
             }
             String dateFormat = dateFormatComboBox.getSelectedItem().toString();
+            JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
             if (!actionName.equals(Resources.TSA_CONTINUOUS_FORECAST)) {
+                this.mainFrame.getJMenuBar().getMenu(2).setEnabled(true);
+                timeSeries.setEnabled(true);
+                if (timeSeries.getItem(1).getActionListeners().length != 0) {
+                    timeSeries.getItem(1).removeActionListener(timeSeries.getItem(1).getActionListeners()[0]);
+                }
+                if (timeSeries.getItem(0).getActionListeners().length != 0) {
+                    timeSeries.getItem(0).removeActionListener(timeSeries.getItem(0).getActionListeners()[0]);
+                }
+
+
+                if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)) {
+                    timeSeries.getItem(1).setEnabled(true);
+                    timeSeries.getItem(1).addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            ArrayList<ArrayList<String>> result = ((TSAForecastVsActual) timeSeriesTool).getValues();
+                            JInternalFrame tmp = new JInternalFrame();
+                            tmp.add(new ShowValues(result, tmp, mainFrame));
+                            mainFrame.add(tmp);
+                            tmp.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
+                            tmp.setVisible(true);
+                            tmp.setClosable(true);
+                            tmp.pack();
+                        }
+                    });
+
+                }
+
+                if (actionName.equals(Resources.TSA_FORECAST_ONCE)) {
+                    timeSeries.getItem(0).setEnabled(true);
+                    timeSeries.getItem(0).addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            ArrayList<ArrayList<String>> result = ((TSAForecastOnce) timeSeriesTool).getValues();
+                            JInternalFrame tmp = new JInternalFrame();
+                            tmp.add(new ShowValues(result, tmp, mainFrame));
+                            mainFrame.add(tmp);
+                            tmp.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
+                            tmp.setVisible(true);
+                            tmp.setClosable(true);
+                            tmp.pack();
+                        }
+                    });
+                }
 
                 timeSeriesTool.build(inputFile, keyX, keyY, actionTimeField.getText(), average, dateFormat);
                 timeSeriesTool.action();
 
-                plotPanel.removeAll();
-                this.remove(plotPanel);
+//                plotPanel.removeAll();
+//                this.remove(plotPanel);
+
+                mainFrame.remove(plotInternalFrame);
+                plotInternalFrame = new JInternalFrame();
+                plotInternalFrame.add(((TimeSeriesAnalysis) timeSeriesTool).plot());
+                mainFrame.add(plotInternalFrame);
+                plotInternalFrame.setTitle(actionName + " " + inputFile);
+                plotInternalFrame.setVisible(true);
+                plotInternalFrame.setClosable(true);
+                plotInternalFrame.pack();
 
 
-                plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
-                if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)){
-                    centerPanel.add(new Label("MSE ERROR: "+((TSAForecastVsActual)timeSeriesTool).getError()));
+//                plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
+                if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)) {
+                    centerPanel.add(new Label("MSE ERROR: " + ((TSAForecastVsActual) timeSeriesTool).getError()));
                 }
-                this.add(plotPanel, BorderLayout.SOUTH);
+//                this.add(plotPanel, BorderLayout.SOUTH);
 
                 masterFrame.revalidate();
                 masterFrame.repaint();
                 masterFrame.pack();
 
-            }
-            else {
+            } else {
+
                 timeSeriesTool.build(inputFile, keyX, keyY, "0", average, dateFormat);
 
                 mainFrame.remove(masterFrame);
 
                 JInternalFrame tmpFrame = new JInternalFrame();
 
-                tmpFrame.add(new ContinuousForcastPanel(timeSeriesTool,tmpFrame));
+                tmpFrame.add(new ContinuousForcastPanel(timeSeriesTool, tmpFrame, mainFrame));
                 tmpFrame.setClosable(true);
                 mainFrame.add(tmpFrame);
                 tmpFrame.setVisible(true);

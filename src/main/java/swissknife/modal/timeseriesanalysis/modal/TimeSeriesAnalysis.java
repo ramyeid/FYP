@@ -17,7 +17,7 @@ public abstract class TimeSeriesAnalysis implements Tool {
     protected String pythonFile = Resources.TIME_SERIES_PYTHON_FILE;
 
 
-    public TimeSeriesAnalysis(String inputFile,String keyX,String keyY,int actionTime,String average,String dateFormat){
+    public TimeSeriesAnalysis(String inputFile, String keyX, String keyY, int actionTime, String average, String dateFormat) {
         this.inputFile = inputFile;
         this.keyX = keyX;
         this.keyY = keyY;
@@ -42,6 +42,7 @@ public abstract class TimeSeriesAnalysis implements Tool {
     }
 
 
-
-
+    public String getInputFile() {
+        return inputFile;
+    }
 }

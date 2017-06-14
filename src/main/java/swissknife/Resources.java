@@ -270,6 +270,7 @@ public class Resources {
     public static TimeSeriesCollection predictedTimeSeriesCollection;
 
 
+
     //Continuous Forecast function.
     public static ArrayList<Float> calculateAbsoluteError(TimeSeries actual, TimeSeriesCollection predicted) {
         ArrayList<Float> result = new ArrayList<Float>();

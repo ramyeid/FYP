@@ -1,8 +1,6 @@
 package swissknife;
 
-import swissknife.panels.comparetools.CompareToolsPanel;
-
-import javax.swing.*;
+import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 
 /**
  * Created by ramyeid on 4/24/17.
@@ -22,6 +20,11 @@ import javax.swing.*;
 
 
 //TODO in CompareToolsPanel add a menu bar that selects and deselects all algorithms // and actionKeys.
+//TODO do the same thing for the views/timeseriesanalysis for the JMEnu and the action listener with what you did in the classifiers views.
+//TODO continuous forecast jmenu bar add
+        //TODO - all values
+        //TODO - absolute error - instead of showing it on the screen in the frame show it in a new showvalue panel.
+
 
 public class Application {
 
@@ -41,18 +44,24 @@ public class Application {
 //        frame.pack();
 
 ////
-        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
-        JFrame frame = new JFrame();
-        JInternalFrame intFrame = new JInternalFrame();
-        CompareToolsPanel compareToolsPanel = new CompareToolsPanel(inputFile,intFrame,frame);
-        intFrame.add(compareToolsPanel);
-        intFrame.setVisible(true);
-        intFrame.pack();
+//        String inputFile = System.getProperty("user.dir")+"/src/main/resources/data_2_Empty.csv";
+//        JFrame frame = new JFrame();
+//        JInternalFrame intFrame = new JInternalFrame();
+//        CompareToolsPanel compareToolsPanel = new CompareToolsPanel(inputFile,intFrame,frame);
+//        intFrame.add(compareToolsPanel);
+//        intFrame.setVisible(true);
+//        intFrame.pack();
+//
+//        frame.add(intFrame);
+//        frame.setVisible(true);
+//        frame.pack();
 
-        frame.add(intFrame);
-        frame.setVisible(true);
-        frame.pack();
+        String inputFile = System.getProperty("user.dir")+"/src/main/resources/AirPassengers.csv";
 
+
+        TSAContinuousForecast tsa = new TSAContinuousForecast(inputFile,"Date","#Passengers",2,"-1","%Y-%m");
+        tsa.plot();
+        tsa.action();
 
 
 /*

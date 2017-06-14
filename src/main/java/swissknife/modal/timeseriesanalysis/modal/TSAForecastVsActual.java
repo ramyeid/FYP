@@ -7,6 +7,7 @@ import swissknife.modal.timeseriesanalysis.RunTSAPython;
 import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Created by ramyeid on 6/2/17.
@@ -14,6 +15,7 @@ import javax.swing.*;
 public class TSAForecastVsActual extends TimeSeriesAnalysis {
 
     private float error;
+    private ArrayList<ArrayList<String>> values;
 
     public TSAForecastVsActual(String inputFile, String keyX, String keyY, int actionTime, String average, String dateFormat){
         super(inputFile,keyX,keyY,actionTime,average,dateFormat);
@@ -27,6 +29,11 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
     public  void action(){
         new RunTSAPython(inputFile,keyX,keyY,2,actionTime,average,dateFormat,0,0).run();
         error = CSVReader.readError(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,"ERROR MSE: ");
+        values = CSVReader.getDataCSVForKeys(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,CSVReader.getColumnKeys(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE));
+    }
+
+    public ArrayList<ArrayList<String>> getValues(){
+        return values;
     }
 
     public  JPanel plot(){
@@ -37,5 +44,7 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
     public float getError() {
         return error;
     }
+
+
 }
 

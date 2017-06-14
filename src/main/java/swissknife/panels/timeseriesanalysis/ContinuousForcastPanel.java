@@ -2,7 +2,9 @@ package swissknife.panels.timeseriesanalysis;
 
 import swissknife.Resources;
 import swissknife.modal.Tool;
+import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
 import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
+import swissknife.panels.showvalues.ShowValues;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,15 +27,17 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
     private JPanel east;
     private JPanel west;
     private JPanel center; // for errors.
-    private JPanel plotPanel;
+//    private JPanel plotPanel;
 
     JInternalFrame masterFrame;
+    JFrame mainFrame;
+
+    JInternalFrame plotInternalFrame;
 
 
-    public ContinuousForcastPanel(Tool timeSeriesTool,JInternalFrame masterFrame){
+    public ContinuousForcastPanel(Tool timeSeriesTool, JInternalFrame masterFrame, JFrame mainFrame) {
 
-        masterFrame.setTitle("Continuous Forecast");
-        this.timeSeriesTool = (TSAContinuousForecast)timeSeriesTool;
+        this.timeSeriesTool = (TSAContinuousForecast) timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
 
         actionTime = new TextField(3);
@@ -42,11 +46,13 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         addValue = new TextField(3);
         east = new JPanel();
         west = new JPanel();
-        plotPanel = new JPanel();
+//        plotPanel = new JPanel();
+        plotInternalFrame = new JInternalFrame();
+
         center = new JPanel();
 
-        east.setLayout(new BoxLayout(east,BoxLayout.Y_AXIS));
-        west.setLayout(new BoxLayout(west,BoxLayout.Y_AXIS));
+        east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
+        west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
 
         east.add(new Label("Forecast"));
         east.add(actionTime);
@@ -63,31 +69,41 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         addValue.setEnabled(false);
 
         this.setLayout(new BorderLayout());
-        this.add(east,BorderLayout.EAST);
+        this.add(east, BorderLayout.EAST);
         this.add(west, BorderLayout.WEST);
 
         this.setVisible(true);
 
 
         this.masterFrame = masterFrame;
+        this.masterFrame.setTitle("Continuous Forecast");
+
+        this.mainFrame = mainFrame;
 
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        plotPanel.removeAll();
-        this.remove(plotPanel);
+//        plotPanel.removeAll();
+//        this.remove(plotPanel);
+        JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+        JMenu timeSeriesContinuousForecast = (JMenu) timeSeries.getMenuComponent(2);
 
-        if(e.getSource()==addValueButton){
+        if (e.getSource() == addValueButton) {
             float value = Float.valueOf(addValue.getText());
             timeSeriesTool.addValue(value);
-            plotPanel = timeSeriesTool.plot();
-            this.add(plotPanel,BorderLayout.SOUTH);
-        }
+//            plotPanel = timeSeriesTool.plot();
+//            this.add(plotPanel, BorderLayout.SOUTH);
+            timeSeries.setEnabled(true);
 
-        else if (e.getSource()==forecastButton){
-
+            if (timeSeriesContinuousForecast.getItem(0).getActionListeners().length!=0) {
+                timeSeriesContinuousForecast.getItem(0).removeActionListener(timeSeriesContinuousForecast.getItem(0).getActionListeners()[0]);
+            }
+            if (timeSeriesContinuousForecast.getItem(1).getActionListeners().length!=0) {
+                timeSeriesContinuousForecast.getItem(1).removeActionListener(timeSeriesContinuousForecast.getItem(1).getActionListeners()[0]);
+            }
+        } else if (e.getSource() == forecastButton) {
             addValue.setEnabled(true);
             addValueButton.setEnabled(true);
 
@@ -95,19 +111,88 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             timeSeriesTool.setActionTime(aTime);
             timeSeriesTool.action();
             timeSeriesTool.setResetCsv(0);
-            plotPanel = timeSeriesTool.plot();
-            this.add(plotPanel,BorderLayout.SOUTH);
+//            plotPanel = timeSeriesTool.plot();
+//            this.add(plotPanel, BorderLayout.SOUTH);
+            timeSeries.setEnabled(true);
+
+            if (timeSeriesContinuousForecast.getItem(0).getActionListeners().length!=0) {
+                timeSeriesContinuousForecast.getItem(0).removeActionListener(timeSeriesContinuousForecast.getItem(0).getActionListeners()[0]);
+            }
+            if (timeSeriesContinuousForecast.getItem(1).getActionListeners().length!=0) {
+                timeSeriesContinuousForecast.getItem(1).removeActionListener(timeSeriesContinuousForecast.getItem(1).getActionListeners()[0]);
+            }
         }
 
-        populateCenterPanel();
+        mainFrame.remove(plotInternalFrame);
+        plotInternalFrame = new JInternalFrame();
+        plotInternalFrame.add(((TimeSeriesAnalysis)timeSeriesTool).plot());
+        mainFrame.add(plotInternalFrame);
+        plotInternalFrame.setTitle(Resources.TSA_CONTINUOUS_FORECAST+" "+timeSeriesTool.getInputFile());
+        plotInternalFrame.setVisible(true);
+        plotInternalFrame.setClosable(true);
+        plotInternalFrame.pack();
+
+        //populateCenterPanel();
+
+        timeSeriesContinuousForecast.setEnabled(true);
+        timeSeriesContinuousForecast.getItem(0).setEnabled(true);
+        timeSeriesContinuousForecast.getItem(1).setEnabled(true);
+
+        timeSeriesContinuousForecast.getItem(0).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<ArrayList<String>> result = ((TSAContinuousForecast) timeSeriesTool).getValues();
+                JInternalFrame tmp = new JInternalFrame();
+                tmp.add(new ShowValues(result, tmp, mainFrame));
+                mainFrame.add(tmp);
+                tmp.setTitle(Resources.TSA_CONTINUOUS_FORECAST + " - all values - " + timeSeriesTool.getInputFile());
+                tmp.setVisible(true);
+                tmp.setClosable(true);
+                tmp.pack();
+            }
+        });
+
+        timeSeriesContinuousForecast.getItem(1).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ArrayList<Float> values = Resources.calculateAbsoluteError(Resources.actualTimeSeries, Resources.predictedTimeSeriesCollection);
+                ArrayList<String> forecastNumber = new ArrayList<String>();
+                ArrayList<String> valuesFinal = new ArrayList<String>();
+                for(int i=0;i<values.size();++i){
+                    forecastNumber.add("forecast #"+i);
+                    valuesFinal.add(""+values.get(i));
+                }
+                ArrayList<ArrayList<String>> result = new ArrayList<>();
+                forecastNumber.add(0,"Forecasts numbers");
+                valuesFinal.add(0,"Absolute error");
+                result.add(forecastNumber);
+                result.add(valuesFinal);
 
 
+                JInternalFrame tmp = new JInternalFrame();
+                tmp.add(new ShowValues(result, tmp, mainFrame));
+                mainFrame.add(tmp);
+                tmp.setTitle(Resources.TSA_CONTINUOUS_FORECAST + "- errors - " + timeSeriesTool.getInputFile());
+                tmp.setVisible(true);
+                tmp.setClosable(true);
+                tmp.pack();
 
-        masterFrame.revalidate();
-        masterFrame.repaint();
-        masterFrame.pack();
+            }
+        });
+
+
 
     }
+
+
+
+
+
+
+
+
+
 
     private void populateCenterPanel() {
         center.removeAll();
@@ -115,22 +200,22 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         JPanel panelErrorValue = new JPanel();
         panelText.setLayout(new BoxLayout(panelText, BoxLayout.Y_AXIS));
         panelErrorValue.setLayout(new BoxLayout(panelErrorValue, BoxLayout.Y_AXIS));
-        ArrayList<Float> values = Resources.calculateAbsoluteError(Resources.actualTimeSeries,Resources.predictedTimeSeriesCollection);
-        for(int i=0;i<values.size();++i){
-            if (i==0){
+        ArrayList<Float> values = Resources.calculateAbsoluteError(Resources.actualTimeSeries, Resources.predictedTimeSeriesCollection);
+        for (int i = 0; i < values.size(); ++i) {
+            if (i == 0) {
                 JLabel mainText = new JLabel("Forecast #");
                 panelText.add(mainText);
                 JLabel mainError = new JLabel("Absolute Error");
                 panelErrorValue.add(mainError);
             }
-            JLabel error = new JLabel(""+values.get(i));
-            JLabel forecastNumber = new JLabel(""+i);
+            JLabel error = new JLabel("" + values.get(i));
+            JLabel forecastNumber = new JLabel("" + i);
             panelErrorValue.add(error);
             panelText.add(forecastNumber);
         }
         center.add(panelText);
         center.add(panelErrorValue);
-        this.add(center,BorderLayout.CENTER);
+        this.add(center, BorderLayout.CENTER);
     }
 
 }

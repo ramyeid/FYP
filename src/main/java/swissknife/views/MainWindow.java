@@ -786,9 +786,25 @@ public class MainWindow extends JFrame
 
 
         //Time Series Analysis
-        //TODO do these.
+        JMenuItem mnItforecastOnce  = new JMenuItem("Forecast Once");
+        JMenuItem mnItforecastVsActual = new JMenuItem("Forecast Vs Actual");
+        JMenu mnItContinuousForecast = new JMenu("Continuous Forecast");
+
+        mnSVTimeSeriesAnalysis.add(mnItforecastOnce);
+        mnItforecastOnce.setEnabled(false);
+        mnSVTimeSeriesAnalysis.add(mnItforecastVsActual);
+        mnItforecastVsActual.setEnabled(false);
+        mnSVTimeSeriesAnalysis.add(mnItContinuousForecast);
+
+        mnItContinuousForecast.setEnabled(false);
 
 
+        JMenuItem mnItContinuousForecastAllValues = new JMenuItem("all values");
+        JMenuItem mnItContinuousForecastAbsoluteError = new JMenuItem("Absolute Errors");
+        mnItContinuousForecastAbsoluteError.setEnabled(false);
+        mnItContinuousForecastAllValues.setEnabled(false);
+        mnItContinuousForecast.add(mnItContinuousForecastAllValues);
+        mnItContinuousForecast.add(mnItContinuousForecastAbsoluteError);
 
 
 
