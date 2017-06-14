@@ -45,10 +45,11 @@ public class ShowValues extends JPanel {
         this.mainFrame = mainFrame;
         JScrollPane scrollPane = new JScrollPane(table);
 
-        this.setLayout(null);
-        this.setSize(scrollPane.getWidth()+10,scrollPane.getHeight()+10);
+//        this.setLayout(null);
         scrollPane.setBounds(10,10,scrollPane.getWidth(),scrollPane.getHeight());
+        masterFrame.setSize(scrollPane.getWidth()+10,scrollPane.getHeight()+10);
         this.add(scrollPane);
+
 //        this.masterFrame.setSize(10,10);
 //        this.masterFrame.pack();
 

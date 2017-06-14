@@ -5,6 +5,7 @@ import swissknife.Resources;
 import swissknife.modal.classifier.Classifier;
 import swissknife.panels.classifier.ClassifierPanel;
 import swissknife.panels.showvalues.ShowValues;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
     JButton submitButton;
 
     JInternalFrame masterFrame;
-    JFrame mainFrame;
+    MainWindowFrame mainFrame;
 
     String keyToPredict = "";
 
@@ -48,7 +49,7 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
     JPanel actionTimePanel;
     JPanel keysCheckBoxPanel;
 
-    public CompareToolsPanel(String inputFile, JInternalFrame masterFrame, JFrame mainFrame) {
+    public CompareToolsPanel(String inputFile, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
         this.inputFile = inputFile;
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
@@ -282,14 +283,19 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
             data.get(1).add(tmpResult);
         }
 
-        JInternalFrame tmpFrame = new JInternalFrame();
 
-        tmpFrame.add(new ShowValues(data,masterFrame,mainFrame));
-        tmpFrame.setTitle("Algorithms Predicted Values");
-        tmpFrame.setClosable(true);
-        mainFrame.add(tmpFrame);
-        tmpFrame.setVisible(true);
-        tmpFrame.pack();
+
+
+        JInternalFrame iF = new JInternalFrame();
+        iF.add(new ShowValues(data,masterFrame,mainFrame));
+
+        iF.setTitle("Algorithms Predicted Values");
+        iF.setClosable(true);
+        iF.setVisible(true);
+        iF.pack();
+
+        mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
 
     }
 
@@ -310,14 +316,23 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         }
 
 
-        JInternalFrame tmpFrame = new JInternalFrame();
 
-        tmpFrame.add(new ShowValues(data, masterFrame, mainFrame));
-        tmpFrame.setTitle("Algorithms Accuracies");
-        tmpFrame.setClosable(true);
-        mainFrame.add(tmpFrame);
-        tmpFrame.setVisible(true);
-        tmpFrame.pack();
+
+
+
+
+        JInternalFrame iF = new JInternalFrame();
+        iF.add(new ShowValues(data, masterFrame, mainFrame));
+
+        iF.setTitle("Algorithms Accuracies");
+        iF.setClosable(true);
+        iF.setVisible(true);
+        iF.pack();
+
+        mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
+
     }
 
 

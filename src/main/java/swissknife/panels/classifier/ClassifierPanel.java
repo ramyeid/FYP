@@ -5,6 +5,7 @@ import swissknife.Resources;
 import swissknife.modal.Tool;
 import swissknife.modal.classifier.Classifier;
 import swissknife.panels.showvalues.ShowValues;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,13 +41,13 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     Classifier classifierTool;
     Label accuracyLabel;
     JInternalFrame masterFrame;
-    JFrame mainFrame;
+    MainWindowFrame mainFrame;
     String keyToPredict = null;
 
 
-    public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame,JFrame mainFrame){
+    public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
         this.setLayout(null);
-        this.setSize(450,300);
+        this.setSize(450, 300);
 
         classifierTool = (Classifier) tool;
         classifierName = classifierTool.getAlgorithmName();
@@ -59,20 +60,20 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         radioButtonsPanelKeysToPredict = new JPanel();
         radioButtonListKeysToPredict = new ArrayList<>();
         actionTimeField = new JTextField(3);
-        actionTimeLabel = new JLabel ("Action Time");
+        actionTimeLabel = new JLabel("Action Time");
         southPanel = new JPanel();
         accuracyLabel = new Label();
         keysToChooseCheckBoxes = new ArrayList<>();
         checkBoxesPanel = new JPanel();
 
         String[] keysList = CSVReader.getColumnKeys(inputFile);
-        Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict",this);
+        Resources.createRadioButtons(keysList, keysToPredictButtonGroup, radioButtonsPanelKeysToPredict, radioButtonListKeysToPredict, "Choose Key To Predict", this);
 
-        createCheckBoxButtonsForActionKeys(keysList,checkBoxesPanel,keysToChooseCheckBoxes,this);
+        createCheckBoxButtonsForActionKeys(keysList, checkBoxesPanel, keysToChooseCheckBoxes, this);
 
-        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length+1)*20+30);
-        checkBoxesPanel.setBounds(230, 20, 196, (keysList.length+1)*20+30);
-        southPanel.setBounds(15, 30+checkBoxesPanel.getHeight(), 388, 120);
+        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length + 1) * 20 + 30);
+        checkBoxesPanel.setBounds(230, 20, 196, (keysList.length + 1) * 20 + 30);
+        southPanel.setBounds(15, 30 + checkBoxesPanel.getHeight(), 388, 120);
 
         this.add(checkBoxesPanel);
         this.add(radioButtonsPanelKeysToPredict);
@@ -87,9 +88,9 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         southPanel.add(actionTimeField);
         southPanel.add(submitButton);
 
-        actionTimeLabel.setBounds(17,5,150,20);
-        actionTimeField.setBounds(10,27,150,30);
-        submitButton.setBounds(10,62,150,30);
+        actionTimeLabel.setBounds(17, 5, 150, 20);
+        actionTimeField.setBounds(10, 27, 150, 30);
+        submitButton.setBounds(10, 62, 150, 30);
 
         this.add(southPanel);
 
@@ -97,8 +98,8 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         this.masterFrame = masterFrame;
         this.masterFrame.setTitle(classifierName);
         this.mainFrame = mainFrame;
-        this.masterFrame.setMaximumSize(new Dimension(470, 55+checkBoxesPanel.getHeight()+southPanel.getHeight()));
-        this.masterFrame.setMinimumSize(new Dimension(470,55+checkBoxesPanel.getHeight()+southPanel.getHeight()));
+        this.masterFrame.setMaximumSize(new Dimension(470, 55 + checkBoxesPanel.getHeight() + southPanel.getHeight()));
+        this.masterFrame.setMinimumSize(new Dimension(470, 55 + checkBoxesPanel.getHeight() + southPanel.getHeight()));
 
         addPredictMenuActionListener();
         addPredictVsActualMenuActionListener();
@@ -125,38 +126,37 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        for (JRadioButton radioTmp:radioButtonListKeysToPredict){
-            if (radioTmp.isSelected()){
-                keyToPredict=radioTmp.getText();
+        for (JRadioButton radioTmp : radioButtonListKeysToPredict) {
+            if (radioTmp.isSelected()) {
+                keyToPredict = radioTmp.getText();
             }
         }
-        if (e.getSource() instanceof JCheckBox || e.getSource() instanceof JRadioButton){
-            if (keyToPredict!=null) {
-                for (JCheckBox tmp:keysToChooseCheckBoxes){
-                    if (tmp.getText().equals(keyToPredict)){
+        if (e.getSource() instanceof JCheckBox || e.getSource() instanceof JRadioButton) {
+            if (keyToPredict != null) {
+                for (JCheckBox tmp : keysToChooseCheckBoxes) {
+                    if (tmp.getText().equals(keyToPredict)) {
                         tmp.setSelected(false);
                     }
                 }
             }
-        }
-        else if (e.getSource().equals(submitButton)) {
+        } else if (e.getSource().equals(submitButton)) {
 
 
             List<String> keysNotToDrop = new ArrayList<>();
-            for(JCheckBox tmp:keysToChooseCheckBoxes){
-                if (tmp.isSelected()){
+            for (JCheckBox tmp : keysToChooseCheckBoxes) {
+                if (tmp.isSelected()) {
                     keysNotToDrop.add(tmp.getText());
                 }
             }
 
-            String actionKeys ="";
-            for (int i=0;i<keysNotToDrop.size();++i){
-                actionKeys += "/"+keysNotToDrop.get(i);
+            String actionKeys = "";
+            for (int i = 0; i < keysNotToDrop.size(); ++i) {
+                actionKeys += "/" + keysNotToDrop.get(i);
             }
 
             String actionTime = actionTimeField.getText();
 
-            classifierTool.build(inputFile, keyToPredict, actionTime,actionKeys);
+            classifierTool.build(inputFile, keyToPredict, actionTime, actionKeys);
 
             switch (actionName) {
                 case Resources.CLASSIFIER_PREDICT:
@@ -164,34 +164,35 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     classifierTool.action();
 
                     ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
-                    ArrayList<ArrayList<String>>result = new ArrayList<>();
+                    ArrayList<ArrayList<String>> result = new ArrayList<>();
                     result.add(data);
-                    JInternalFrame tmp = new JInternalFrame();
-                    tmp.add(new ShowValues(result,tmp,mainFrame));
-                    mainFrame.add(tmp);
-                    tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - key to predict values for action time");
-                    tmp.setVisible(true);
-                    tmp.setClosable(true);
-                    tmp.pack();
+
+
+                    JInternalFrame iF = new JInternalFrame();
+                    iF.add(new ShowValues(result, iF, mainFrame));
+
+                    iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - key to predict values for action time");
+                    iF.setClosable(true);
+                    iF.setVisible(true);
+                    iF.pack();
+
+                    mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
 
                     break;
                 case Resources.CLASSIFIER_PREDICT_VS_ACTUAL:
                     this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2).setEnabled(true);
                     classifierTool.action();
                     float accuracy = classifierTool.getAccuracy();
-                    accuracyLabel.setText("Accuracy :"+accuracy);
+                    accuracyLabel.setText("Accuracy :" + accuracy);
                     southPanel.add(accuracyLabel);
-                    accuracyLabel.setBounds(225,25,150,20);
+                    accuracyLabel.setBounds(225, 25, 150, 20);
                     masterFrame.pack();
                     break;
             }
 
         }
     }
-
-
-
-
 
 
     private void addPredictVsActualMenuActionListener() {
@@ -212,21 +213,26 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     //actionKeys Columns, actionTime Values
     public ArrayList<ArrayList<String>> getValuesOfActionKeysForActionTime_PredictVsActual()*/
         JMenu predictVsActualMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2);
-        for(int i=0;i<predictVsActualMenu.getItemCount();++i){
+        for (int i = 0; i < predictVsActualMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictVsActualMenu.getItem(i);
-            switch(tmp.getText()){
+            switch (tmp.getText()) {
                 case "all values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+
                             ArrayList<ArrayList<String>> result = classifierTool.getAllValues(classifierTool.getFileAllResultsPvsA());
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - P vs A - all values");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - P vs A - all values");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
                     break;
@@ -235,13 +241,18 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getAllValuesForActionTime(classifierTool.getFileAllResultsPvsA());
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - P vs A - all values for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();                        }
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - P vs A - all values for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+                        }
                     });
                     break;
                 case "Actual and Predicted values for action time":
@@ -249,13 +260,17 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getValuesOfActualAndPredictedForActionTime();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - P vs A - values of actual and predicted for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - P vs A - values of actual and predicted for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
                     break;
@@ -264,13 +279,16 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getValuesOfActionKeysForActionTime_PredictVsActual();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - P vs A - action keys columns for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - P vs A - action keys columns for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
                     break;
@@ -301,21 +319,26 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         System.out.println(mainFrame.getJMenuBar().getMenuCount());
         System.out.println(mainFrame.getJMenuBar().getMenu(2).getItemCount());
         JMenu predictMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1);
-        for(int i=0;i<predictMenu.getItemCount();++i){
+        for (int i = 0; i < predictMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictMenu.getItem(i);
-            switch(tmp.getText()){
+            switch (tmp.getText()) {
                 case "all values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getAllValues(classifierTool.getFileToReadPredicted());
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - all values");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - all values");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
                         }
                     });
                     break;
@@ -324,13 +347,18 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getAllValuesForActionTime(classifierTool.getFileToReadPredicted());
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - all values for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - all values for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
                         }
                     });
                     break;
@@ -339,13 +367,18 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getValuesOfActionKeys_Predict();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - action keys values");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - action keys values");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
                         }
                     });
                     break;
@@ -354,13 +387,18 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<ArrayList<String>> result = classifierTool.getValuesOfActionKeysForActiontime_Predict();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - action keys values for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - action keys values for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
                         }
                     });
                     break;
@@ -369,15 +407,18 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<String> data = classifierTool.getValuesOfPredicted_Predict();
-                            ArrayList<ArrayList<String>>result = new ArrayList<>();
+                            ArrayList<ArrayList<String>> result = new ArrayList<>();
                             result.add(data);
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - key to predict values");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - key to predict values");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
 
 
                         }
@@ -388,15 +429,19 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
-                            ArrayList<ArrayList<String>>result = new ArrayList<>();
+                            ArrayList<ArrayList<String>> result = new ArrayList<>();
                             result.add(data);
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result,tmp,mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(classifierTool.getAlgorithmName()+" - Predict - key to predict values for action time");
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - key to predict values for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
                     break;

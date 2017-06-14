@@ -1,6 +1,7 @@
 package swissknife.views.timeseriesanalysis;
 
 import swissknife.panels.timeseriesanalysis.TimeSeriesAnalysisPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -8,7 +9,7 @@ import javax.swing.event.InternalFrameEvent;
 
 public class TimeSeriesContinuousForecast extends JInternalFrame
 {
-    public TimeSeriesContinuousForecast(String pathCsv,JFrame mainFrame)
+    public TimeSeriesContinuousForecast(String pathCsv,MainWindowFrame mainFrame)
     {
         this.add(new TimeSeriesAnalysisPanel(pathCsv,4,this,mainFrame));
         this.setVisible(true);

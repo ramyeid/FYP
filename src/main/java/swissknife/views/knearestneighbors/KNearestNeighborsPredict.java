@@ -2,6 +2,7 @@ package swissknife.views.knearestneighbors;
 
 import swissknife.modal.classifier.knearestneighbors.KNNPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class KNearestNeighborsPredict extends JInternalFrame
 {
-    public KNearestNeighborsPredict(String pathCsv, JFrame mainFrame)
+    public KNearestNeighborsPredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new KNNPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);

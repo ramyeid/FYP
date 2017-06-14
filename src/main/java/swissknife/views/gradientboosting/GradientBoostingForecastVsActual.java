@@ -2,6 +2,7 @@ package swissknife.views.gradientboosting;
 
 import swissknife.modal.classifier.gradientboosting.GBPredictVsActual;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class GradientBoostingForecastVsActual extends JInternalFrame
 {
-    public GradientBoostingForecastVsActual(String pathCsv, JFrame mainFrame)
+    public GradientBoostingForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new GBPredictVsActual(),pathCsv,this,mainFrame));
         this.setVisible(true);

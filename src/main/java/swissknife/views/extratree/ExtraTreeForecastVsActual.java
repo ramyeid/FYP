@@ -2,6 +2,7 @@ package swissknife.views.extratree;
 
 import swissknife.modal.classifier.extratreeclassifier.ETPredictVsActual;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class ExtraTreeForecastVsActual extends JInternalFrame
 {
-    public ExtraTreeForecastVsActual(String pathCsv, JFrame mainFrame)
+    public ExtraTreeForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new ETPredictVsActual(),pathCsv,this,mainFrame));
         this.setVisible(true);

@@ -2,6 +2,7 @@ package swissknife.views.decisiontree;
 
 import swissknife.modal.classifier.decisiontree.DTPredictVsActual;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,13 +13,13 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class DecisionTreeForecastVsActual extends JInternalFrame
 {
-    public DecisionTreeForecastVsActual(String pathCsv, JFrame mainFrame)
+    public DecisionTreeForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
     {
+
+
         this.add(new ClassifierPanel(new DTPredictVsActual(),pathCsv,this,mainFrame));
         this.setVisible(true);
         this.pack();
-
-
 
         this.addInternalFrameListener(new InternalFrameAdapter() {
             @Override

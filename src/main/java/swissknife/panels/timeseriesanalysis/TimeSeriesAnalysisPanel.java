@@ -7,6 +7,7 @@ import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastOnce;
 import swissknife.modal.timeseriesanalysis.modal.TSAForecastVsActual;
 import swissknife.panels.showvalues.ShowValues;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 
 //TODO ADD MORE AVERAGE
 //TODO ADD MORE DATE FORMAT
+//TODO all actions on different threads.
+
 public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     private String inputFile;
@@ -49,28 +52,26 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
 
     JInternalFrame masterFrame;
-    JFrame mainFrame;
+    MainWindowFrame mainFrame;
     JInternalFrame plotInternalFrame;
 
-    public TimeSeriesAnalysisPanel(String fileName, int action, JInternalFrame masterFrame, JFrame mainFrame) {
-        super(new BorderLayout());
+    public TimeSeriesAnalysisPanel(String fileName, int action, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
+//        super(new BorderLayout());
 
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
-        this.masterFrame.setTitle(actionName);
         this.inputFile = fileName;
 
-
-
         this.setLayout(null);
-        this.setSize(600, 400);
-        this.masterFrame.setSize(620,400);
-        this.masterFrame.setMaximumSize(new Dimension(620, 400));
-        this.masterFrame.setMinimumSize(new Dimension(620, 400));
+//        this.setSize(600, 400);
+//        this.masterFrame.setSize(620,400);
+//        this.masterFrame.setMaximumSize(new Dimension(620, 400));
+//        this.masterFrame.setMinimumSize(new Dimension(620, 400));
 
 
         actionName = Resources.getTimeSeriesAnalysisActionName(action);
         timeSeriesTool = Resources.getTimeSeriesAnalysisTool(action);
+        this.masterFrame.setTitle(actionName);
 
         keysXButtonGroup = new ButtonGroup();
         keysYButtonGroup = new ButtonGroup();
@@ -83,9 +84,10 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         averageComboBox = new JComboBox(Resources.AVERAGE_LIST);
 
         submitPanel = new JPanel();
+        submitPanel.setLayout(null);
 
 
-        actionTimeField = new TextField(3);
+        actionTimeField = new TextField(4);
 //        plotPanel = new JPanel();
         plotInternalFrame = new JInternalFrame();
 
@@ -98,41 +100,85 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
         Resources.createRadioButtons(keysList, keysXButtonGroup, radioButtonsPanelX, radioButtonListX, "X Axis", this);
 
 
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-        centerPanel.add(new Label("Date Format"));
+
+        JLabel dateFormatLabel = new JLabel("Date Format");
+        JLabel averageLabel = new JLabel("Set Average");
+
+
+//        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setLayout(null);
+
+        centerPanel.setLayout(null);
+        centerPanel.add(dateFormatLabel);
+        dateFormatLabel.setBounds(5,15,80,20);
         centerPanel.add(dateFormatComboBox);
-        centerPanel.add(new Label("Set Average"));
+        dateFormatComboBox.setBounds(100,15,130,20);
+        centerPanel.add(averageLabel);
+        averageLabel.setBounds(5,40,80,20);
         centerPanel.add(averageComboBox);
+        averageComboBox.setBounds(100,40,130,20);
+
+
+
         dateFormatComboBox.addActionListener(this);
         averageComboBox.addActionListener(this);
 
         submitButton.addActionListener(this);
 
+
+        if (action != 4) {
+            submitPanel.add(actionTimeLabel);
+            actionTimeLabel.setBounds(5,5,100,20);
+
+            submitPanel.add(actionTimeField);
+            actionTimeField.setBounds(105,5,80,20);
+        }
+
+//        centerPanel.add(submitPanel);
+        submitPanel.add(submitButton);
+        submitButton.setBounds(5,35,180,20);
+
         int numberOfKeys = keysList.length;
+
+
 
         JPanel radioButtonsPanel = new JPanel();
         radioButtonsPanel.setLayout(null);
         radioButtonsPanel.add(radioButtonsPanelX);
         radioButtonsPanelX.setBounds(5,5,150,40+(numberOfKeys+1)*20);
+        radioButtonsPanelX.setBorder(BorderFactory.createLineBorder(Color.black));
         radioButtonsPanel.add(radioButtonsPanelY);
         radioButtonsPanelY.setBounds(160,5,150,40+(numberOfKeys+1)*20);
+        radioButtonsPanelY.setBorder(BorderFactory.createLineBorder(Color.black));
 
 
-        if (action != 4) {
-            submitPanel.add(actionTimeField);
-            submitPanel.add(actionTimeLabel);
-        }
 
-        centerPanel.add(submitPanel);
-        submitPanel.add(submitButton);
 
         add(radioButtonsPanel);
-        radioButtonsPanel.setBounds(20,15,350,10+radioButtonsPanelX.getHeight());
+        radioButtonsPanel.setBounds(20,15,320,10+radioButtonsPanelX.getHeight());
 
         add(centerPanel);
-        centerPanel.setBounds(400,15,100,150);
+        centerPanel.setBounds(350,15,300,100);
         this.add(submitPanel);
-        submitPanel.setBounds(350,200,200,200);
+        submitPanel.setBounds(350,110,200,100);
+
+
+        if(radioButtonsPanel.getHeight()>230)
+        {
+            this.setSize(600, 50+radioButtonsPanel.getHeight());
+            this.masterFrame.setSize(620,70+radioButtonsPanel.getHeight());
+            this.masterFrame.setMaximumSize(new Dimension(620, 70+radioButtonsPanel.getHeight()));
+            this.masterFrame.setMinimumSize(new Dimension(620, 70+radioButtonsPanel.getHeight()));
+        }
+
+        else
+        {
+            this.setSize(600,250);
+            this.masterFrame.setSize(620,260);
+            this.masterFrame.setMaximumSize(new Dimension(620, 260));
+            this.masterFrame.setMinimumSize(new Dimension(620, 260));
+        }
+
     }
 
 
@@ -185,14 +231,20 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                     timeSeries.getItem(1).addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+
+
                             ArrayList<ArrayList<String>> result = ((TSAForecastVsActual) timeSeriesTool).getValues();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result, tmp, mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+
+                            iF.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
 
@@ -203,14 +255,22 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                     timeSeries.getItem(0).addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+
+
                             ArrayList<ArrayList<String>> result = ((TSAForecastOnce) timeSeriesTool).getValues();
-                            JInternalFrame tmp = new JInternalFrame();
-                            tmp.add(new ShowValues(result, tmp, mainFrame));
-                            mainFrame.add(tmp);
-                            tmp.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
-                            tmp.setVisible(true);
-                            tmp.setClosable(true);
-                            tmp.pack();
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+
+                            iF.setTitle(Resources.TSA_FORECAST_ONCE + " " + inputFile);
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+                            iF.setClosable(true);
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
+
                         }
                     });
                 }
@@ -221,14 +281,23 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 //                plotPanel.removeAll();
 //                this.remove(plotPanel);
 
-                mainFrame.remove(plotInternalFrame);
+                mainFrame.getDesktopPanel().remove(plotInternalFrame);
+                mainFrame.repaint();
+                mainFrame.revalidate();
+
                 plotInternalFrame = new JInternalFrame();
                 plotInternalFrame.add(((TimeSeriesAnalysis) timeSeriesTool).plot());
-                mainFrame.add(plotInternalFrame);
                 plotInternalFrame.setTitle(actionName + " " + inputFile);
                 plotInternalFrame.setVisible(true);
                 plotInternalFrame.setClosable(true);
                 plotInternalFrame.pack();
+
+
+                mainFrame.getDesktopPanel().add(plotInternalFrame);//add internal frame to the desktop pane
+
+
+
+
 
 
 //                plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
@@ -237,23 +306,26 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 }
 //                this.add(plotPanel, BorderLayout.SOUTH);
 
-                masterFrame.revalidate();
-                masterFrame.repaint();
-                masterFrame.pack();
 
             } else {
 
                 timeSeriesTool.build(inputFile, keyX, keyY, "0", average, dateFormat);
 
-                mainFrame.remove(masterFrame);
+                mainFrame.getDesktopPanel().remove(masterFrame);
+                mainFrame.repaint();
+                mainFrame.revalidate();
 
-                JInternalFrame tmpFrame = new JInternalFrame();
+                JInternalFrame iF = new JInternalFrame();
+                iF.add(new ContinuousForcastPanel(timeSeriesTool, iF, (MainWindowFrame) mainFrame));
+                iF.setClosable(true);
+                iF.setVisible(true);
+                iF.pack();
+                iF.setClosable(true);
+                mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
 
-                tmpFrame.add(new ContinuousForcastPanel(timeSeriesTool, tmpFrame, mainFrame));
-                tmpFrame.setClosable(true);
-                mainFrame.add(tmpFrame);
-                tmpFrame.setVisible(true);
-                tmpFrame.pack();
+
+
+
 
             }
         }

@@ -2,6 +2,7 @@ package swissknife.views.lineardiscriminant;
 
 import swissknife.modal.classifier.lineardiscriminant.LDPredictVsActual;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class LinearDiscriminantForecastVsActual extends JInternalFrame
 {
-    public LinearDiscriminantForecastVsActual(String pathCsv, JFrame mainFrame)
+    public LinearDiscriminantForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new LDPredictVsActual(),pathCsv,this,mainFrame));
         this.setVisible(true);

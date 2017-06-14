@@ -2,6 +2,7 @@ package swissknife.views.stochasticgradientdescent;
 
 import swissknife.modal.classifier.stochasticgradientdescent.SGDPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class StochasticGradientDescentPredict extends JInternalFrame
 {
-    public StochasticGradientDescentPredict(String pathCsv, JFrame mainFrame)
+    public StochasticGradientDescentPredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new SGDPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);

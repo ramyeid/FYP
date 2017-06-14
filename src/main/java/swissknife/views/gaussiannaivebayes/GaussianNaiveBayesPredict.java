@@ -18,6 +18,7 @@ package swissknife.views.gaussiannaivebayes;
 
 import swissknife.modal.classifier.gaussiannaivebayes.GNBPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -25,7 +26,7 @@ import javax.swing.event.InternalFrameEvent;
 
 public class GaussianNaiveBayesPredict extends JInternalFrame
 {
-    public GaussianNaiveBayesPredict(String pathCsv, JFrame mainFrame)
+    public GaussianNaiveBayesPredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new GNBPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);

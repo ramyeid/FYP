@@ -2,6 +2,7 @@ package swissknife.views.lineardiscriminant;
 
 import swissknife.modal.classifier.lineardiscriminant.LDPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -11,7 +12,7 @@ import javax.swing.event.InternalFrameEvent;
  * Created by joeabdelnour on 6/11/17.
  */
 public class LinearDiscriminantPredict extends JInternalFrame {
-    public LinearDiscriminantPredict(String pathCsv, JFrame mainFrame) {
+    public LinearDiscriminantPredict(String pathCsv, MainWindowFrame mainFrame) {
         this.add(new ClassifierPanel(new LDPredict(), pathCsv, this, mainFrame));
         this.setVisible(true);
         this.pack();

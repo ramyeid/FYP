@@ -2,6 +2,7 @@ package swissknife.views.supportvectormachine;
 
 import swissknife.modal.classifier.svm.SVMPredictVsActual;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class SupportVectorMachineForecastVsActual extends JInternalFrame
 {
-    public SupportVectorMachineForecastVsActual(String pathCsv, JFrame mainFrame)
+    public SupportVectorMachineForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new SVMPredictVsActual(),pathCsv,this,mainFrame));
         this.setVisible(true);

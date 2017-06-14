@@ -2,6 +2,7 @@ package swissknife.views.logisticregression;
 
 import swissknife.modal.classifier.logisticregression.LogRPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -11,7 +12,7 @@ import javax.swing.event.InternalFrameEvent;
  * Created by joeabdelnour on 6/11/17.
  */
 public class LogisticRegressionPredict extends JInternalFrame {
-    public LogisticRegressionPredict(String pathCsv, JFrame mainFrame) {
+    public LogisticRegressionPredict(String pathCsv, MainWindowFrame mainFrame) {
         this.add(new ClassifierPanel(new LogRPredict(), pathCsv, this, mainFrame));
         this.setVisible(true);
         this.pack();

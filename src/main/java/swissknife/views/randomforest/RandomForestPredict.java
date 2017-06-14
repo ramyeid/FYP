@@ -2,6 +2,7 @@ package swissknife.views.randomforest;
 
 import swissknife.modal.classifier.randomforest.RFPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class RandomForestPredict extends JInternalFrame
 {
-    public RandomForestPredict(String pathCsv, JFrame mainFrame)
+    public RandomForestPredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new RFPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);

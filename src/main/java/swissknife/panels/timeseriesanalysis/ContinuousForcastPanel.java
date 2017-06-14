@@ -5,6 +5,7 @@ import swissknife.modal.Tool;
 import swissknife.modal.timeseriesanalysis.TimeSeriesAnalysis;
 import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 import swissknife.panels.showvalues.ShowValues;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,12 +31,12 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
 //    private JPanel plotPanel;
 
     JInternalFrame masterFrame;
-    JFrame mainFrame;
+    MainWindowFrame mainFrame;
 
     JInternalFrame plotInternalFrame;
 
 
-    public ContinuousForcastPanel(Tool timeSeriesTool, JInternalFrame masterFrame, JFrame mainFrame) {
+    public ContinuousForcastPanel(Tool timeSeriesTool, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
 
         this.timeSeriesTool = (TSAContinuousForecast) timeSeriesTool;
         this.timeSeriesTool.setResetCsv(1);
@@ -123,14 +124,20 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
             }
         }
 
-        mainFrame.remove(plotInternalFrame);
+        mainFrame.getDesktopPanel().remove(plotInternalFrame);
+        mainFrame.repaint();
+        mainFrame.revalidate();
+
         plotInternalFrame = new JInternalFrame();
         plotInternalFrame.add(((TimeSeriesAnalysis)timeSeriesTool).plot());
-        mainFrame.add(plotInternalFrame);
         plotInternalFrame.setTitle(Resources.TSA_CONTINUOUS_FORECAST+" "+timeSeriesTool.getInputFile());
         plotInternalFrame.setVisible(true);
         plotInternalFrame.setClosable(true);
         plotInternalFrame.pack();
+        mainFrame.getDesktopPanel().add(plotInternalFrame);//add internal frame to the desktop pane
+
+
+
 
         //populateCenterPanel();
 
@@ -141,14 +148,20 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         timeSeriesContinuousForecast.getItem(0).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<ArrayList<String>> result = ((TSAContinuousForecast) timeSeriesTool).getValues();
-                JInternalFrame tmp = new JInternalFrame();
-                tmp.add(new ShowValues(result, tmp, mainFrame));
-                mainFrame.add(tmp);
-                tmp.setTitle(Resources.TSA_CONTINUOUS_FORECAST + " - all values - " + timeSeriesTool.getInputFile());
-                tmp.setVisible(true);
-                tmp.setClosable(true);
-                tmp.pack();
+                ArrayList<ArrayList<String>> result =((TSAContinuousForecast) timeSeriesTool).getValues();
+                JInternalFrame iF = new JInternalFrame();
+                iF.add(new ShowValues(result, iF, mainFrame));
+
+                iF.setTitle(Resources.TSA_CONTINUOUS_FORECAST + " - all values - " + timeSeriesTool.getInputFile());
+                iF.setClosable(true);
+                iF.setVisible(true);
+                iF.pack();
+
+                mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
+
+
+
             }
         });
 
@@ -170,13 +183,17 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
                 result.add(valuesFinal);
 
 
-                JInternalFrame tmp = new JInternalFrame();
-                tmp.add(new ShowValues(result, tmp, mainFrame));
-                mainFrame.add(tmp);
-                tmp.setTitle(Resources.TSA_CONTINUOUS_FORECAST + "- errors - " + timeSeriesTool.getInputFile());
-                tmp.setVisible(true);
-                tmp.setClosable(true);
-                tmp.pack();
+
+
+                JInternalFrame iF = new JInternalFrame();
+                iF.add(new ShowValues(result, iF, mainFrame));
+
+                iF.setTitle(Resources.TSA_CONTINUOUS_FORECAST + "- errors - " + timeSeriesTool.getInputFile());
+                iF.setClosable(true);
+                iF.setVisible(true);
+                iF.pack();
+
+                mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
 
             }
         });

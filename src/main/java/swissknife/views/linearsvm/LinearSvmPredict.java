@@ -2,6 +2,7 @@ package swissknife.views.linearsvm;
 
 import swissknife.modal.classifier.linearsvm.LSVCPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class LinearSvmPredict extends JInternalFrame
 {
-    public LinearSvmPredict(String pathCsv, JFrame mainFrame)
+    public LinearSvmPredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new LSVCPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);

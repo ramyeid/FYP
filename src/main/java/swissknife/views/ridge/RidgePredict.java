@@ -2,6 +2,7 @@ package swissknife.views.ridge;
 
 import swissknife.modal.classifier.ridge.RCPredict;
 import swissknife.panels.classifier.ClassifierPanel;
+import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -12,7 +13,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class RidgePredict extends JInternalFrame
 {
-    public RidgePredict(String pathCsv, JFrame mainFrame)
+    public RidgePredict(String pathCsv, MainWindowFrame mainFrame)
     {
         this.add(new ClassifierPanel(new RCPredict(),pathCsv,this,mainFrame));
         this.setVisible(true);
