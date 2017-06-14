@@ -72,7 +72,9 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         createCheckBoxButtonsForActionKeys(keysList, checkBoxesPanel, keysToChooseCheckBoxes, this);
 
         radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length + 1) * 20 + 30);
+        radioButtonsPanelKeysToPredict.setBorder(BorderFactory.createLineBorder(Color.black));
         checkBoxesPanel.setBounds(230, 20, 196, (keysList.length + 1) * 20 + 30);
+        checkBoxesPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         southPanel.setBounds(15, 30 + checkBoxesPanel.getHeight(), 388, 120);
 
         this.add(checkBoxesPanel);
