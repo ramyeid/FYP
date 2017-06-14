@@ -20,8 +20,9 @@ public class TimeSeriesForecastOnce extends JInternalFrame
                 JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
                 JMenuItem forecastOnce = (JMenuItem) timeSeries.getMenuComponent(0);
 
-                forecastOnce.removeActionListener(forecastOnce.getActionListeners()[0]);
-
+                if(forecastOnce.getActionListeners().length!=0) {
+                    forecastOnce.removeActionListener(forecastOnce.getActionListeners()[0]);
+                }
                 forecastOnce.setEnabled(false);
             }
         });

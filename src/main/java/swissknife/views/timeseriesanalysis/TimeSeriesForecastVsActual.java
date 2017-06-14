@@ -20,8 +20,9 @@ public class TimeSeriesForecastVsActual extends JInternalFrame
                 JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
                 JMenuItem forecastVsActual = (JMenuItem) timeSeries.getMenuComponent(1);
 
-                forecastVsActual.removeActionListener(forecastVsActual.getActionListeners()[0]);
-
+                if(forecastVsActual.getActionListeners().length!=0) {
+                    forecastVsActual.removeActionListener(forecastVsActual.getActionListeners()[0]);
+                }
                 forecastVsActual.setEnabled(false);
             }
         });

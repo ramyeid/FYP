@@ -20,9 +20,13 @@ public class TimeSeriesContinuousForecast extends JInternalFrame
                 super.internalFrameClosing(e);
                 JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
                 JMenu continuousForecast = (JMenu) timeSeries.getMenuComponent(2);
-                continuousForecast.getItem(0).removeActionListener(continuousForecast.getItem(0).getActionListeners()[0]);
-                continuousForecast.getItem(1).removeActionListener(continuousForecast.getItem(1).getActionListeners()[0]);
 
+                if(continuousForecast.getItem(0).getActionListeners().length!=0) {
+                    continuousForecast.getItem(0).removeActionListener(continuousForecast.getItem(0).getActionListeners()[0]);
+                }
+                if(continuousForecast.getItem(1).getActionListeners().length!=0) {
+                    continuousForecast.getItem(1).removeActionListener(continuousForecast.getItem(1).getActionListeners()[0]);
+                }
 
                 continuousForecast.setEnabled(false);
 

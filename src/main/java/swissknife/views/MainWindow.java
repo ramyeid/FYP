@@ -56,7 +56,6 @@ public class MainWindow extends JFrame
 {
     private JPanel contentPane;
 
-    private static MainWindow frame;
 
     private String csvPath;
 
@@ -70,21 +69,22 @@ public class MainWindow extends JFrame
      */
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                try
-                {
-                    frame = new MainWindow();
-                    frame.setVisible(true);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
+        new MainWindow().setVisible(true);
+//        EventQueue.invokeLater(new Runnable()
+//        {
+//            public void run()
+//            {
+//                try
+//                {
+//                    MainWindow.this = new MainWindow();
+//                    MainWindow.this.setVisible(true);
+//                }
+//                catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     /**
@@ -158,7 +158,7 @@ public class MainWindow extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                frame.dispose();
+                MainWindow.this.dispose();
             }
         });
         mnFile.add(mntmClose);
@@ -188,10 +188,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 DecisionTreePredict decisionTreePredictInternalFrame = new DecisionTreePredict(csvPath, MainWindow.this);
-                frame.add(decisionTreePredictInternalFrame);
+                MainWindow.this.add(decisionTreePredictInternalFrame);
                 decisionTreePredictInternalFrame.setVisible(true);
-                decisionTreePredictInternalFrame.setLocation((frame.getWidth() - decisionTreePredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- decisionTreePredictInternalFrame.getHeight())/2);
+                decisionTreePredictInternalFrame.setLocation((MainWindow.this.getWidth() - decisionTreePredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- decisionTreePredictInternalFrame.getHeight())/2);
                 decisionTreePredictInternalFrame.pack();
                 decisionTreePredictInternalFrame.setClosable(true);
             }
@@ -203,10 +203,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 DecisionTreeForecastVsActual decisionTreeForecastVsActualInternalFrame = new DecisionTreeForecastVsActual(csvPath, MainWindow.this);
-                frame.add(decisionTreeForecastVsActualInternalFrame);
+                MainWindow.this.add(decisionTreeForecastVsActualInternalFrame);
                 decisionTreeForecastVsActualInternalFrame.setVisible(true);
-                decisionTreeForecastVsActualInternalFrame.setLocation((frame.getWidth() - decisionTreeForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- decisionTreeForecastVsActualInternalFrame.getHeight())/2);
+                decisionTreeForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - decisionTreeForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- decisionTreeForecastVsActualInternalFrame.getHeight())/2);
                 decisionTreeForecastVsActualInternalFrame.pack();
                 decisionTreeForecastVsActualInternalFrame.setClosable(true);
             }
@@ -225,11 +225,11 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 ExtraTreePredict extraTreePredictInternalFrame = new ExtraTreePredict(csvPath, MainWindow.this);
-                frame.add(extraTreePredictInternalFrame);
+                MainWindow.this.add(extraTreePredictInternalFrame);
                 extraTreePredictInternalFrame.setVisible(true);
                 extraTreePredictInternalFrame.setVisible(true);
-                extraTreePredictInternalFrame.setLocation((frame.getWidth() - extraTreePredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- extraTreePredictInternalFrame.getHeight())/2);
+                extraTreePredictInternalFrame.setLocation((MainWindow.this.getWidth() - extraTreePredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- extraTreePredictInternalFrame.getHeight())/2);
                 extraTreePredictInternalFrame.pack();
                 extraTreePredictInternalFrame.setClosable(true);
             }
@@ -241,10 +241,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 ExtraTreeForecastVsActual extraTreeForecastVsActualInternalFrame = new ExtraTreeForecastVsActual(csvPath, MainWindow.this);
-                frame.add(extraTreeForecastVsActualInternalFrame);
+                MainWindow.this.add(extraTreeForecastVsActualInternalFrame);
                 extraTreeForecastVsActualInternalFrame.setVisible(true);
-                extraTreeForecastVsActualInternalFrame.setLocation((frame.getWidth() - extraTreeForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- extraTreeForecastVsActualInternalFrame.getHeight())/2);
+                extraTreeForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - extraTreeForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- extraTreeForecastVsActualInternalFrame.getHeight())/2);
                 extraTreeForecastVsActualInternalFrame.pack();
                 extraTreeForecastVsActualInternalFrame.setClosable(true);
             }
@@ -263,11 +263,11 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 GradientBoostingPredict gradientBoostingPredictInternalFrame = new GradientBoostingPredict(csvPath, MainWindow.this);
-                frame.add(gradientBoostingPredictInternalFrame);
+                MainWindow.this.add(gradientBoostingPredictInternalFrame);
                 gradientBoostingPredictInternalFrame.setVisible(true);
                 gradientBoostingPredictInternalFrame.setVisible(true);
-                gradientBoostingPredictInternalFrame.setLocation((frame.getWidth() - gradientBoostingPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- gradientBoostingPredictInternalFrame.getHeight())/2);
+                gradientBoostingPredictInternalFrame.setLocation((MainWindow.this.getWidth() - gradientBoostingPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- gradientBoostingPredictInternalFrame.getHeight())/2);
                 gradientBoostingPredictInternalFrame.pack();
                 gradientBoostingPredictInternalFrame.setClosable(true);
             }
@@ -279,10 +279,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 GradientBoostingForecastVsActual gradientBoostingForecastVsActualInternalFrame = new GradientBoostingForecastVsActual(csvPath, MainWindow.this);
-                frame.add(gradientBoostingForecastVsActualInternalFrame);
+                MainWindow.this.add(gradientBoostingForecastVsActualInternalFrame);
                 gradientBoostingForecastVsActualInternalFrame.setVisible(true);
-                gradientBoostingForecastVsActualInternalFrame.setLocation((frame.getWidth() - gradientBoostingForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- gradientBoostingForecastVsActualInternalFrame.getHeight())/2);
+                gradientBoostingForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - gradientBoostingForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- gradientBoostingForecastVsActualInternalFrame.getHeight())/2);
                 gradientBoostingForecastVsActualInternalFrame.pack();
                 gradientBoostingForecastVsActualInternalFrame.setClosable(true);
             }
@@ -301,11 +301,11 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 KNearestNeighborsPredict kNearestNeighborsPredictInternalFrame = new KNearestNeighborsPredict(csvPath, MainWindow.this);
-                frame.add(kNearestNeighborsPredictInternalFrame);
+                MainWindow.this.add(kNearestNeighborsPredictInternalFrame);
                 kNearestNeighborsPredictInternalFrame.setVisible(true);
                 kNearestNeighborsPredictInternalFrame.setVisible(true);
-                kNearestNeighborsPredictInternalFrame.setLocation((frame.getWidth() - kNearestNeighborsPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- kNearestNeighborsPredictInternalFrame.getHeight())/2);
+                kNearestNeighborsPredictInternalFrame.setLocation((MainWindow.this.getWidth() - kNearestNeighborsPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- kNearestNeighborsPredictInternalFrame.getHeight())/2);
                 kNearestNeighborsPredictInternalFrame.pack();
                 kNearestNeighborsPredictInternalFrame.setClosable(true);
             }
@@ -317,10 +317,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 KNearestNeighborsForecastVsActual kNearestNeighborsForecastVsActualInternalFrame = new KNearestNeighborsForecastVsActual(csvPath, MainWindow.this);
-                frame.add(kNearestNeighborsForecastVsActualInternalFrame);
+                MainWindow.this.add(kNearestNeighborsForecastVsActualInternalFrame);
                 kNearestNeighborsForecastVsActualInternalFrame.setVisible(true);
-                kNearestNeighborsForecastVsActualInternalFrame.setLocation((frame.getWidth() - kNearestNeighborsForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- kNearestNeighborsForecastVsActualInternalFrame.getHeight())/2);
+                kNearestNeighborsForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - kNearestNeighborsForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- kNearestNeighborsForecastVsActualInternalFrame.getHeight())/2);
                 kNearestNeighborsForecastVsActualInternalFrame.pack();
                 kNearestNeighborsForecastVsActualInternalFrame.setClosable(true);
             }
@@ -339,11 +339,11 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearDiscriminantPredict linearDiscriminantPredictInternalFrame = new LinearDiscriminantPredict(csvPath, MainWindow.this);
-                frame.add(linearDiscriminantPredictInternalFrame);
+                MainWindow.this.add(linearDiscriminantPredictInternalFrame);
                 linearDiscriminantPredictInternalFrame.setVisible(true);
                 linearDiscriminantPredictInternalFrame.setVisible(true);
-                linearDiscriminantPredictInternalFrame.setLocation((frame.getWidth() - linearDiscriminantPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearDiscriminantPredictInternalFrame.getHeight())/2);
+                linearDiscriminantPredictInternalFrame.setLocation((MainWindow.this.getWidth() - linearDiscriminantPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearDiscriminantPredictInternalFrame.getHeight())/2);
                 linearDiscriminantPredictInternalFrame.pack();
                 linearDiscriminantPredictInternalFrame.setClosable(true);
             }
@@ -355,10 +355,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearDiscriminantForecastVsActual linearDiscriminantForecastVsActualInternalFrame = new LinearDiscriminantForecastVsActual(csvPath, MainWindow.this);
-                frame.add(linearDiscriminantForecastVsActualInternalFrame);
+                MainWindow.this.add(linearDiscriminantForecastVsActualInternalFrame);
                 linearDiscriminantForecastVsActualInternalFrame.setVisible(true);
-                linearDiscriminantForecastVsActualInternalFrame.setLocation((frame.getWidth() - linearDiscriminantForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearDiscriminantForecastVsActualInternalFrame.getHeight())/2);
+                linearDiscriminantForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - linearDiscriminantForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearDiscriminantForecastVsActualInternalFrame.getHeight())/2);
                 linearDiscriminantForecastVsActualInternalFrame.pack();
                 linearDiscriminantForecastVsActualInternalFrame.setClosable(true);
             }
@@ -377,11 +377,11 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearRegressionPredict linearRegressionPredictInternalFrame = new LinearRegressionPredict(csvPath);
-                frame.add(linearRegressionPredictInternalFrame);
+                MainWindow.this.add(linearRegressionPredictInternalFrame);
                 linearRegressionPredictInternalFrame.setVisible(true);
                 linearRegressionPredictInternalFrame.setVisible(true);
-                linearRegressionPredictInternalFrame.setLocation((frame.getWidth() - linearRegressionPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearRegressionPredictInternalFrame.getHeight())/2);
+                linearRegressionPredictInternalFrame.setLocation((MainWindow.this.getWidth() - linearRegressionPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearRegressionPredictInternalFrame.getHeight())/2);
                 linearRegressionPredictInternalFrame.pack();
                 linearRegressionPredictInternalFrame.setClosable(true);
             }
@@ -393,10 +393,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearRegressionForecastVsActual linearRegressionForecastVsActualInternalFrame = new LinearRegressionForecastVsActual(csvPath);
-                frame.add(linearRegressionForecastVsActualInternalFrame);
+                MainWindow.this.add(linearRegressionForecastVsActualInternalFrame);
                 linearRegressionForecastVsActualInternalFrame.setVisible(true);
-                linearRegressionForecastVsActualInternalFrame.setLocation((frame.getWidth() - linearRegressionForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearRegressionForecastVsActualInternalFrame.getHeight())/2);
+                linearRegressionForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - linearRegressionForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearRegressionForecastVsActualInternalFrame.getHeight())/2);
                 linearRegressionForecastVsActualInternalFrame.pack();
                 linearRegressionForecastVsActualInternalFrame.setClosable(true);
             }
@@ -415,10 +415,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearSvmPredict linearSvmPredictInternalFrame = new LinearSvmPredict(csvPath, MainWindow.this);
-                frame.add(linearSvmPredictInternalFrame);
+                MainWindow.this.add(linearSvmPredictInternalFrame);
                 linearSvmPredictInternalFrame.setVisible(true);
-                linearSvmPredictInternalFrame.setLocation((frame.getWidth() - linearSvmPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearSvmPredictInternalFrame.getHeight())/2);
+                linearSvmPredictInternalFrame.setLocation((MainWindow.this.getWidth() - linearSvmPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearSvmPredictInternalFrame.getHeight())/2);
                 linearSvmPredictInternalFrame.pack();
                 linearSvmPredictInternalFrame.setClosable(true);
             }
@@ -430,10 +430,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LinearSvmForecastVsActual linearSvmForecastVsActualInternalFrame = new LinearSvmForecastVsActual(csvPath, MainWindow.this);
-                frame.add(linearSvmForecastVsActualInternalFrame);
+                MainWindow.this.add(linearSvmForecastVsActualInternalFrame);
                 linearSvmForecastVsActualInternalFrame.setVisible(true);
-                linearSvmForecastVsActualInternalFrame.setLocation((frame.getWidth() - linearSvmForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- linearSvmForecastVsActualInternalFrame.getHeight())/2);
+                linearSvmForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - linearSvmForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- linearSvmForecastVsActualInternalFrame.getHeight())/2);
                 linearSvmForecastVsActualInternalFrame.pack();
                 linearSvmForecastVsActualInternalFrame.setClosable(true);
             }
@@ -452,10 +452,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LogisticRegressionPredict logisticRegressionPredictInternalFrame = new LogisticRegressionPredict(csvPath, MainWindow.this);
-                frame.add(logisticRegressionPredictInternalFrame);
+                MainWindow.this.add(logisticRegressionPredictInternalFrame);
                 logisticRegressionPredictInternalFrame.setVisible(true);
-                logisticRegressionPredictInternalFrame.setLocation((frame.getWidth() - logisticRegressionPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- logisticRegressionPredictInternalFrame.getHeight())/2);
+                logisticRegressionPredictInternalFrame.setLocation((MainWindow.this.getWidth() - logisticRegressionPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- logisticRegressionPredictInternalFrame.getHeight())/2);
                 logisticRegressionPredictInternalFrame.pack();
                 logisticRegressionPredictInternalFrame.setClosable(true);
             }
@@ -467,10 +467,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 LogisticRegressionForecastVsActual logisticRegressionForecastVsActualInternalFrame = new LogisticRegressionForecastVsActual(csvPath, MainWindow.this);
-                frame.add(logisticRegressionForecastVsActualInternalFrame);
+                MainWindow.this.add(logisticRegressionForecastVsActualInternalFrame);
                 logisticRegressionForecastVsActualInternalFrame.setVisible(true);
-                logisticRegressionForecastVsActualInternalFrame.setLocation((frame.getWidth() - logisticRegressionForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- logisticRegressionForecastVsActualInternalFrame.getHeight())/2);
+                logisticRegressionForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - logisticRegressionForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- logisticRegressionForecastVsActualInternalFrame.getHeight())/2);
                 logisticRegressionForecastVsActualInternalFrame.pack();
                 logisticRegressionForecastVsActualInternalFrame.setClosable(true);
             }
@@ -497,10 +497,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 BernoulliNaiveBayesPredict bernoulliNaiveBayesPredictInternalFrame = new BernoulliNaiveBayesPredict(csvPath, MainWindow.this);
-                frame.add(bernoulliNaiveBayesPredictInternalFrame);
+                MainWindow.this.add(bernoulliNaiveBayesPredictInternalFrame);
                 bernoulliNaiveBayesPredictInternalFrame.setVisible(true);
-                bernoulliNaiveBayesPredictInternalFrame.setLocation((frame.getWidth() - bernoulliNaiveBayesPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- bernoulliNaiveBayesPredictInternalFrame.getHeight())/2);
+                bernoulliNaiveBayesPredictInternalFrame.setLocation((MainWindow.this.getWidth() - bernoulliNaiveBayesPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- bernoulliNaiveBayesPredictInternalFrame.getHeight())/2);
                 bernoulliNaiveBayesPredictInternalFrame.pack();
                 bernoulliNaiveBayesPredictInternalFrame.setClosable(true);
             }
@@ -512,10 +512,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 BernoulliNaiveBayesForecastVsActual bernoulliNaiveBayesForecastVsActualInternalFrame = new BernoulliNaiveBayesForecastVsActual(csvPath, MainWindow.this);
-                frame.add(bernoulliNaiveBayesForecastVsActualInternalFrame);
+                MainWindow.this.add(bernoulliNaiveBayesForecastVsActualInternalFrame);
                 bernoulliNaiveBayesForecastVsActualInternalFrame.setVisible(true);
-                bernoulliNaiveBayesForecastVsActualInternalFrame.setLocation((frame.getWidth() - bernoulliNaiveBayesForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- bernoulliNaiveBayesForecastVsActualInternalFrame.getHeight())/2);
+                bernoulliNaiveBayesForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - bernoulliNaiveBayesForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- bernoulliNaiveBayesForecastVsActualInternalFrame.getHeight())/2);
                 bernoulliNaiveBayesForecastVsActualInternalFrame.pack();
                 bernoulliNaiveBayesForecastVsActualInternalFrame.setClosable(true);
             }
@@ -533,10 +533,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 GaussianNaiveBayesPredict gaussianNaiveBayesPredictInternalFrame = new GaussianNaiveBayesPredict(csvPath, MainWindow.this);
-                frame.add(gaussianNaiveBayesPredictInternalFrame);
+                MainWindow.this.add(gaussianNaiveBayesPredictInternalFrame);
                 gaussianNaiveBayesPredictInternalFrame.setVisible(true);
-                gaussianNaiveBayesPredictInternalFrame.setLocation((frame.getWidth() - gaussianNaiveBayesPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- gaussianNaiveBayesPredictInternalFrame.getHeight())/2);
+                gaussianNaiveBayesPredictInternalFrame.setLocation((MainWindow.this.getWidth() - gaussianNaiveBayesPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- gaussianNaiveBayesPredictInternalFrame.getHeight())/2);
                 gaussianNaiveBayesPredictInternalFrame.pack();
                 gaussianNaiveBayesPredictInternalFrame.setClosable(true);
             }
@@ -548,10 +548,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 GaussianNaiveBayesForecastVsActual gaussianNaiveBayesForecastVsActualInternalFrame = new GaussianNaiveBayesForecastVsActual(csvPath, MainWindow.this);
-                frame.add(gaussianNaiveBayesForecastVsActualInternalFrame);
+                MainWindow.this.add(gaussianNaiveBayesForecastVsActualInternalFrame);
                 gaussianNaiveBayesForecastVsActualInternalFrame.setVisible(true);
-                gaussianNaiveBayesForecastVsActualInternalFrame.setLocation((frame.getWidth() - gaussianNaiveBayesForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- gaussianNaiveBayesForecastVsActualInternalFrame.getHeight())/2);
+                gaussianNaiveBayesForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - gaussianNaiveBayesForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- gaussianNaiveBayesForecastVsActualInternalFrame.getHeight())/2);
                 gaussianNaiveBayesForecastVsActualInternalFrame.pack();
                 gaussianNaiveBayesForecastVsActualInternalFrame.setClosable(true);
             }
@@ -573,10 +573,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RandomForestPredict neuralNetworkPredictInternalFrame = new RandomForestPredict(csvPath, MainWindow.this);
-                frame.add(neuralNetworkPredictInternalFrame);
+                MainWindow.this.add(neuralNetworkPredictInternalFrame);
                 neuralNetworkPredictInternalFrame.setVisible(true);
-                neuralNetworkPredictInternalFrame.setLocation((frame.getWidth() - neuralNetworkPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- neuralNetworkPredictInternalFrame.getHeight())/2);
+                neuralNetworkPredictInternalFrame.setLocation((MainWindow.this.getWidth() - neuralNetworkPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- neuralNetworkPredictInternalFrame.getHeight())/2);
                 neuralNetworkPredictInternalFrame.pack();
                 neuralNetworkPredictInternalFrame.setClosable(true);
             }
@@ -588,10 +588,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RandomForestForecastVsActual neuralNetworkForecastVsActualInternalFrame = new RandomForestForecastVsActual(csvPath, MainWindow.this);
-                frame.add(neuralNetworkForecastVsActualInternalFrame);
+                MainWindow.this.add(neuralNetworkForecastVsActualInternalFrame);
                 neuralNetworkForecastVsActualInternalFrame.setVisible(true);
-                neuralNetworkForecastVsActualInternalFrame.setLocation((frame.getWidth() - neuralNetworkForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- neuralNetworkForecastVsActualInternalFrame.getHeight())/2);
+                neuralNetworkForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - neuralNetworkForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- neuralNetworkForecastVsActualInternalFrame.getHeight())/2);
                 neuralNetworkForecastVsActualInternalFrame.pack();
                 neuralNetworkForecastVsActualInternalFrame.setClosable(true);
             }
@@ -611,10 +611,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RandomForestPredict randomForestPredictInternalFrame = new RandomForestPredict(csvPath, MainWindow.this);
-                frame.add(randomForestPredictInternalFrame);
+                MainWindow.this.add(randomForestPredictInternalFrame);
                 randomForestPredictInternalFrame.setVisible(true);
-                randomForestPredictInternalFrame.setLocation((frame.getWidth() - randomForestPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- randomForestPredictInternalFrame.getHeight())/2);
+                randomForestPredictInternalFrame.setLocation((MainWindow.this.getWidth() - randomForestPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- randomForestPredictInternalFrame.getHeight())/2);
                 randomForestPredictInternalFrame.pack();
                 randomForestPredictInternalFrame.setClosable(true);
             }
@@ -626,10 +626,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RandomForestForecastVsActual randomForestForecastVsActualInternalFrame = new RandomForestForecastVsActual(csvPath, MainWindow.this);
-                frame.add(randomForestForecastVsActualInternalFrame);
+                MainWindow.this.add(randomForestForecastVsActualInternalFrame);
                 randomForestForecastVsActualInternalFrame.setVisible(true);
-                randomForestForecastVsActualInternalFrame.setLocation((frame.getWidth() - randomForestForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- randomForestForecastVsActualInternalFrame.getHeight())/2);
+                randomForestForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - randomForestForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- randomForestForecastVsActualInternalFrame.getHeight())/2);
                 randomForestForecastVsActualInternalFrame.pack();
                 randomForestForecastVsActualInternalFrame.setClosable(true);
             }
@@ -648,10 +648,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RidgePredict ridgePredictInternalFrame = new RidgePredict(csvPath, MainWindow.this);
-                frame.add(ridgePredictInternalFrame);
+                MainWindow.this.add(ridgePredictInternalFrame);
                 ridgePredictInternalFrame.setVisible(true);
-                ridgePredictInternalFrame.setLocation((frame.getWidth() - ridgePredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- ridgePredictInternalFrame.getHeight())/2);
+                ridgePredictInternalFrame.setLocation((MainWindow.this.getWidth() - ridgePredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- ridgePredictInternalFrame.getHeight())/2);
                 ridgePredictInternalFrame.pack();
                 ridgePredictInternalFrame.setClosable(true);
             }
@@ -663,10 +663,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 RidgeForecastVsActual ridgeForecastVsActualInternalFrame = new RidgeForecastVsActual(csvPath, MainWindow.this);
-                frame.add(ridgeForecastVsActualInternalFrame);
+                MainWindow.this.add(ridgeForecastVsActualInternalFrame);
                 ridgeForecastVsActualInternalFrame.setVisible(true);
-                ridgeForecastVsActualInternalFrame.setLocation((frame.getWidth() - ridgeForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- ridgeForecastVsActualInternalFrame.getHeight())/2);
+                ridgeForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - ridgeForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- ridgeForecastVsActualInternalFrame.getHeight())/2);
                 ridgeForecastVsActualInternalFrame.pack();
                 ridgeForecastVsActualInternalFrame.setClosable(true);
             }
@@ -685,10 +685,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 StochasticGradientDescentPredict stochasticGradientDescentPredictInternalFrame = new StochasticGradientDescentPredict(csvPath, MainWindow.this);
-                frame.add(stochasticGradientDescentPredictInternalFrame);
+                MainWindow.this.add(stochasticGradientDescentPredictInternalFrame);
                 stochasticGradientDescentPredictInternalFrame.setVisible(true);
-                stochasticGradientDescentPredictInternalFrame.setLocation((frame.getWidth() - stochasticGradientDescentPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- stochasticGradientDescentPredictInternalFrame.getHeight())/2);
+                stochasticGradientDescentPredictInternalFrame.setLocation((MainWindow.this.getWidth() - stochasticGradientDescentPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- stochasticGradientDescentPredictInternalFrame.getHeight())/2);
                 stochasticGradientDescentPredictInternalFrame.pack();
                 stochasticGradientDescentPredictInternalFrame.setClosable(true);
             }
@@ -700,10 +700,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 StochasticGradientDescentForecastVsActual stochasticGradientDescentForecastVsActualInternalFrame = new StochasticGradientDescentForecastVsActual(csvPath, MainWindow.this);
-                frame.add(stochasticGradientDescentForecastVsActualInternalFrame);
+                MainWindow.this.add(stochasticGradientDescentForecastVsActualInternalFrame);
                 stochasticGradientDescentForecastVsActualInternalFrame.setVisible(true);
-                stochasticGradientDescentForecastVsActualInternalFrame.setLocation((frame.getWidth() - stochasticGradientDescentForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- stochasticGradientDescentForecastVsActualInternalFrame.getHeight())/2);
+                stochasticGradientDescentForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - stochasticGradientDescentForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- stochasticGradientDescentForecastVsActualInternalFrame.getHeight())/2);
                 stochasticGradientDescentForecastVsActualInternalFrame.pack();
                 stochasticGradientDescentForecastVsActualInternalFrame.setClosable(true);
             }
@@ -722,10 +722,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 SupportVectorMachinePredict supportVectorMachinePredictInternalFrame = new SupportVectorMachinePredict(csvPath, MainWindow.this);
-                frame.add(supportVectorMachinePredictInternalFrame);
+                MainWindow.this.add(supportVectorMachinePredictInternalFrame);
                 supportVectorMachinePredictInternalFrame.setVisible(true);
-                supportVectorMachinePredictInternalFrame.setLocation((frame.getWidth() - supportVectorMachinePredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- supportVectorMachinePredictInternalFrame.getHeight())/2);
+                supportVectorMachinePredictInternalFrame.setLocation((MainWindow.this.getWidth() - supportVectorMachinePredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- supportVectorMachinePredictInternalFrame.getHeight())/2);
                 supportVectorMachinePredictInternalFrame.pack();
                 supportVectorMachinePredictInternalFrame.setClosable(true);
             }
@@ -737,10 +737,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 SupportVectorMachineForecastVsActual supportVectorMachineForecastVsActualInternalFrame = new SupportVectorMachineForecastVsActual(csvPath, MainWindow.this);
-                frame.add(supportVectorMachineForecastVsActualInternalFrame);
+                MainWindow.this.add(supportVectorMachineForecastVsActualInternalFrame);
                 supportVectorMachineForecastVsActualInternalFrame.setVisible(true);
-                supportVectorMachineForecastVsActualInternalFrame.setLocation((frame.getWidth() - supportVectorMachineForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- supportVectorMachineForecastVsActualInternalFrame.getHeight())/2);
+                supportVectorMachineForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - supportVectorMachineForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- supportVectorMachineForecastVsActualInternalFrame.getHeight())/2);
                 supportVectorMachineForecastVsActualInternalFrame.pack();
                 supportVectorMachineForecastVsActualInternalFrame.setClosable(true);
             }
@@ -759,10 +759,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 TimeSeriesPredict timeSeriesPredictInternalFrame = new TimeSeriesPredict(csvPath,MainWindow.this);
-                frame.add(timeSeriesPredictInternalFrame);
+                MainWindow.this.add(timeSeriesPredictInternalFrame);
                 timeSeriesPredictInternalFrame.setVisible(true);
-                timeSeriesPredictInternalFrame.setLocation((frame.getWidth() - timeSeriesPredictInternalFrame.getWidth())/2,
-                        (frame.getHeight()- timeSeriesPredictInternalFrame.getHeight())/2);
+                timeSeriesPredictInternalFrame.setLocation((MainWindow.this.getWidth() - timeSeriesPredictInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- timeSeriesPredictInternalFrame.getHeight())/2);
                 timeSeriesPredictInternalFrame.pack();
                 timeSeriesPredictInternalFrame.setClosable(true);
             }
@@ -774,10 +774,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 TimeSeriesForecastOnce timeSeriesForecastOnceInternalFrame = new TimeSeriesForecastOnce(csvPath,MainWindow.this);
-                frame.add(timeSeriesForecastOnceInternalFrame);
+                MainWindow.this.add(timeSeriesForecastOnceInternalFrame);
                 timeSeriesForecastOnceInternalFrame.setVisible(true);
-                timeSeriesForecastOnceInternalFrame.setLocation((frame.getWidth() - timeSeriesForecastOnceInternalFrame.getWidth())/2,
-                        (frame.getHeight()- timeSeriesForecastOnceInternalFrame.getHeight())/2);
+                timeSeriesForecastOnceInternalFrame.setLocation((MainWindow.this.getWidth() - timeSeriesForecastOnceInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- timeSeriesForecastOnceInternalFrame.getHeight())/2);
                 timeSeriesForecastOnceInternalFrame.pack();
                 timeSeriesForecastOnceInternalFrame.setClosable(true);
             }
@@ -789,10 +789,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 TimeSeriesForecastVsActual timeSeriesForecastVsActualInternalFrame = new TimeSeriesForecastVsActual(csvPath,MainWindow.this);
-                frame.add(timeSeriesForecastVsActualInternalFrame);
+                MainWindow.this.add(timeSeriesForecastVsActualInternalFrame);
                 timeSeriesForecastVsActualInternalFrame.setVisible(true);
-                timeSeriesForecastVsActualInternalFrame.setLocation((frame.getWidth() - timeSeriesForecastVsActualInternalFrame.getWidth())/2,
-                        (frame.getHeight()- timeSeriesForecastVsActualInternalFrame.getHeight())/2);
+                timeSeriesForecastVsActualInternalFrame.setLocation((MainWindow.this.getWidth() - timeSeriesForecastVsActualInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- timeSeriesForecastVsActualInternalFrame.getHeight())/2);
                 timeSeriesForecastVsActualInternalFrame.pack();
                 timeSeriesForecastVsActualInternalFrame.setClosable(true);
             }
@@ -804,10 +804,10 @@ public class MainWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 TimeSeriesContinuousForecast timeSeriesContinuousForecastInternalFrame = new TimeSeriesContinuousForecast(csvPath,MainWindow.this);
-                frame.add(timeSeriesContinuousForecastInternalFrame);
+                MainWindow.this.add(timeSeriesContinuousForecastInternalFrame);
                 timeSeriesContinuousForecastInternalFrame.setVisible(true);
-                timeSeriesContinuousForecastInternalFrame.setLocation((frame.getWidth() - timeSeriesContinuousForecastInternalFrame.getWidth())/2,
-                        (frame.getHeight()- timeSeriesContinuousForecastInternalFrame.getHeight())/2);
+                timeSeriesContinuousForecastInternalFrame.setLocation((MainWindow.this.getWidth() - timeSeriesContinuousForecastInternalFrame.getWidth())/2,
+                        (MainWindow.this.getHeight()- timeSeriesContinuousForecastInternalFrame.getHeight())/2);
                 timeSeriesContinuousForecastInternalFrame.pack();
                 timeSeriesContinuousForecastInternalFrame.setClosable(true);
             }
