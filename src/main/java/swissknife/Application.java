@@ -9,7 +9,6 @@ import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 //TODO ADD in menu bar - print graph
 //TODO ADD in menu bar - SAVE GRAPHs
 //TODO ADD CHOICE TO GET NON HEADERS CSV MAYBE AUTOMATIC IF NO HEADERS => CHOOSE COLUMN.
-//TODO FOR TIME SERIES ANALYSIS PLOT IN DIFFERENT PANEL.
 //TODO IN CONTINOUS FORECAST - FIX ADD NEXT VALUE BUTTON ( TRY TO THINK OF MORE ERGONOMOIQUE WAY OF ADDING A VALUE)
 
 
@@ -17,13 +16,9 @@ import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 //TODO IN THE PRESENTATION - EVERY ALGORITHM IN ONE SLIDE AND THEN FOR MORE DETAILS GO TO SLIDES AFTER Q&A.
 //TODO IN THE PRESENTATION - EXPLAIN THAT WE DID NOT GET ANY DATA SO WE ABSTRACTED OUR PROJECT IN ORDER TO ANALYZE EVERY SIGNAL (N'IMPORTE QUEL SIGNAL). -- PROJET AKBAR.
 //TODO - FACULTATIF - ADD OPTION IN CLASSIFIERS TO PLOT VALUES THAT THE USER ONE (EXAMPLE CHOOSE X AS TEMPS AND Y AS Y-AXIS AND PLOT.)
-
-
+//TODO - fix show values table last item is not shown properly
 //TODO in CompareToolsPanel add a menu bar that selects and deselects all algorithms // and actionKeys.
 //TODO do the same thing for the views/timeseriesanalysis for the JMEnu and the action listener with what you did in the classifiers views.
-//TODO continuous forecast jmenu bar add
-        //TODO - all values
-        //TODO - absolute error - instead of showing it on the screen in the frame show it in a new showvalue panel.
 
 
 public class Application {
