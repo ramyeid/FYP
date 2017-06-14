@@ -62,6 +62,7 @@ public class MainWindow extends JFrame
 
     private JMenu mnTools;
     private JMenu mnComparison;
+    private JMenu mnShowValues;
     private JMenuItem mnShowInputCSV;
 
     /**
@@ -147,6 +148,7 @@ public class MainWindow extends JFrame
                 {
                     mnTools.setEnabled(true);
                     mnComparison.setEnabled(true);
+                    mnShowValues.setEnabled(true);
                     mnShowInputCSV.setEnabled(true);
                 }
             }
@@ -761,9 +763,9 @@ public class MainWindow extends JFrame
         //all columns, actionTime values -- For Predict and Predict Vs Actual
         //all columns, all values -- For Predict and Predict Vs Actual
 
-        JMenu mnShowValues = new JMenu("Show values");
+        mnShowValues = new JMenu("Show Values");
 
-        mnShowInputCSV = new JMenuItem("csv"); // done
+        mnShowInputCSV = new JMenuItem("Loaded CSV"); // done
         JMenu mnSVPredict = new JMenu("Predict");
         JMenu mnSVPredictVsActual = new JMenu("Predict Vs Actual");
         JMenu mnSVTimeSeriesAnalysis = new JMenu("Time Series Analysis");
@@ -827,9 +829,9 @@ public class MainWindow extends JFrame
                 ArrayList<ArrayList<String>> result =
                         CSVReader.getDataCSVForKeys(csvPath, CSVReader.getColumnKeys(csvPath));
                 JInternalFrame masterFrame = new JInternalFrame();
-                masterFrame.add(new ShowValues(result,masterFrame,MainWindow.this));
-                String [] tmp = csvPath.split("/");
-                String csvFile = tmp[tmp.length-1];
+                masterFrame.add(new ShowValues(result, masterFrame, MainWindow.this));
+                String[] tmp = csvPath.split("/");
+                String csvFile = tmp[tmp.length - 1];
                 MainWindow.this.add(masterFrame);
                 masterFrame.setTitle(csvFile);
                 masterFrame.setVisible(true);
@@ -839,14 +841,16 @@ public class MainWindow extends JFrame
             }
         });
 
+        mnShowValues.setEnabled(false);
 
 
 
-        //*******************
-        //*******************
+
+        //********************
+        //********************
         //**** Comparison ****
-        //*******************
-        //*******************
+        //********************
+        //********************
 
         mnComparison = new JMenu("Comparison");
         menuBar.add(mnComparison);
