@@ -321,6 +321,8 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 iF.add(new ContinuousForcastPanel(timeSeriesTool, iF, (MainWindowFrame) mainFrame));
                 iF.setClosable(true);
                 iF.setVisible(true);
+                iF.setLocation((mainFrame.getWidth() - iF.getWidth())/2,
+                        (mainFrame.getHeight()- iF.getHeight())/2);
                 iF.pack();
                 iF.setClosable(true);
                 mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane

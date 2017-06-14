@@ -69,9 +69,11 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         addValueButton.setEnabled(false);
         addValue.setEnabled(false);
 
-        this.setLayout(new BorderLayout());
+        this.setLayout(null);
         this.add(east, BorderLayout.EAST);
+        east.setBounds(15,5,120,80);
         this.add(west, BorderLayout.WEST);
+        west.setBounds(160,5,120,80);
 
         this.setVisible(true);
 
@@ -80,6 +82,11 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
         this.masterFrame.setTitle("Continuous Forecast");
 
         this.mainFrame = mainFrame;
+
+        this.setSize(300,100);
+        this.masterFrame.setSize(320,110);
+        this.masterFrame.setMaximumSize(new Dimension(320, 110));
+        this.masterFrame.setMinimumSize(new Dimension(320, 110));
 
     }
 
