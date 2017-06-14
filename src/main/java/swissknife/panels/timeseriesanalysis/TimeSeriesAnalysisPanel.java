@@ -55,13 +55,26 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
     public TimeSeriesAnalysisPanel(String fileName, int action, JInternalFrame masterFrame, JFrame mainFrame) {
         super(new BorderLayout());
 
+        this.masterFrame = masterFrame;
+        this.mainFrame = mainFrame;
+        this.masterFrame.setTitle(actionName);
         this.inputFile = fileName;
+
+
+
+        this.setLayout(null);
+        this.setSize(600, 400);
+        this.masterFrame.setSize(620,400);
+        this.masterFrame.setMaximumSize(new Dimension(620, 400));
+        this.masterFrame.setMinimumSize(new Dimension(620, 400));
+
+
         actionName = Resources.getTimeSeriesAnalysisActionName(action);
         timeSeriesTool = Resources.getTimeSeriesAnalysisTool(action);
 
         keysXButtonGroup = new ButtonGroup();
         keysYButtonGroup = new ButtonGroup();
-        submitButton = new JButton();
+        submitButton = new JButton(actionName);
         radioButtonsPanelX = new JPanel();
         radioButtonsPanelY = new JPanel();
         radioButtonListX = new ArrayList<>();
@@ -95,32 +108,33 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
         submitButton.addActionListener(this);
 
+        int numberOfKeys = keysList.length;
 
-        JPanel radioButtons = new JPanel(new BorderLayout());
-        radioButtons.add(radioButtonsPanelX, BorderLayout.WEST);
-        radioButtons.add(radioButtonsPanelY, BorderLayout.EAST);
+        JPanel radioButtonsPanel = new JPanel();
+        radioButtonsPanel.setLayout(null);
+        radioButtonsPanel.add(radioButtonsPanelX);
+        radioButtonsPanelX.setBounds(5,5,150,40+(numberOfKeys+1)*20);
+        radioButtonsPanel.add(radioButtonsPanelY);
+        radioButtonsPanelY.setBounds(160,5,150,40+(numberOfKeys+1)*20);
 
 
-        add(radioButtons, BorderLayout.WEST);
-        add(centerPanel, BorderLayout.CENTER);
-
-        submitButton.setText(actionName);
         if (action != 4) {
             submitPanel.add(actionTimeField);
             submitPanel.add(actionTimeLabel);
-
         }
-        submitPanel.add(submitButton);
 
         centerPanel.add(submitPanel);
+        submitPanel.add(submitButton);
 
+        add(radioButtonsPanel);
+        radioButtonsPanel.setBounds(20,15,350,10+radioButtonsPanelX.getHeight());
 
-        this.masterFrame = masterFrame;
-        this.mainFrame = mainFrame;
-        this.masterFrame.setTitle(actionName);
-
-
+        add(centerPanel);
+        centerPanel.setBounds(400,15,100,150);
+        this.add(submitPanel);
+        submitPanel.setBounds(350,200,200,200);
     }
+
 
 
     @Override
