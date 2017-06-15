@@ -19,7 +19,7 @@ public class TimeSeriesContinuousForecast extends JInternalFrame
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
                 super.internalFrameClosing(e);
-                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
                 JMenu continuousForecast = (JMenu) timeSeries.getMenuComponent(2);
 
                 if(continuousForecast.getItem(0).getActionListeners().length!=0) {
@@ -29,6 +29,7 @@ public class TimeSeriesContinuousForecast extends JInternalFrame
                     continuousForecast.getItem(1).removeActionListener(continuousForecast.getItem(1).getActionListeners()[0]);
                 }
 
+                timeSeries.setEnabled(false);
                 continuousForecast.setEnabled(false);
 
             }

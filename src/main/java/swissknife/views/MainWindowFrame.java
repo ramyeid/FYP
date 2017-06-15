@@ -810,6 +810,26 @@ public class MainWindowFrame extends JFrame {
         mnTimeSeriesAnalysis.add(mntmTSAContinuousForecast);
 
 
+
+        //********************
+        //********************
+        //**** Java Bayes       ****
+        //********************
+        //********************
+
+        JMenu mnBayesianNetwork = new JMenu("Bayesian Network");
+        menuBar.add(mnBayesianNetwork);
+        JMenuItem mntmJavaBayes = new JMenuItem("JavaBayes");
+        mnBayesianNetwork.add(mntmJavaBayes);
+        mntmJavaBayes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JavaBayes javaBayes = new JavaBayes();
+                javaBayes.construct(false);
+            }
+        });
+
         //*********************
         //*********************
         //**** SHOW VALUES ****
@@ -979,24 +999,6 @@ public class MainWindowFrame extends JFrame {
         });
         mnPlot.setEnabled(false);
 
-        //********************
-        //********************
-        //**** Plot       ****
-        //********************
-        //********************
-
-        JMenu mnBayesianNetwork = new JMenu("Bayesian Network");
-        menuBar.add(mnBayesianNetwork);
-        JMenuItem mntmJavaBayes = new JMenuItem("JavaBayes");
-        mnBayesianNetwork.add(mntmJavaBayes);
-        mntmJavaBayes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                JavaBayes javaBayes = new JavaBayes();
-                javaBayes.construct(false);
-            }
-        });
 
 
 

@@ -18,12 +18,13 @@ public class TimeSeriesForecastVsActual extends JInternalFrame
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
                 super.internalFrameClosing(e);
-                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
                 JMenuItem forecastVsActual = (JMenuItem) timeSeries.getMenuComponent(1);
 
                 if(forecastVsActual.getActionListeners().length!=0) {
                     forecastVsActual.removeActionListener(forecastVsActual.getActionListeners()[0]);
                 }
+                timeSeries.setEnabled(false);
                 forecastVsActual.setEnabled(false);
             }
         });

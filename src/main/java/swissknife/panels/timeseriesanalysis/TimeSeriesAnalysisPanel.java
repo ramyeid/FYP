@@ -215,10 +215,11 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                     break;
             }
             String dateFormat = dateFormatComboBox.getSelectedItem().toString();
-            JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+            JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
             if (!actionName.equals(Resources.TSA_CONTINUOUS_FORECAST)) {
-                this.mainFrame.getJMenuBar().getMenu(2).setEnabled(true);
-                timeSeries.setEnabled(true);
+                this.mainFrame.getJMenuBar().getMenu(3).setEnabled(true);
+                if(!actionName.equals(Resources.TSA_PREDICT))
+                    timeSeries.setEnabled(true);
                 if (timeSeries.getItem(1).getActionListeners().length != 0) {
                     timeSeries.getItem(1).removeActionListener(timeSeries.getItem(1).getActionListeners()[0]);
                 }
@@ -332,7 +333,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                     @Override
                     public void internalFrameClosing(InternalFrameEvent e) {
                         super.internalFrameClosing(e);
-                        JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+                        JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
                         JMenu continuousForecast = (JMenu) timeSeries.getMenuComponent(2);
 
                         if(continuousForecast.getItem(0).getActionListeners().length!=0) {
@@ -341,7 +342,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                         if(continuousForecast.getItem(1).getActionListeners().length!=0) {
                             continuousForecast.getItem(1).removeActionListener(continuousForecast.getItem(1).getActionListeners()[0]);
                         }
-
+                        timeSeries.setEnabled(false);
                         continuousForecast.setEnabled(false);
 
                     }

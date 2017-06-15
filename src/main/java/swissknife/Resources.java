@@ -184,7 +184,7 @@ public class Resources {
     public static final String GRADIENT_BOOSTING_CLASSIFIER = "Gradient Boosting Classifier";
     public static final String K_NEAREST_NEIGHBORS = "K Nearest Neighbors";
     public static final String LINEAR_DISCRIMINANT_ANALYSIS = "Linear Discriminant Analysis";
-    public static final String LINEAR_SVC = "Linear SVC";
+    public static final String LINEAR_SVC = "Linear SVM";
     public static final String LOGISTIC_REGRESSION = "Logistic Regression";
     public static final String GAUSSIAN_NAIVE_BAYES = "Gaussian Naive Bayes";
     public static final String RANDOM_FOREST = "Random Forest";

@@ -1,4 +1,4 @@
-Sex,Length,Diameter,Height,Whole weight,Shucked weight,Viscera weight,Shell weight,Rings,var0,var1Predict & Actual
+Sex,Length,Diameter,Height,Whole weight,Shucked weight,Viscera weight,Shell weight,Rings,Area,AgePredict & Actual
 1,1,1,1,0,0,1,1,1,0,1.0
 1,1,1,1,0,1,0,1,1,0,0.0
 1,1,1,0,0,0,1,1,1,1,1.0
@@ -9994,7 +9994,7 @@ Sex,Length,Diameter,Height,Whole weight,Shucked weight,Viscera weight,Shell weig
 1,1,1,0,0,1,0,1,1,1,1.0
 1,1,1,0,0,1,0,1,1,1,1.0
 1,1,1,0,0,0,0,1,1,0,1.0
-0,0,0,0,0,0,1,0,0,1,1.0
+0,0,0,0,0,0,1,0,0,1,0.0
 1,1,1,0,0,1,1,1,1,0,1.0
 0,1,0,0,0,0,1,1,1,0,1.0
 0,0,0,0,0,0,1,0,0,0,0.0

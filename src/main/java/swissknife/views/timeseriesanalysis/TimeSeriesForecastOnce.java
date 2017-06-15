@@ -18,12 +18,13 @@ public class TimeSeriesForecastOnce extends JInternalFrame
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
                 super.internalFrameClosing(e);
-                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+                JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
                 JMenuItem forecastOnce = (JMenuItem) timeSeries.getMenuComponent(0);
 
                 if(forecastOnce.getActionListeners().length!=0) {
                     forecastOnce.removeActionListener(forecastOnce.getActionListeners()[0]);
                 }
+                timeSeries.setEnabled(false);
                 forecastOnce.setEnabled(false);
             }
         });

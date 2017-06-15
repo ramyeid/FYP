@@ -95,7 +95,7 @@ public class ContinuousForcastPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 //        plotPanel.removeAll();
 //        this.remove(plotPanel);
-        JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+        JMenu timeSeries = (JMenu) this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(3);
         JMenu timeSeriesContinuousForecast = (JMenu) timeSeries.getMenuComponent(2);
 
         if (e.getSource() == addValueButton) {

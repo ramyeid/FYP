@@ -22,8 +22,8 @@ public class DecisionTreePredict extends JInternalFrame
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
                 super.internalFrameClosing(e);
-                JMenu predictVsActualMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2);
-                JMenu predictMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1);
+                JMenu predictVsActualMenu = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(2);
+                JMenu predictMenu = (JMenu) mainFrame.getJMenuBar().getMenu(3).getMenuComponent(1);
 
 
                 for(int i=0;i<predictVsActualMenu.getItemCount();++i){

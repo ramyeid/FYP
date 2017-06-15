@@ -187,7 +187,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
             switch (actionName) {
                 case Resources.CLASSIFIER_PREDICT:
-                    this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1).setEnabled(true);
+                    this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(1).setEnabled(true);
                     classifierTool.action();
 
                     ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
@@ -208,7 +208,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
                     break;
                 case Resources.CLASSIFIER_PREDICT_VS_ACTUAL:
-                    this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2).setEnabled(true);
+                    this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(2).setEnabled(true);
                     classifierTool.action();
                     float accuracy = classifierTool.getAccuracy();
                     accuracy = accuracy * 100f;
@@ -242,7 +242,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
     //actionKeys Columns, actionTime Values
     public ArrayList<ArrayList<String>> getValuesOfActionKeysForActionTime_PredictVsActual()*/
-        JMenu predictVsActualMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2);
+        JMenu predictVsActualMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(2);
         for (int i = 0; i < predictVsActualMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictVsActualMenu.getItem(i);
             switch (tmp.getText()) {
@@ -347,8 +347,8 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
 //
         System.out.println(mainFrame.getJMenuBar().getMenuCount());
-        System.out.println(mainFrame.getJMenuBar().getMenu(2).getItemCount());
-        JMenu predictMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1);
+        System.out.println(mainFrame.getJMenuBar().getMenu(3).getItemCount());
+        JMenu predictMenu = (JMenu) this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(1);
         for (int i = 0; i < predictMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictMenu.getItem(i);
             switch (tmp.getText()) {
