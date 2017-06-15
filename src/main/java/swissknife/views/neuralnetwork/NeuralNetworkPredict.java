@@ -16,24 +16,30 @@ public class NeuralNetworkPredict extends JInternalFrame{
         this.add(new ClassifierPanel(new NNPredict(), pathCsv, this, mainFrame));
         this.setVisible(true);
         this.pack();
-        this.addInternalFrameListener(new InternalFrameAdapter() {
-            @Override
-            public void internalFrameClosing(InternalFrameEvent e) {
-                super.internalFrameClosing(e);
-                JMenu predictVsActualMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2);
-                JMenu predictMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1);
+       this.addInternalFrameListener(new InternalFrameAdapter() {
+           @Override
+           public void internalFrameClosing(InternalFrameEvent e) {
+               super.internalFrameClosing(e);
+               JMenu predictVsActualMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2);
+               JMenu predictMenu = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1);
 
-                for (int i = 0; i < predictVsActualMenu.getItemCount(); ++i) {
-                    predictVsActualMenu.getItem(i).removeActionListener(predictVsActualMenu.getItem(i).getActionListeners()[0]);
-                }
 
-                for (int i = 0; i < predictMenu.getItemCount(); ++i) {
-                    predictMenu.getItem(i).removeActionListener(predictMenu.getItem(i).getActionListeners()[0]);
-                }
+               for(int i=0;i<predictVsActualMenu.getItemCount();++i){
+                   if (predictVsActualMenu.getItem(i).getActionListeners().length!=0) {
+                       predictVsActualMenu.getItem(i).removeActionListener(predictVsActualMenu.getItem(i).getActionListeners()[0]);
+                   }
+               }
 
-                predictVsActualMenu.setEnabled(false);
-                predictMenu.setEnabled(false);
-            }
-        });
+               for(int i=0;i<predictMenu.getItemCount();++i) {
+                   if (predictMenu.getItem(i).getActionListeners().length != 0) {
+                       predictMenu.getItem(i).removeActionListener(predictMenu.getItem(i).getActionListeners()[0]);
+                   }
+               }
+
+               predictVsActualMenu.setEnabled(false);
+               predictMenu.setEnabled(false);
+
+           }
+       });
     }
 }
