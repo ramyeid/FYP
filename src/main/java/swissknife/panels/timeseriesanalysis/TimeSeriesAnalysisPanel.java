@@ -10,6 +10,8 @@ import swissknife.panels.showvalues.ShowValues;
 import swissknife.views.MainWindowFrame;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -323,6 +325,27 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
                 iF.setVisible(true);
                 iF.setLocation((mainFrame.getWidth() - iF.getWidth())/2,
                         (mainFrame.getHeight()- iF.getHeight())/2);
+
+
+                iF.addInternalFrameListener(new InternalFrameAdapter() {
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        super.internalFrameClosing(e);
+                        JMenu timeSeries = (JMenu) mainFrame.getJMenuBar().getMenu(2).getMenuComponent(3);
+                        JMenu continuousForecast = (JMenu) timeSeries.getMenuComponent(2);
+
+                        if(continuousForecast.getItem(0).getActionListeners().length!=0) {
+                            continuousForecast.getItem(0).removeActionListener(continuousForecast.getItem(0).getActionListeners()[0]);
+                        }
+                        if(continuousForecast.getItem(1).getActionListeners().length!=0) {
+                            continuousForecast.getItem(1).removeActionListener(continuousForecast.getItem(1).getActionListeners()[0]);
+                        }
+
+                        continuousForecast.setEnabled(false);
+
+                    }
+                });
+
                 iF.pack();
                 iF.setClosable(true);
                 mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
