@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 //TODO ADD MORE AVERAGE
 //TODO ADD MORE DATE FORMAT
 //TODO all actions on different threads.
+//TODO add bayesian network // done // noeud ...
+
 public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     private String inputFile;
@@ -45,7 +47,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
     TextField actionTimeField;
     Label actionTimeLabel = new Label("Action Time");
-
+    JLabel accuracyLabel;
 //    JPanel plotPanel;
 
     String actionName;
@@ -86,7 +88,7 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
         submitPanel = new JPanel();
         submitPanel.setLayout(null);
-
+        accuracyLabel = new JLabel();
 
         actionTimeField = new TextField(4);
 //        plotPanel = new JPanel();
@@ -304,9 +306,10 @@ public class TimeSeriesAnalysisPanel extends JPanel implements ActionListener {
 
 //                plotPanel = ((TimeSeriesAnalysis)timeSeriesTool).plot();
                 if (actionName.equals(Resources.TSA_FORECAST_VS_ACTUAL)) {
-                    JLabel mse = new JLabel("MSE ERROR: " + ((TSAForecastVsActual) timeSeriesTool).getError());
-                    submitPanel.add(mse);
-                    mse.setBounds(5,60,180,20);
+                    submitPanel.remove(accuracyLabel);
+                    accuracyLabel.setText("Accuracy: "+ ((TSAForecastVsActual) timeSeriesTool).getAccuracy()+" %");
+                    submitPanel.add(accuracyLabel);
+                    accuracyLabel.setBounds(5,60,180,20);
                 }
 //                this.add(plotPanel, BorderLayout.SOUTH);
 

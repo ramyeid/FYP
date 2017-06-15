@@ -32,7 +32,21 @@ def forecastVsActual(keyY,series,actionTime,src):
         obs = test[t]
         history.append(obs)
         # print('predicted=%f, expected=%f' % (yhat, obs))
-    error = mean_squared_error(test, predictions)
+
+    actual = 0
+    accuracy = 0
+    for i in range(0,len(test)):
+        accuracy+=abs(test[i]-predictions[i])
+        actual += test[i]
+
+    actual = actual/len(test)
+
+    accuracy = accuracy / len(test)
+    accuracy = accuracy / actual
+    accuracy = round((1 - accuracy)*100,2)
+
+
+    # error = mean_squared_error(test, predictions)
     # print('MSE: %.3f' % error)
 
     time = series[keyX].values[size:len(X)]
@@ -43,7 +57,7 @@ def forecastVsActual(keyY,series,actionTime,src):
     df.to_csv(outputFile, index=True, encoding='utf-8')
 
     with open(outputFile,'a') as f:
-        f.write("ERROR MSE: "+str(error));
+        f.write("Accuracy: "+str(accuracy));
         f.write("\n")
     f.close()
 

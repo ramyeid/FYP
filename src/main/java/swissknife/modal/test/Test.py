@@ -94,9 +94,30 @@ target_pred = clf.predict(features_test)
 
 keys.append(keyToPredict)
 if action == "1":
-    error = mean_squared_error(target_test, target_pred)
-    print 'error', error
-    print 'AAAA', np.mean((target_test - target_pred) ** 2)
+    # error = mean_squared_error(target_test, target_pred)
+
+
+    actual = 0
+    accuracy = 0
+    print accuracy
+    for i in range(0,len(target_test)):
+        accuracy+=abs(target_test[i]-target_pred[i])
+        actual += target_test[i]
+
+    print accuracy
+
+    actual = actual/len(target_test)
+
+    accuracy = accuracy/len(target_test)
+
+    accuracy = accuracy / actual
+    print accuracy
+
+    accuracy = round((1 - accuracy),2)
+
+
+
+
 
     df = pd.DataFrame()
     tmp_df = pd.read_csv(inputFile, header=0)
@@ -123,7 +144,7 @@ if action == "1":
     df_2.to_csv(src + "Predicted_Actual_Only.csv")
 
     with open(src + "Predicted_Actual_Only.csv", 'a') as f:
-        f.write("ERROR MSE: " + str(error));
+        f.write("ACCURACY: " + str(accuracy));
         f.write("\n")
         f.close()
 

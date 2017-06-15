@@ -10,7 +10,7 @@ public abstract class Test implements Tool{
     protected String inputFile;
     protected String keyToPredict;
     protected int actionTime;
-    private float mseError;
+    private float accuracy;
     protected int action;
     protected String fileToReadError;
     protected String algorithmName;
@@ -31,12 +31,12 @@ public abstract class Test implements Tool{
     }
 
     private void calculateError(){
-        mseError = CSVReader.readError(fileToReadError, "ERROR MSE: ");
+        accuracy = CSVReader.readError(fileToReadError, "ERROR MSE: ");
     }
 
-    public float getMseError() {
+    public float getAccuracy() {
         calculateError();
-        return mseError;
+        return accuracy;
     }
 
     public int getAction() {

@@ -186,7 +186,10 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(2).setEnabled(true);
                     classifierTool.action();
                     float accuracy = classifierTool.getAccuracy();
-                    accuracyLabel.setText("Accuracy :" + accuracy);
+                    accuracy = accuracy * 100f;
+
+                    String text = String.format("Accuracy: %.2f",accuracy);
+                    accuracyLabel.setText(text+" %");
                     southPanel.add(accuracyLabel);
                     accuracyLabel.setBounds(225, 25, 150, 20);
                     masterFrame.pack();

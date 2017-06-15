@@ -1,4 +1,4 @@
 Date,#Passengers_actual,#Passengers_prediction
 1960-11-01,390.0,443.692740453
 1960-12-01,432.0,366.035675821
-ERROR MSE: 3617.10122092
+Accuracy: 85.44

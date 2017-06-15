@@ -100,7 +100,7 @@ public class LinearRegressionPanel extends JPanel implements ActionListener {
                     break;
                 case Resources.LR_PREDICT_VS_ACTUAL:
                     testTool.action();
-                    float error =  ((Test)testTool).getMseError();
+                    float error =  ((Test)testTool).getAccuracy();
                     mseErrorLabel.setText("MSE ERROR: "+error);
                     southPanel.add(mseErrorLabel);
                     masterFrame.revalidate();

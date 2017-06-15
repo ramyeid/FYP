@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TSAForecastVsActual extends TimeSeriesAnalysis {
 
-    private float error;
+    private float accuracy;
     private ArrayList<ArrayList<String>> values;
 
     public TSAForecastVsActual(String inputFile, String keyX, String keyY, int actionTime, String average, String dateFormat){
@@ -28,7 +28,7 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
 
     public  void action(){
         new RunTSAPython(inputFile,keyX,keyY,2,actionTime,average,dateFormat,0,0).run();
-        error = CSVReader.readError(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,"ERROR MSE: ");
+        accuracy = CSVReader.readError(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,"Accuracy: ");
         values = CSVReader.getDataCSVForKeys(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE,CSVReader.getColumnKeys(Resources.TSA_FORECAST_VS_ACTUAL_OUTPUT_FILE));
     }
 
@@ -41,8 +41,8 @@ public class TSAForecastVsActual extends TimeSeriesAnalysis {
     }
 
 
-    public float getError() {
-        return error;
+    public float getAccuracy() {
+        return accuracy;
     }
 
 

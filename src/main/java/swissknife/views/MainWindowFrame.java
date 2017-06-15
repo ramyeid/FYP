@@ -47,8 +47,11 @@ import java.util.ArrayList;
 /**
  * Created by ramyeid on 6/14/17.
  */
-
-//TODO Scroll pane enable scroll horizontally.
+//TODO finish with neural network.s
+//TODO Scroll pane enable scroll horizontally - check scroll pane bcs last value usually is not shown properly
+//TODO add Panel that the user can choose 2 keys and plot them.
+//TODO fix linear regression test it and do it
+//TODO choose adult.data.csv and fix the frame that need to be fixed example predict vs actual for the keys.
 
 public class MainWindowFrame extends JFrame{
 
@@ -368,8 +371,16 @@ public class MainWindowFrame extends JFrame{
         {
             public void actionPerformed(ActionEvent e)
             {
+//
+//                LinearRegressionPredict iF = new LinearRegressionPredict(csvPath);
+//                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
+//                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+//
+//                iF.setClosable(true);
+//                iF.setVisible(true);
+//                dp.add(iF);//add internal frame to the desktop pane
 
-                LinearRegressionPredict iF = new LinearRegressionPredict(csvPath);
+                LinearRegressionPredict iF = new LinearRegressionPredict(csvPath, MainWindowFrame.this);
                 iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
                         (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
 
@@ -386,7 +397,14 @@ public class MainWindowFrame extends JFrame{
             {
 
 
-                LinearRegressionForecastVsActual iF = new LinearRegressionForecastVsActual(csvPath);
+//                LinearRegressionForecastVsActual iF = new LinearRegressionForecastVsActual(csvPath);
+//                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
+//                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+//
+//                iF.setClosable(true);
+//                iF.setVisible(true);
+//                dp.add(iF);//add internal frame to the desktop pane
+                LinearRegressionForecastVsActual iF = new LinearRegressionForecastVsActual(csvPath, MainWindowFrame.this);
                 iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
                         (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
 

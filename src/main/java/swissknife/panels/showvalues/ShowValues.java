@@ -2,6 +2,9 @@ package swissknife.panels.showvalues;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -14,7 +17,6 @@ public class ShowValues extends JPanel {
     JFrame mainFrame;
 
     public ShowValues(ArrayList<ArrayList<String>> data, JInternalFrame masterFrame, JFrame mainFrame) {
-
         Vector<String> columnNames = new Vector<String>();
         for (int i = 0; i < data.size(); ++i) {
             columnNames.add(data.get(i).get(0));
@@ -27,7 +29,18 @@ public class ShowValues extends JPanel {
             }
         };
 
-        JTable table = new JTable(tableModel);
+        JTable table = new JTable(tableModel){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//        JTable table = new JTable(tableModel);
 
         for (int j = 1; j < data.get(0).size(); j++) {
             Vector<String> result = new Vector<String>();

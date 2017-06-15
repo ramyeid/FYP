@@ -94,33 +94,29 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         comparisonAndSubmitSouth.add(submitButton);
 
         this.add(chooseAlgorithmsActionPanelWEST);
-        chooseAlgorithmsActionPanelWEST.setBounds(15,20,250,350);
+        chooseAlgorithmsActionPanelWEST.setBounds(15, 20, 250, 350);
         chooseAlgorithmsActionPanelWEST.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(keysPanelCenter);
-        keysPanelCenter.setBounds(300,20, 150, 40+(numberOfKeys+1)*20);
+        keysPanelCenter.setBounds(300, 20, 150, 40 + (numberOfKeys + 1) * 20);
         keysPanelCenter.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(keysCheckBoxPanel);
-        keysCheckBoxPanel.setBounds(500,20,200,40+(numberOfKeys+1)*20);
+        keysCheckBoxPanel.setBounds(500, 20, 200, 40 + (numberOfKeys + 1) * 20);
         keysCheckBoxPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actionPanel);
-        actionPanel.setBounds(300,40+keysPanelCenter.getHeight(),200,60);
+        actionPanel.setBounds(300, 40 + keysPanelCenter.getHeight(), 200, 60);
         this.add(actionTimePanel);
-        actionTimePanel.setBounds(480,40+keysPanelCenter.getHeight(),200,30);
+        actionTimePanel.setBounds(480, 40 + keysPanelCenter.getHeight(), 200, 30);
         this.add(comparisonAndSubmitSouth);
-        comparisonAndSubmitSouth.setBounds(500,80+keysPanelCenter.getHeight(),100,100);
+        comparisonAndSubmitSouth.setBounds(500, 80 + keysPanelCenter.getHeight(), 100, 100);
 
-        if(keysCheckBoxPanel.getHeight()>350)
-        {
-            this.setSize(715, 50+keysCheckBoxPanel.getHeight());
-            this.masterFrame.setSize(735,20+keysCheckBoxPanel.getHeight());
-            this.masterFrame.setMaximumSize(new Dimension(735, 20+keysCheckBoxPanel.getHeight()));
-            this.masterFrame.setMinimumSize(new Dimension(735, 20+keysCheckBoxPanel.getHeight()));
-        }
-
-        else
-        {
-            this.setSize(715,400);
-            this.masterFrame.setSize(735,410);
+        if (keysCheckBoxPanel.getHeight() > 350) {
+            this.setSize(715, 50 + keysCheckBoxPanel.getHeight());
+            this.masterFrame.setSize(735, 20 + keysCheckBoxPanel.getHeight());
+            this.masterFrame.setMaximumSize(new Dimension(735, 20 + keysCheckBoxPanel.getHeight()));
+            this.masterFrame.setMinimumSize(new Dimension(735, 20 + keysCheckBoxPanel.getHeight()));
+        } else {
+            this.setSize(715, 400);
+            this.masterFrame.setSize(735, 410);
             this.masterFrame.setMaximumSize(new Dimension(735, 410));
             this.masterFrame.setMinimumSize(new Dimension(735, 410));
         }
@@ -272,31 +268,51 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
     }
 
     private void showValues() {
+//
+//        ArrayList<ArrayList<String>> data = new ArrayList<>();
+//        data.add(new ArrayList<>());
+//        data.add(new ArrayList<>());
+//        data.get(0).add("Algorithm Name");
+//        data.get(1).add("Values Predicted");
+//
+//        for (int i = 0; i < classifiersChosen.size(); ++i) {
+//            ArrayList<String> result = classifiersChosen.get(i).getValuesOfPredictedForActionTime_Predict();
+//            String tmpResult = "";
+//            for (int j = 1; j < result.size(); ++j) {
+//                tmpResult += result.get(j);
+//                if (j != result.size() - 1) {
+//                    tmpResult += ", ";
+//                }
+//            }
+//            data.get(0).add(classifiersChosen.get(i).getAlgorithmName());
+//            data.get(1).add(tmpResult);
+//        }
+//
+//
+//
+//
+//        JInternalFrame iF = new JInternalFrame();
+//        iF.add(new ShowValues(data,iF,mainFrame));
+//
+//        iF.setTitle("Algorithms Predicted Values");
+//        iF.setClosable(true);
+//        iF.setVisible(true);
+//        iF.pack();
+//
+//        mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
 
         ArrayList<ArrayList<String>> data = new ArrayList<>();
-        data.add(new ArrayList<>());
-        data.add(new ArrayList<>());
-        data.get(0).add("Algorithm Name");
-        data.get(1).add("Values Predicted");
-
+        ArrayList<String> result;
         for (int i = 0; i < classifiersChosen.size(); ++i) {
-            ArrayList<String> result = classifiersChosen.get(i).getValuesOfPredictedForActionTime_Predict();
-            String tmpResult = "";
-            for (int j = 1; j < result.size(); ++j) {
-                tmpResult += result.get(j);
-                if (j != result.size() - 1) {
-                    tmpResult += ", ";
-                }
-            }
-            data.get(0).add(classifiersChosen.get(i).getAlgorithmName());
-            data.get(1).add(tmpResult);
+            data.add(new ArrayList<>());
+            data.get(i).add(classifiersChosen.get(i).getAlgorithmName());
+            result = classifiersChosen.get(i).getValuesOfPredictedForActionTime_Predict();
+            result.remove(0);
+            data.get(i).addAll(result);
         }
 
-
-
-
         JInternalFrame iF = new JInternalFrame();
-        iF.add(new ShowValues(data,iF,mainFrame));
+        iF.add(new ShowValues(data, iF, mainFrame));
 
         iF.setTitle("Algorithms Predicted Values");
         iF.setClosable(true);
@@ -321,13 +337,12 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
             float accuracy = classifiersChosen.get(i).getAccuracy();
             String name = classifiersChosen.get(i).getAlgorithmName();
             data.get(0).add(name);
-            data.get(1).add("" + accuracy);
+
+            accuracy = accuracy * 100f;
+            String text = String.format("%.2f", accuracy);
+
+            data.get(1).add(text + " %");
         }
-
-
-
-
-
 
 
         JInternalFrame iF = new JInternalFrame();
@@ -339,7 +354,6 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         iF.pack();
 
         mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
-
 
 
     }

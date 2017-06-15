@@ -138,8 +138,8 @@ public class Resources {
     public static final String RC_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_RC + "Predicted_Actual_Result.csv";
     public static final String BNB_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_BNB + "Predicted_Actual_Result.csv";
 
-    public static final String LR_PREDICTED_ACTUAL_FILE = BASE_FILE_LR + "Predicted_Actual_Result.csv";
 
+    public static final String LR_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_LR+"Predicted_Actual_Result.csv";
 
 
 
@@ -186,6 +186,7 @@ public class Resources {
     public static final String RIDGE_CLASSIFIER = "Ridge Classifier";
     public static final String STOCHASTIC_GRADIENT_DESCENT = "Stochastic Gradient Descent";
     public static final String SUPPORT_VECTOR_MACHINE = "Support Vector Machine";
+    public static final String LINEAR_REGRESSION = "Linear Regression";
 
 
     public static String getTimeSeriesAnalysisActionName(int action) {

@@ -183,7 +183,7 @@ public class Application {
 
         linR.action();
 
-        System.out.println("linr"+ linR.getMseError());
+        System.out.println("linr"+ linR.getAccuracy());
 
 
 
