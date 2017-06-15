@@ -41,7 +41,7 @@ public class CSVReader {
         int index = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                if (line.contains("ACCURACY:") || line.contains("ERROR MSE:")){
+                if (line.contains("Accuracy") || line.contains("ACCURACY:") || line.contains("ERROR MSE:")){
                     continue;
                 }
                 if (gotHeader == true) {

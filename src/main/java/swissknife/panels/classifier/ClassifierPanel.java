@@ -246,7 +246,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         for (int i = 0; i < predictVsActualMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictVsActualMenu.getItem(i);
             switch (tmp.getText()) {
-                case "all values":
+                case "All values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -266,7 +266,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "all values for action time":
+                case "All values for action time":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -304,7 +304,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "action keys columns for action time":
+                case "Action keys columns for action time":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -352,7 +352,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         for (int i = 0; i < predictMenu.getItemCount(); ++i) {
             JMenuItem tmp = predictMenu.getItem(i);
             switch (tmp.getText()) {
-                case "all values":
+                case "All values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -372,7 +372,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "all values for action time":
+                case "All values for action time":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -392,7 +392,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "action keys values":
+                case "Action keys values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -412,7 +412,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "action keys values for action time":
+                case "Action keys values for action time":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -432,7 +432,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "key to predict values":
+                case "Key to predict values":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -454,7 +454,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                         }
                     });
                     break;
-                case "key to predict values for action time":
+                case "Key to predict values for action time":
                     tmp.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {

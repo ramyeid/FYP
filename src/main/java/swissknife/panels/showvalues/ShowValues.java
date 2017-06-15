@@ -8,16 +8,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- * Created by ramyeid on 6/12/17.
- */
+
 public class ShowValues extends JPanel {
 
     JInternalFrame masterFrame;
     JFrame mainFrame;
 
     public ShowValues(ArrayList<ArrayList<String>> data, JInternalFrame masterFrame, JFrame mainFrame) {
-        Vector<String> columnNames = new Vector<String>();
+        Vector<String> columnNames = new Vector<>();
         for (int i = 0; i < data.size(); ++i) {
             columnNames.add(data.get(i).get(0));
         }
@@ -29,17 +27,7 @@ public class ShowValues extends JPanel {
             }
         };
 
-        JTable table = new JTable(tableModel){
-            @Override
-            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
-                Component component = super.prepareRenderer(renderer, row, column);
-                int rendererWidth = component.getPreferredSize().width;
-                TableColumn tableColumn = getColumnModel().getColumn(column);
-                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
-                return component;
-            }
-        };
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
 //        JTable table = new JTable(tableModel);
 
         for (int j = 1; j < data.get(0).size(); j++) {
@@ -53,15 +41,29 @@ public class ShowValues extends JPanel {
                 tableModel.addRow(result);
             }
         }
+        JTable table = new JTable(tableModel){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         this.masterFrame = masterFrame;
         this.mainFrame = mainFrame;
         JScrollPane scrollPane = new JScrollPane(table);
 
-//        this.setLayout(null);
-        scrollPane.setBounds(10,10,scrollPane.getWidth(),scrollPane.getHeight());
-        masterFrame.setSize(scrollPane.getWidth()+10,scrollPane.getHeight()+10);
+
+
+        this.masterFrame.setSize(table.getWidth(), table.getHeight());
+
         this.add(scrollPane);
+        this.setLayout(new GridLayout(1,1));
+
 
 //        this.masterFrame.setSize(10,10);
 //        this.masterFrame.pack();

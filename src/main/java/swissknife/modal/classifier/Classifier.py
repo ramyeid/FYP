@@ -82,7 +82,6 @@ if(hiddenDepth!=""):
 		print depth
 		depthResult.append(depth)
 else:
-	print' hererehrehreehrhe'
 	depthResult.append(30)
 	depthResult.append(30)
 	depthResult.append(30)

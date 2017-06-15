@@ -2,6 +2,7 @@ package swissknife.views;
 
 import swissknife.CSVReader;
 import swissknife.panels.comparetools.CompareToolsPanel;
+import swissknife.panels.plotrandomkeys.PlotRandomKeys;
 import swissknife.panels.showvalues.ShowValues;
 import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesForecastVsActual;
 import swissknife.views.bernoullinaivebayes.BernoulliNaiveBayesPredict;
@@ -49,10 +50,9 @@ import java.util.ArrayList;
 /**
  * Created by ramyeid on 6/14/17.
  */
-//TODO add Panel that the user can choose 2 keys and plot them.
 //TODO fix linear regression test it and do it // hint check Resources.java and add linearregression in variables.
 
-public class MainWindowFrame extends JFrame{
+public class MainWindowFrame extends JFrame {
 
     String csvPath;
 
@@ -61,6 +61,7 @@ public class MainWindowFrame extends JFrame{
     private JMenu mnComparison;
     private JMenu mnShowValues;
     private JMenuItem mnShowInputCSV;
+    private JMenuItem mnPlot;
     JDesktopPane dp;
 
     public MainWindowFrame()
@@ -78,12 +79,8 @@ public class MainWindowFrame extends JFrame{
         dp.setBackground(Color.gray);
 
 
-
-
-
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-
 
 
         //*******************
@@ -95,20 +92,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnFile = new JMenu("File");
 
 
-
-
-
         menuBar.add(mnFile);
         JMenuItem mntmLoadCsv = new JMenuItem("Load CSV");
         mnFile.add(mntmLoadCsv);
 
 
-
-
-        mntmLoadCsv.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLoadCsv.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 CsvFilter csv = new CsvFilter();
 
@@ -118,35 +108,28 @@ public class MainWindowFrame extends JFrame{
                 fileChooser.setAcceptAllFileFilterUsed(false);
 
                 int rVal = fileChooser.showOpenDialog(null);
-                if (rVal == JFileChooser.APPROVE_OPTION)
-                {
-                    csvPath=fileChooser.getSelectedFile().toString();
+                if (rVal == JFileChooser.APPROVE_OPTION) {
+                    csvPath = fileChooser.getSelectedFile().toString();
                 }
 
-                if(!csvPath.contains(".csv"))
-                {
-                    JOptionPane.showMessageDialog(null,"Please choose a file with a .csv extension");
-                }
-
-                else
-                {
+                if (!csvPath.contains(".csv")) {
+                    JOptionPane.showMessageDialog(null, "Please choose a file with a .csv extension");
+                } else {
                     mnTools.setEnabled(true);
                     mnComparison.setEnabled(true);
                     mnShowValues.setEnabled(true);
                     mnShowInputCSV.setEnabled(true);
+                    mnPlot.setEnabled(true);
                 }
             }
         });
         JMenuItem mntmClose = new JMenuItem("Close");
-        mntmClose.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 MainWindowFrame.this.dispose();
             }
         });
         mnFile.add(mntmClose);
-
 
 
         //********************
@@ -160,7 +143,6 @@ public class MainWindowFrame extends JFrame{
         mnTools.setEnabled(false);
 
 
-
         //***********************
         //**** Decision Tree ****
         //***********************
@@ -168,14 +150,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnDecisionTree = new JMenu("Decision Tree");
         mnTools.add(mnDecisionTree);
         JMenuItem mntmDTPrediction = new JMenuItem("Prediction");
-        mntmDTPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmDTPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 DecisionTreePredict iF = new DecisionTreePredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -184,13 +164,11 @@ public class MainWindowFrame extends JFrame{
         });
         mnDecisionTree.add(mntmDTPrediction);
         JMenuItem mntmDTForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmDTForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmDTForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 DecisionTreeForecastVsActual iF = new DecisionTreeForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -209,14 +187,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnExtraTree = new JMenu("Extra Tree");
         mnTools.add(mnExtraTree);
         JMenuItem mntmETPrediction = new JMenuItem("Prediction");
-        mntmETPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmETPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 ExtraTreePredict iF = new ExtraTreePredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -226,16 +202,12 @@ public class MainWindowFrame extends JFrame{
         mnExtraTree.add(mntmETPrediction);
 
 
-
-
         JMenuItem mntmETForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmETForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmETForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 ExtraTreeForecastVsActual iF = new ExtraTreeForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -252,13 +224,11 @@ public class MainWindowFrame extends JFrame{
         JMenu mnGradientBoosting = new JMenu("Gradient Boosting");
         mnTools.add(mnGradientBoosting);
         JMenuItem mntmGBPrediction = new JMenuItem("Prediction");
-        mntmGBPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmGBPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 GradientBoostingPredict iF = new GradientBoostingPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -267,13 +237,11 @@ public class MainWindowFrame extends JFrame{
         });
         mnGradientBoosting.add(mntmGBPrediction);
         JMenuItem mntmGBForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmGBForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmGBForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 GradientBoostingForecastVsActual iF = new GradientBoostingForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -290,13 +258,11 @@ public class MainWindowFrame extends JFrame{
         JMenu mnKNearestNeighbors = new JMenu("K Nearest Neighbors");
         mnTools.add(mnKNearestNeighbors);
         JMenuItem mntmKNNPrediction = new JMenuItem("Prediction");
-        mntmKNNPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmKNNPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 KNearestNeighborsPredict iF = new KNearestNeighborsPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -306,13 +272,11 @@ public class MainWindowFrame extends JFrame{
         });
         mnKNearestNeighbors.add(mntmKNNPrediction);
         JMenuItem mntmKNNForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmKNNForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmKNNForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 KNearestNeighborsForecastVsActual iF = new KNearestNeighborsForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -328,13 +292,11 @@ public class MainWindowFrame extends JFrame{
         JMenu mnLinearDiscriminant = new JMenu("Linear Discriminant");
         mnTools.add(mnLinearDiscriminant);
         JMenuItem mntmLDPrediction = new JMenuItem("Prediction");
-        mntmLDPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLDPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 LinearDiscriminantPredict iF = new LinearDiscriminantPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -344,13 +306,11 @@ public class MainWindowFrame extends JFrame{
         });
         mnLinearDiscriminant.add(mntmLDPrediction);
         JMenuItem mntmLDForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmLDForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLDForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 LinearDiscriminantForecastVsActual iF = new LinearDiscriminantForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -366,10 +326,8 @@ public class MainWindowFrame extends JFrame{
         JMenu mnLinearRegression = new JMenu("Linear Regression");
         mnTools.add(mnLinearRegression);
         JMenuItem mntmLiRPrediction = new JMenuItem("Prediction");
-        mntmLiRPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLiRPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 //
 //                LinearRegressionPredict iF = new LinearRegressionPredict(csvPath);
 //                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
@@ -380,8 +338,8 @@ public class MainWindowFrame extends JFrame{
 //                dp.add(iF);//add internal frame to the desktop pane
 
                 LinearRegressionPredict iF = new LinearRegressionPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -390,10 +348,8 @@ public class MainWindowFrame extends JFrame{
         });
         mnLinearRegression.add(mntmLiRPrediction);
         JMenuItem mntmLiRForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmLiRForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLiRForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
 //                LinearRegressionForecastVsActual iF = new LinearRegressionForecastVsActual(csvPath);
@@ -404,8 +360,8 @@ public class MainWindowFrame extends JFrame{
 //                iF.setVisible(true);
 //                dp.add(iF);//add internal frame to the desktop pane
                 LinearRegressionForecastVsActual iF = new LinearRegressionForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -422,15 +378,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnLinearSvm = new JMenu("Linear SVM");
         mnTools.add(mnLinearSvm);
         JMenuItem mntmLSVMPrediction = new JMenuItem("Prediction");
-        mntmLSVMPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLSVMPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 LinearSvmPredict iF = new LinearSvmPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -440,14 +394,12 @@ public class MainWindowFrame extends JFrame{
         });
         mnLinearSvm.add(mntmLSVMPrediction);
         JMenuItem mntmLSVMForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmLSVMForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLSVMForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 LinearSvmForecastVsActual iF = new LinearSvmForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -464,15 +416,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnLogisticRegression = new JMenu("Logistic Regression");
         mnTools.add(mnLogisticRegression);
         JMenuItem mntmLoRPrediction = new JMenuItem("Prediction");
-        mntmLoRPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLoRPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 LogisticRegressionPredict iF = new LogisticRegressionPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -483,15 +433,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnLogisticRegression.add(mntmLoRPrediction);
         JMenuItem mntmLoRForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmLoRForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmLoRForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 LogisticRegressionForecastVsActual iF = new LogisticRegressionForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -501,7 +449,6 @@ public class MainWindowFrame extends JFrame{
             }
         });
         mnLogisticRegression.add(mntmLoRForecastVsActual);
-
 
 
         //*********************
@@ -517,14 +464,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnBernoulliNaiveBayes = new JMenu("Bernoulli Naive Bayes");
         mnNaiveBayes.add(mnBernoulliNaiveBayes);
         JMenuItem mntmBNBPrediction = new JMenuItem("Prediction");
-        mntmBNBPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmBNBPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 BernoulliNaiveBayesPredict iF = new BernoulliNaiveBayesPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -535,15 +480,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnBernoulliNaiveBayes.add(mntmBNBPrediction);
         JMenuItem mntmBNBForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmBNBForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmBNBForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 BernoulliNaiveBayesForecastVsActual iF = new BernoulliNaiveBayesForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -560,14 +503,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnGaussianNaiveBayes = new JMenu("Gaussian Naive Bayes");
         mnNaiveBayes.add(mnGaussianNaiveBayes);
         JMenuItem mntmGNBPrediction = new JMenuItem("Prediction");
-        mntmGNBPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmGNBPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 GaussianNaiveBayesPredict iF = new GaussianNaiveBayesPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -578,15 +519,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnGaussianNaiveBayes.add(mntmGNBPrediction);
         JMenuItem mntmGNBForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmGNBForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmGNBForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 GaussianNaiveBayesForecastVsActual iF = new GaussianNaiveBayesForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -603,14 +542,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnNeuralNetwork = new JMenu("Neural Network");
         mnTools.add(mnNeuralNetwork);
         JMenuItem mntmNNPrediction = new JMenuItem("Prediction");
-        mntmNNPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmNNPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 NeuralNetworkPredict iF = new NeuralNetworkPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -621,15 +558,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnNeuralNetwork.add(mntmNNPrediction);
         JMenuItem mntmNNForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmNNForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmNNForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 NeuralNetworkForecastVsActual iF = new NeuralNetworkForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -640,8 +575,6 @@ public class MainWindowFrame extends JFrame{
         mnNeuralNetwork.add(mntmNNForecastVsActual);
 
 
-
-
         //***********************
         //**** Random Forest ****
         //***********************
@@ -649,15 +582,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnRandomForest = new JMenu("Random Forest");
         mnTools.add(mnRandomForest);
         JMenuItem mntmRFPrediction = new JMenuItem("Prediction");
-        mntmRFPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmRFPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 RandomForestPredict iF = new RandomForestPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -668,15 +599,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnRandomForest.add(mntmRFPrediction);
         JMenuItem mntmRFForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmRFForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmRFForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 RandomForestForecastVsActual iF = new RandomForestForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -693,15 +622,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnRidge = new JMenu("Ridge");
         mnTools.add(mnRidge);
         JMenuItem mntmRidgePredicition = new JMenuItem("Predicition");
-        mntmRidgePredicition.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmRidgePredicition.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 RidgePredict iF = new RidgePredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -712,15 +639,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnRidge.add(mntmRidgePredicition);
         JMenuItem mntmRidgeForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmRidgeForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmRidgeForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 RidgeForecastVsActual iF = new RidgeForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -737,16 +662,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnStochasticGradientDescent = new JMenu("Stochastic Gradient Descent");
         mnTools.add(mnStochasticGradientDescent);
         JMenuItem mntmSGDPrediction = new JMenuItem("Prediction");
-        mntmSGDPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-
+        mntmSGDPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 StochasticGradientDescentPredict iF = new StochasticGradientDescentPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -756,15 +678,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnStochasticGradientDescent.add(mntmSGDPrediction);
         JMenuItem mntmSGDForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmSGDForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmSGDForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 StochasticGradientDescentForecastVsActual iF = new StochasticGradientDescentForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -782,14 +702,12 @@ public class MainWindowFrame extends JFrame{
         JMenu mnSupportVectotMachine = new JMenu("Support Vector Machine");
         mnTools.add(mnSupportVectotMachine);
         JMenuItem mntmSVMPrediction = new JMenuItem("Prediction");
-        mntmSVMPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmSVMPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 SupportVectorMachinePredict iF = new SupportVectorMachinePredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -800,15 +718,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnSupportVectotMachine.add(mntmSVMPrediction);
         JMenuItem mntmSVMForecastVsActual = new JMenuItem("Predict Vs Actual");
-        mntmSVMForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmSVMForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 SupportVectorMachineForecastVsActual iF = new SupportVectorMachineForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -819,7 +735,6 @@ public class MainWindowFrame extends JFrame{
         mnSupportVectotMachine.add(mntmSVMForecastVsActual);
 
 
-
         //******************************
         //**** Time Series Analysis ****
         //******************************
@@ -827,15 +742,13 @@ public class MainWindowFrame extends JFrame{
         JMenu mnTimeSeriesAnalysis = new JMenu("Time Series Analysis ");
         mnTools.add(mnTimeSeriesAnalysis);
         JMenuItem mntmTSAPrediction = new JMenuItem("Prediction");
-        mntmTSAPrediction.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmTSAPrediction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 TimeSeriesPredict iF = new TimeSeriesPredict(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -846,15 +759,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnTimeSeriesAnalysis.add(mntmTSAPrediction);
         JMenuItem mntmTSAForecastOnce = new JMenuItem("Forecast Once");
-        mntmTSAForecastOnce.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmTSAForecastOnce.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 TimeSeriesForecastOnce iF = new TimeSeriesForecastOnce(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -865,15 +776,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnTimeSeriesAnalysis.add(mntmTSAForecastOnce);
         JMenuItem mntmTSAForecastVsActual = new JMenuItem("Forecast Vs Actual");
-        mntmTSAForecastVsActual.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmTSAForecastVsActual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 TimeSeriesForecastVsActual iF = new TimeSeriesForecastVsActual(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -883,15 +792,13 @@ public class MainWindowFrame extends JFrame{
         });
         mnTimeSeriesAnalysis.add(mntmTSAForecastVsActual);
         JMenuItem mntmTSAContinuousForecast = new JMenuItem("Continuous Forecast");
-        mntmTSAContinuousForecast.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmTSAContinuousForecast.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
 
                 TimeSeriesContinuousForecast iF = new TimeSeriesContinuousForecast(csvPath, MainWindowFrame.this);
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 iF.setVisible(true);
@@ -900,14 +807,6 @@ public class MainWindowFrame extends JFrame{
             }
         });
         mnTimeSeriesAnalysis.add(mntmTSAContinuousForecast);
-
-
-
-
-
-
-
-
 
 
         //*********************
@@ -949,9 +848,8 @@ public class MainWindowFrame extends JFrame{
         mnSVPredictVsActual.add(new JMenuItem("Action keys columns for action time"));
 
 
-
         //Time Series Analysis
-        JMenuItem mnItforecastOnce  = new JMenuItem("Forecast Once");
+        JMenuItem mnItforecastOnce = new JMenuItem("Forecast Once");
         JMenuItem mnItforecastVsActual = new JMenuItem("Forecast Vs Actual");
         JMenu mnItContinuousForecast = new JMenu("Continuous Forecast");
 
@@ -970,7 +868,6 @@ public class MainWindowFrame extends JFrame{
         mnItContinuousForecastAllValues.setEnabled(false);
         mnItContinuousForecast.add(mnItContinuousForecastAllValues);
         mnItContinuousForecast.add(mnItContinuousForecastAbsoluteError);
-
 
 
         mnSVPredict.setEnabled(false);
@@ -1002,8 +899,8 @@ public class MainWindowFrame extends JFrame{
                 iF.setVisible(true);
                 iF.pack();
 
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 dp.add(iF);//add internal frame to the desktop pane
@@ -1013,8 +910,6 @@ public class MainWindowFrame extends JFrame{
         });
 
         mnShowValues.setEnabled(false);
-
-
 
 
         //********************
@@ -1034,24 +929,54 @@ public class MainWindowFrame extends JFrame{
                 ArrayList<ArrayList<String>> result =
                         CSVReader.getDataCSVForKeys(csvPath, CSVReader.getColumnKeys(csvPath));
                 JInternalFrame iF = new JInternalFrame();
-                iF.add(new CompareToolsPanel(csvPath,iF,MainWindowFrame.this));
+                iF.add(new CompareToolsPanel(csvPath, iF, MainWindowFrame.this));
 
                 iF.setTitle("Comparison Tool");
                 iF.setClosable(true);
                 iF.setVisible(true);
                 iF.pack();
-                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
-                        (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
 
                 iF.setClosable(true);
                 dp.add(iF);//add internal frame to the desktop pane
-
 
 
             }
         });
         mnComparison.setEnabled(false);
 
+
+        //********************
+        //********************
+        //**** Plot       ****
+        //********************
+        //********************
+
+        mnPlot = new JMenu("Plot");
+        menuBar.add(mnPlot);
+        JMenuItem mntmPlot = new JMenuItem("Plot");
+        mnPlot.add(mntmPlot);
+        mntmPlot.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JInternalFrame iF = new JInternalFrame();
+                iF.add(new PlotRandomKeys(csvPath, iF, MainWindowFrame.this));
+
+                iF.setTitle("Plot");
+                iF.setClosable(true);
+                iF.setVisible(true);
+                iF.pack();
+
+                iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth()) / 2,
+                        (MainWindowFrame.this.getHeight() - iF.getHeight()) / 2);
+
+                iF.setClosable(true);
+                dp.add(iF);//add internal frame to the desktop pane
+            }
+        });
+        mnPlot.setEnabled(false);
 
 
         //*******************
@@ -1063,43 +988,36 @@ public class MainWindowFrame extends JFrame{
         JMenu mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
         JMenuItem mntmAbout = new JMenuItem("About");
-        mntmAbout.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        mntmAbout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
             }
         });
         mnHelp.add(mntmAbout);
 
 
-
-
-
-
         this.setVisible(true);
     }
 
-    public static void main(String []args){
+    public static void main(String[] args) {
         new MainWindowFrame();
     }
 
 
-    public JDesktopPane getDesktopPanel(){
+    public JDesktopPane getDesktopPanel() {
         return dp;
     }
 
 }
 
 
-class CsvFilter extends FileFilter
-{
+class CsvFilter extends FileFilter {
     @Override
-    public boolean accept(File f)
-    {
-        return f.getName().toLowerCase().endsWith(".csv")||f.isDirectory();
+    public boolean accept(File f) {
+        return f.getName().toLowerCase().endsWith(".csv") || f.isDirectory();
     }
+
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return "Comma Separated Values (*.csv)";
     }
 }
