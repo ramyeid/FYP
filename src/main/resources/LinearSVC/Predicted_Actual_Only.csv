@@ -1496,7 +1496,7 @@ income,incomePredicted
  <=50K, <=50K
  <=50K, <=50K
  <=50K, <=50K
- <=50K, <=50K
+ <=50K, >50K
  >50K, <=50K
  <=50K, <=50K
  <=50K, >50K
@@ -3299,4 +3299,4 @@ income,incomePredicted
  <=50K, <=50K
  <=50K, <=50K
  >50K, >50K
-ACCURACY: 0.824545454545
+ACCURACY: 0.824242424242

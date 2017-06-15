@@ -30757,7 +30757,7 @@ age,workclass,fnlwgt,education,education_num,marital_status,occupation,relations
 50, Local-gov,308764, HS-grad,9, Widowed, Transport-moving, Unmarried, White, Female,0,0,40, United-States, <=50K, <=50K
 27, Private,103524, HS-grad,9, Separated, Handlers-cleaners, Unmarried, White, Male,0,0,40, United-States, <=50K, <=50K
 31, ?,99483, HS-grad,9, Never-married, ?, Own-child, Amer-Indian-Eskimo, Male,0,0,40, United-States, <=50K, <=50K
-50, Private,230951, Bachelors,13, Married-civ-spouse, Sales, Husband, White, Male,0,0,40, United-States, <=50K, <=50K
+50, Private,230951, Bachelors,13, Married-civ-spouse, Sales, Husband, White, Male,0,0,40, United-States, <=50K, >50K
 45, Private,99355, HS-grad,9, Married-civ-spouse, Protective-serv, Husband, Black, Male,0,0,40, United-States, >50K, <=50K
 33, Private,857532, 12th,8, Never-married, Protective-serv, Own-child, Black, Male,0,0,40, United-States, <=50K, <=50K
 62, Private,81116, Some-college,10, Divorced, Adm-clerical, Not-in-family, White, Male,0,1974,40, United-States, <=50K, >50K

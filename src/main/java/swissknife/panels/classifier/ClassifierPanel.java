@@ -111,7 +111,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
         addPredictMenuActionListener();
         addPredictVsActualMenuActionListener();
 
-        if(classifierName.equals(Resources.NEURAL_NETWORK)){
+        if (classifierName.equals(Resources.NEURAL_NETWORK)) {
             hiddenLayerLabel = new JLabel("Depth of hidden layer n,n,...");
 
             hiddenLayerTextField = new JTextField(10);
@@ -120,9 +120,6 @@ public class ClassifierPanel extends JPanel implements ActionListener {
             southPanel.add(hiddenLayerTextField);
             hiddenLayerTextField.setBounds(225, 37, 180, 20);
         }
-
-
-
 
 
     }
@@ -180,10 +177,10 @@ public class ClassifierPanel extends JPanel implements ActionListener {
             classifierTool.build(inputFile, keyToPredict, actionTime, actionKeys);
 
 
-            if(classifierName.equals(Resources.NEURAL_NETWORK)){
+            if (classifierName.equals(Resources.NEURAL_NETWORK)) {
                 String hiddenDepth = hiddenLayerTextField.getText();
-                System.out.println("ASDASDASDAS"+hiddenDepth);
-                ((NeuralNetwork)classifierTool).setHiddenDepth(hiddenDepth);
+                System.out.println("ASDASDASDAS" + hiddenDepth);
+                ((NeuralNetwork) classifierTool).setHiddenDepth(hiddenDepth);
             }
 
             switch (actionName) {
@@ -191,66 +188,70 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(1).setEnabled(true);
 
                     southPanel.remove(submitButton);
+                    masterFrame.repaint();
+                    masterFrame.revalidate();
                     final Thread thread = new Thread(new Runnable() {
 
                         @Override
                         public void run() {
-                                // Your code
-                                classifierTool.action();
-                                running = false;
+                            // Your code
+                            classifierTool.action();
+                            southPanel.add(submitButton);
+
+
+                            masterFrame.repaint();
+                            masterFrame.revalidate();
+
+                            ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
+                            ArrayList<ArrayList<String>> result = new ArrayList<>();
+                            result.add(data);
+
+
+                            JInternalFrame iF = new JInternalFrame();
+                            iF.add(new ShowValues(result, iF, mainFrame));
+
+                            iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - key to predict values for action time");
+                            iF.setClosable(true);
+                            iF.setVisible(true);
+                            iF.pack();
+
+                            mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
+
                         }
                     });
                     thread.start();
-                    while(running);
-                    running=true;
-                    southPanel.add(submitButton);
-
-
-                    ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
-                    ArrayList<ArrayList<String>> result = new ArrayList<>();
-                    result.add(data);
-
-
-                    JInternalFrame iF = new JInternalFrame();
-                    iF.add(new ShowValues(result, iF, mainFrame));
-
-                    iF.setTitle(classifierTool.getAlgorithmName() + " - Predict - key to predict values for action time");
-                    iF.setClosable(true);
-                    iF.setVisible(true);
-                    iF.pack();
-
-                    mainFrame.getDesktopPanel().add(iF);//add internal frame to the desktop pane
-
 
                     break;
                 case Resources.CLASSIFIER_PREDICT_VS_ACTUAL:
                     this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(2).setEnabled(true);
 
                     southPanel.remove(submitButton);
+
+                    masterFrame.repaint();
+                    masterFrame.revalidate();
                     final Thread thread_2 = new Thread(new Runnable() {
 
                         @Override
                         public void run() {
                             // Your code
                             classifierTool.action();
-                            running = false;
+                            southPanel.add(submitButton);
+
+                            masterFrame.repaint();
+                            masterFrame.revalidate();
+
+                            float accuracy = classifierTool.getAccuracy();
+                            accuracy = accuracy * 100f;
+
+                            String text = String.format("Accuracy: %.2f", accuracy);
+                            accuracyLabel.setText(text + " %");
+                            southPanel.add(accuracyLabel);
+                            accuracyLabel.setBounds(225, 60, 150, 20);
+                            masterFrame.pack();
+
                         }
                     });
                     thread_2.start();
-                    while(running);
-                    southPanel.add(submitButton);
-                    running=true;
-
-
-
-                    float accuracy = classifierTool.getAccuracy();
-                    accuracy = accuracy * 100f;
-
-                    String text = String.format("Accuracy: %.2f",accuracy);
-                    accuracyLabel.setText(text+" %");
-                    southPanel.add(accuracyLabel);
-                    accuracyLabel.setBounds(225, 60, 150, 20);
-                    masterFrame.pack();
                     break;
             }
 
