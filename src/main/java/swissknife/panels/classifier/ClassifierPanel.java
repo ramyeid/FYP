@@ -47,6 +47,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
     JLabel hiddenLayerLabel;
     JTextField hiddenLayerTextField;
+    private volatile boolean running = true;
 
 
     public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
@@ -188,7 +189,22 @@ public class ClassifierPanel extends JPanel implements ActionListener {
             switch (actionName) {
                 case Resources.CLASSIFIER_PREDICT:
                     this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(1).setEnabled(true);
-                    classifierTool.action();
+
+                    southPanel.remove(submitButton);
+                    final Thread thread = new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                                // Your code
+                                classifierTool.action();
+                                running = false;
+                        }
+                    });
+                    thread.start();
+                    while(running);
+                    running=true;
+                    southPanel.add(submitButton);
+
 
                     ArrayList<String> data = classifierTool.getValuesOfPredictedForActionTime_Predict();
                     ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -209,7 +225,24 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     break;
                 case Resources.CLASSIFIER_PREDICT_VS_ACTUAL:
                     this.mainFrame.getJMenuBar().getMenu(3).getMenuComponent(2).setEnabled(true);
-                    classifierTool.action();
+
+                    southPanel.remove(submitButton);
+                    final Thread thread_2 = new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            // Your code
+                            classifierTool.action();
+                            running = false;
+                        }
+                    });
+                    thread_2.start();
+                    while(running);
+                    southPanel.add(submitButton);
+                    running=true;
+
+
+
                     float accuracy = classifierTool.getAccuracy();
                     accuracy = accuracy * 100f;
 
