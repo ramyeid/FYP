@@ -18,6 +18,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import RidgeClassifierCV
 from sklearn.naive_bayes import BernoulliNB
+from sklearn.neural_network import MLPClassifier
 
 
 def ChooseAlgorithm(algorithmName):
@@ -61,6 +62,9 @@ def ChooseAlgorithm(algorithmName):
 
 	elif algorithmName == "BNB":
 		return BernoulliNB(),cwd+"BernoulliNaiveBayes/"
+	elif algorithmName == "NN":
+		return MLPClassifier(hidden_layer_sizes=depthResult), cwd+"NeuralNetwork/"
+
 
 inputFile = sys.argv[1]
 keyToPredict = sys.argv[2]
@@ -68,7 +72,20 @@ action = sys.argv[3]
 actionTime = int(sys.argv[4])
 algorithmName = sys.argv[5]
 actionKeys = sys.argv[6]
+hiddenDepth = sys.argv[7]
 
+depthResult = []
+if(hiddenDepth!=""):
+	hiddenDepth = hiddenDepth.split(',')
+	for i in range(0,len(hiddenDepth)):
+		depth = int(hiddenDepth[i])
+		print depth
+		depthResult.append(depth)
+else:
+	print' hererehrehreehrhe'
+	depthResult.append(30)
+	depthResult.append(30)
+	depthResult.append(30)
 
 
 

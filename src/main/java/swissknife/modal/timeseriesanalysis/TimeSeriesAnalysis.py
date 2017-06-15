@@ -11,7 +11,6 @@ import dateutil.relativedelta as dateutil
 import os
 
 
-#TODO divide into different scripts.
 def parser(x):
     return datetime.strptime(x, dateFormat)
 

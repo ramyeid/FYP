@@ -25,6 +25,8 @@ import swissknife.modal.classifier.linearsvm.LSVCPredict;
 import swissknife.modal.classifier.linearsvm.LSVCPredictVsActual;
 import swissknife.modal.classifier.logisticregression.LogRPredict;
 import swissknife.modal.classifier.logisticregression.LogRPredictVsActual;
+import swissknife.modal.classifier.neuralnetwork.NNPredict;
+import swissknife.modal.classifier.neuralnetwork.NNPredictVsActual;
 import swissknife.modal.classifier.randomforest.RFPredict;
 import swissknife.modal.classifier.randomforest.RFPredictVsActual;
 import swissknife.modal.classifier.ridge.RCPredict;
@@ -70,7 +72,7 @@ public class Resources {
     private static final String BASE_FILE_ETC = System.getProperty("user.dir") + "/src/main/resources/ExtraTreeClassifier/";
     private static final String BASE_FILE_RC = System.getProperty("user.dir") + "/src/main/resources/RidgeClassifier/";
     private static final String BASE_FILE_BNB = System.getProperty("user.dir") + "/src/main/resources/BernoulliNaiveBayes/";
-
+    private static final String BASE_FILE_NN = System.getProperty("user.dir")+ "/src/main/resources/NeuralNetwork/";
 
     private static final String BASE_FILE_LR = System.getProperty("user.dir") + "/src/main/resources/LinearRegression/";
 
@@ -95,6 +97,7 @@ public class Resources {
     public static final String ET_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_ETC + "Predicted_Actual_Only.csv";
     public static final String RC_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_RC + "Predicted_Actual_Only.csv";
     public static final String BNB_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_BNB + "Predicted_Actual_Only.csv";
+    public static final String NN_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_NN + "Predicted_Actual_Only.csv";
 
 
     public static final String LR_PREDICTED_ACTUAL_ONLY_FILE = BASE_FILE_LR + "Predicted_Actual_Only.csv";
@@ -118,6 +121,7 @@ public class Resources {
     public static final String ET_PREDICTED_RESULT_FILE = BASE_FILE_ETC + "Predicted_result.csv";
     public static final String RC_PREDICTED_RESULT_FILE = BASE_FILE_RC + "Predicted_result.csv";
     public static final String BNB_PREDICTED_RESULT_FILE = BASE_FILE_BNB + "Predicted_result.csv";
+    public static final String NN_PREDICTED_RESULT_FILE = BASE_FILE_NN + "Predicted_result.csv";
 
     public static final String LR_PREDICTED_RESULT_FILE = BASE_FILE_LR + "Predicted_result.csv";
 
@@ -137,6 +141,7 @@ public class Resources {
     public static final String ET_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_ETC + "Predicted_Actual_Result.csv";
     public static final String RC_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_RC + "Predicted_Actual_Result.csv";
     public static final String BNB_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_BNB + "Predicted_Actual_Result.csv";
+    public static final String NN_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_NN + "Predicted_Actual_Result.csv";
 
 
     public static final String LR_PREDICTED_ACTUAL_RESULT_FILE = BASE_FILE_LR+"Predicted_Actual_Result.csv";
@@ -187,6 +192,7 @@ public class Resources {
     public static final String STOCHASTIC_GRADIENT_DESCENT = "Stochastic Gradient Descent";
     public static final String SUPPORT_VECTOR_MACHINE = "Support Vector Machine";
     public static final String LINEAR_REGRESSION = "Linear Regression";
+    public static final String NEURAL_NETWORK = "Neural Network";
 
 
     public static String getTimeSeriesAnalysisActionName(int action) {
@@ -304,7 +310,7 @@ public class Resources {
             Arrays.asList(GAUSSIAN_NAIVE_BAYES, DECISION_TREE, EXTRA_TREE_CLASSIFIER,
                     GRADIENT_BOOSTING_CLASSIFIER, K_NEAREST_NEIGHBORS, LINEAR_DISCRIMINANT_ANALYSIS,
                     LINEAR_SVC, LOGISTIC_REGRESSION, BERNOULLI_NAIVE_BAYES, RANDOM_FOREST, RIDGE_CLASSIFIER,
-                    STOCHASTIC_GRADIENT_DESCENT, SUPPORT_VECTOR_MACHINE));
+                    STOCHASTIC_GRADIENT_DESCENT, SUPPORT_VECTOR_MACHINE,NEURAL_NETWORK));
 
 
     public static Classifier getClassifierForNameAndAction(String s, int action) {
@@ -355,6 +361,8 @@ public class Resources {
         myMap.put(BERNOULLI_NAIVE_BAYES+" 1", new BNBPredictVsActual());
         myMap.put(BERNOULLI_NAIVE_BAYES+" 2", new BNBPredict());
 
+        myMap.put(NEURAL_NETWORK+" 1",new NNPredictVsActual());
+        myMap.put(NEURAL_NETWORK+" 2",new NNPredict());
         return myMap;
     }
 }

@@ -4,6 +4,7 @@ import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.Tool;
 import swissknife.modal.classifier.Classifier;
+import swissknife.modal.classifier.neuralnetwork.NeuralNetwork;
 import swissknife.panels.showvalues.ShowValues;
 import swissknife.views.MainWindowFrame;
 
@@ -44,6 +45,9 @@ public class ClassifierPanel extends JPanel implements ActionListener {
     MainWindowFrame mainFrame;
     String keyToPredict = null;
 
+    JLabel hiddenLayerLabel;
+    JTextField hiddenLayerTextField;
+
 
     public ClassifierPanel(Tool tool, String inputFile, JInternalFrame masterFrame, MainWindowFrame mainFrame) {
         this.setLayout(null);
@@ -71,11 +75,11 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
         createCheckBoxButtonsForActionKeys(keysList, checkBoxesPanel, keysToChooseCheckBoxes, this);
 
-        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length + 1) * 20 + 30);
+        radioButtonsPanelKeysToPredict.setBounds(30, 20, 154, (keysList.length + 1) * 21 + 30);
         radioButtonsPanelKeysToPredict.setBorder(BorderFactory.createLineBorder(Color.black));
-        checkBoxesPanel.setBounds(230, 20, 196, (keysList.length + 1) * 20 + 30);
+        checkBoxesPanel.setBounds(230, 20, 196, (keysList.length + 1) * 21 + 30);
         checkBoxesPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        southPanel.setBounds(15, 30 + checkBoxesPanel.getHeight(), 388, 120);
+        southPanel.setBounds(15, 30 + checkBoxesPanel.getHeight(), 420, 120);
 
         this.add(checkBoxesPanel);
         this.add(radioButtonsPanelKeysToPredict);
@@ -105,6 +109,20 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
         addPredictMenuActionListener();
         addPredictVsActualMenuActionListener();
+
+        if(classifierName.equals(Resources.NEURAL_NETWORK)){
+            hiddenLayerLabel = new JLabel("Depth of hidden layer n,n,...");
+
+            hiddenLayerTextField = new JTextField(10);
+            southPanel.add(hiddenLayerLabel);
+            hiddenLayerLabel.setBounds(225, 15, 180, 20);
+            southPanel.add(hiddenLayerTextField);
+            hiddenLayerTextField.setBounds(225, 37, 180, 20);
+        }
+
+
+
+
 
     }
 
@@ -160,6 +178,13 @@ public class ClassifierPanel extends JPanel implements ActionListener {
 
             classifierTool.build(inputFile, keyToPredict, actionTime, actionKeys);
 
+
+            if(classifierName.equals(Resources.NEURAL_NETWORK)){
+                String hiddenDepth = hiddenLayerTextField.getText();
+                System.out.println("ASDASDASDAS"+hiddenDepth);
+                ((NeuralNetwork)classifierTool).setHiddenDepth(hiddenDepth);
+            }
+
             switch (actionName) {
                 case Resources.CLASSIFIER_PREDICT:
                     this.mainFrame.getJMenuBar().getMenu(2).getMenuComponent(1).setEnabled(true);
@@ -191,7 +216,7 @@ public class ClassifierPanel extends JPanel implements ActionListener {
                     String text = String.format("Accuracy: %.2f",accuracy);
                     accuracyLabel.setText(text+" %");
                     southPanel.add(accuracyLabel);
-                    accuracyLabel.setBounds(225, 25, 150, 20);
+                    accuracyLabel.setBounds(225, 60, 150, 20);
                     masterFrame.pack();
                     break;
             }

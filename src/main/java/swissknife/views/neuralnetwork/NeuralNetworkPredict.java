@@ -1,6 +1,6 @@
-package swissknife.views.neuralnetworks;
+package swissknife.views.neuralnetwork;
 
-import swissknife.modal.classifier.randomforest.RFPredictVsActual;
+import swissknife.modal.classifier.neuralnetwork.NNPredict;
 import swissknife.panels.classifier.ClassifierPanel;
 import swissknife.views.MainWindowFrame;
 
@@ -9,13 +9,11 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 /**
- * Created by joeabdelnour on 6/13/17.
+ * Created by ramyeid on 6/15/17.
  */
-public class NeuralNetworksForecastVsActual extends JInternalFrame
-{
-    public NeuralNetworksForecastVsActual(String pathCsv, MainWindowFrame mainFrame)
-    {
-        this.add(new ClassifierPanel(new RFPredictVsActual(),pathCsv,this,mainFrame));
+public class NeuralNetworkPredict extends JInternalFrame{
+   public NeuralNetworkPredict(String pathCsv, MainWindowFrame mainFrame) {
+        this.add(new ClassifierPanel(new NNPredict(), pathCsv, this, mainFrame));
         this.setVisible(true);
         this.pack();
         this.addInternalFrameListener(new InternalFrameAdapter() {

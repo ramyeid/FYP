@@ -44,9 +44,6 @@
 //import java.util.ArrayList;
 //
 ////
-//////TODO PACK LOAD CSV
-//////TODO READ EXCEL FILES NOT JUST CSV
-//////TODO PANEL DESIGNS TO BE FIXED
 //
 //
 //public class MainWindow extends JFrame

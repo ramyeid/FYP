@@ -3,6 +3,7 @@ package swissknife.panels.comparetools;
 import swissknife.CSVReader;
 import swissknife.Resources;
 import swissknife.modal.classifier.Classifier;
+import swissknife.modal.classifier.neuralnetwork.NeuralNetwork;
 import swissknife.panels.classifier.ClassifierPanel;
 import swissknife.panels.showvalues.ShowValues;
 import swissknife.views.MainWindowFrame;
@@ -94,13 +95,13 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         comparisonAndSubmitSouth.add(submitButton);
 
         this.add(chooseAlgorithmsActionPanelWEST);
-        chooseAlgorithmsActionPanelWEST.setBounds(15, 20, 250, 350);
+        chooseAlgorithmsActionPanelWEST.setBounds(15, 20, 250, 370);
         chooseAlgorithmsActionPanelWEST.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(keysPanelCenter);
-        keysPanelCenter.setBounds(300, 20, 150, 40 + (numberOfKeys + 1) * 20);
+        keysPanelCenter.setBounds(300, 20, 150, 40 + (numberOfKeys + 1) * 21);
         keysPanelCenter.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(keysCheckBoxPanel);
-        keysCheckBoxPanel.setBounds(500, 20, 200, 40 + (numberOfKeys + 1) * 20);
+        keysCheckBoxPanel.setBounds(500, 20, 200, 40 + (numberOfKeys + 1) * 21);
         keysCheckBoxPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actionPanel);
         actionPanel.setBounds(300, 40 + keysPanelCenter.getHeight(), 200, 60);
@@ -109,11 +110,11 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
         this.add(comparisonAndSubmitSouth);
         comparisonAndSubmitSouth.setBounds(500, 80 + keysPanelCenter.getHeight(), 100, 100);
 
-        if (keysCheckBoxPanel.getHeight() > 350) {
+        if (keysCheckBoxPanel.getHeight() > 370) {
             this.setSize(715, 50 + keysCheckBoxPanel.getHeight());
             this.masterFrame.setSize(735, 20 + keysCheckBoxPanel.getHeight());
-            this.masterFrame.setMaximumSize(new Dimension(735, 20 + keysCheckBoxPanel.getHeight()));
-            this.masterFrame.setMinimumSize(new Dimension(735, 20 + keysCheckBoxPanel.getHeight()));
+            this.masterFrame.setMaximumSize(new Dimension(735, 200 + keysCheckBoxPanel.getHeight()));
+            this.masterFrame.setMinimumSize(new Dimension(735, 200 + keysCheckBoxPanel.getHeight()));
         } else {
             this.setSize(715, 400);
             this.masterFrame.setSize(735, 410);
@@ -243,8 +244,12 @@ public class CompareToolsPanel extends JPanel implements ActionListener {
 
             for (int i = 0; i < algorithmNameChosenList.size(); ++i) {
                 Classifier classifier = Resources.getClassifierForNameAndAction(algorithmNameChosenList.get(i), action);
+                if(classifier.getAlgorithmName().equals(Resources.NEURAL_NETWORK)){
+                    ((NeuralNetwork)classifier).setHiddenDepth("");
+                }
                 classifier.build(inputFile, keyToPredict, actionTime, actionKeys);
                 classifier.action();
+
                 classifiersChosen.add(classifier);
             }
 

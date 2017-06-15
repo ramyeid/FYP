@@ -16,9 +16,8 @@ import swissknife.modal.timeseriesanalysis.modal.TSAContinuousForecast;
 //TODO IN THE PRESENTATION - EVERY ALGORITHM IN ONE SLIDE AND THEN FOR MORE DETAILS GO TO SLIDES AFTER Q&A.
 //TODO IN THE PRESENTATION - EXPLAIN THAT WE DID NOT GET ANY DATA SO WE ABSTRACTED OUR PROJECT IN ORDER TO ANALYZE EVERY SIGNAL (N'IMPORTE QUEL SIGNAL). -- PROJET AKBAR.
 //TODO - FACULTATIF - ADD OPTION IN CLASSIFIERS TO PLOT VALUES THAT THE USER ONE (EXAMPLE CHOOSE X AS TEMPS AND Y AS Y-AXIS AND PLOT.)
-//TODO - fix show values table last item is not shown properly
+
 //TODO in CompareToolsPanel add a menu bar that selects and deselects all algorithms // and actionKeys.
-//TODO do the same thing for the views/timeseriesanalysis for the JMEnu and the action listener with what you did in the classifiers views.
 
 
 public class Application {

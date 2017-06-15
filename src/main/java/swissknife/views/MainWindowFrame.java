@@ -23,6 +23,8 @@ import swissknife.views.linearsvm.LinearSvmForecastVsActual;
 import swissknife.views.linearsvm.LinearSvmPredict;
 import swissknife.views.logisticregression.LogisticRegressionForecastVsActual;
 import swissknife.views.logisticregression.LogisticRegressionPredict;
+import swissknife.views.neuralnetwork.NeuralNetworkForecastVsActual;
+import swissknife.views.neuralnetwork.NeuralNetworkPredict;
 import swissknife.views.randomforest.RandomForestForecastVsActual;
 import swissknife.views.randomforest.RandomForestPredict;
 import swissknife.views.ridge.RidgeForecastVsActual;
@@ -47,11 +49,8 @@ import java.util.ArrayList;
 /**
  * Created by ramyeid on 6/14/17.
  */
-//TODO finish with neural network.s
-//TODO Scroll pane enable scroll horizontally - check scroll pane bcs last value usually is not shown properly
 //TODO add Panel that the user can choose 2 keys and plot them.
-//TODO fix linear regression test it and do it
-//TODO choose adult.data.csv and fix the frame that need to be fixed example predict vs actual for the keys.
+//TODO fix linear regression test it and do it // hint check Resources.java and add linearregression in variables.
 
 public class MainWindowFrame extends JFrame{
 
@@ -597,22 +596,19 @@ public class MainWindowFrame extends JFrame{
         });
         mnGaussianNaiveBayes.add(mntmGNBForecastVsActual);
 
+        //********************************
+        //**** Neural Network         ****
+        //********************************
 
-
-
-        //*************************
-        //**** Neural Networks ****
-        //*************************
-
-        JMenu mnNeuralNetworks = new JMenu("Neural Networks");
-        mnTools.add(mnNeuralNetworks);
+        JMenu mnNeuralNetwork = new JMenu("Neural Network");
+        mnTools.add(mnNeuralNetwork);
         JMenuItem mntmNNPrediction = new JMenuItem("Prediction");
         mntmNNPrediction.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
 
-                RandomForestPredict iF = new RandomForestPredict(csvPath, MainWindowFrame.this);
+                NeuralNetworkPredict iF = new NeuralNetworkPredict(csvPath, MainWindowFrame.this);
                 iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
                         (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
 
@@ -620,9 +616,10 @@ public class MainWindowFrame extends JFrame{
                 iF.setVisible(true);
                 dp.add(iF);//add internal frame to the desktop pane
 
+
             }
         });
-        mnNeuralNetworks.add(mntmNNPrediction);
+        mnNeuralNetwork.add(mntmNNPrediction);
         JMenuItem mntmNNForecastVsActual = new JMenuItem("Predict Vs Actual");
         mntmNNForecastVsActual.addActionListener(new ActionListener()
         {
@@ -630,7 +627,7 @@ public class MainWindowFrame extends JFrame{
             {
 
 
-                RandomForestForecastVsActual iF = new RandomForestForecastVsActual(csvPath, MainWindowFrame.this);
+                NeuralNetworkForecastVsActual iF = new NeuralNetworkForecastVsActual(csvPath, MainWindowFrame.this);
                 iF.setLocation((MainWindowFrame.this.getWidth() - iF.getWidth())/2,
                         (MainWindowFrame.this.getHeight()- iF.getHeight())/2);
 
@@ -640,7 +637,9 @@ public class MainWindowFrame extends JFrame{
 
             }
         });
-        mnNeuralNetworks.add(mntmNNForecastVsActual);
+        mnNeuralNetwork.add(mntmNNForecastVsActual);
+
+
 
 
         //***********************
@@ -819,6 +818,8 @@ public class MainWindowFrame extends JFrame{
         });
         mnSupportVectotMachine.add(mntmSVMForecastVsActual);
 
+
+
         //******************************
         //**** Time Series Analysis ****
         //******************************
@@ -933,19 +934,19 @@ public class MainWindowFrame extends JFrame{
         JMenu mnSVTimeSeriesAnalysis = new JMenu("Time Series Analysis");
 
         //Predict
-        mnSVPredict.add(new JMenuItem("all values"));
-        mnSVPredict.add(new JMenuItem("all values for action time"));
-        mnSVPredict.add(new JMenuItem("action keys values"));
-        mnSVPredict.add(new JMenuItem("action keys values for action time"));
-        mnSVPredict.add(new JMenuItem("key to predict values"));
-        mnSVPredict.add(new JMenuItem("key to predict values for action time"));
+        mnSVPredict.add(new JMenuItem("All values"));
+        mnSVPredict.add(new JMenuItem("All values for action time"));
+        mnSVPredict.add(new JMenuItem("Action keys values"));
+        mnSVPredict.add(new JMenuItem("Action keys values for action time"));
+        mnSVPredict.add(new JMenuItem("Key to predict values"));
+        mnSVPredict.add(new JMenuItem("Key to predict values for action time"));
 
 
         //Predict vs Actual
-        mnSVPredictVsActual.add(new JMenuItem("all values"));
-        mnSVPredictVsActual.add(new JMenuItem("all values for action time"));
+        mnSVPredictVsActual.add(new JMenuItem("All values"));
+        mnSVPredictVsActual.add(new JMenuItem("All values for action time"));
         mnSVPredictVsActual.add(new JMenuItem("Actual and Predicted values for action time"));
-        mnSVPredictVsActual.add(new JMenuItem("action keys columns for action time"));
+        mnSVPredictVsActual.add(new JMenuItem("Action keys columns for action time"));
 
 
 
@@ -963,7 +964,7 @@ public class MainWindowFrame extends JFrame{
         mnItContinuousForecast.setEnabled(false);
 
 
-        JMenuItem mnItContinuousForecastAllValues = new JMenuItem("all values");
+        JMenuItem mnItContinuousForecastAllValues = new JMenuItem("All values");
         JMenuItem mnItContinuousForecastAbsoluteError = new JMenuItem("Absolute Errors");
         mnItContinuousForecastAbsoluteError.setEnabled(false);
         mnItContinuousForecastAllValues.setEnabled(false);
@@ -1088,12 +1089,6 @@ public class MainWindowFrame extends JFrame{
     }
 
 }
-
-
-
-
-
-
 
 
 class CsvFilter extends FileFilter
